@@ -10,7 +10,6 @@ export default defineConfig({
     host: true,
     port: process.env.PORT || 4173,
     allowedHosts: [
-      'jajisfrontend.up.railway.app',
       '.up.railway.app'
     ]
   },
@@ -19,10 +18,5 @@ export default defineConfig({
     outDir: 'dist',
     sourcemap: false,
     minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-      },
-    },
   },
 })
