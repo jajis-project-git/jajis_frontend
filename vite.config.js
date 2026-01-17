@@ -4,10 +4,15 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+
   base: '/',
-  server: {
-    port: 3000,
+
+  preview: {
+    host: true,
+    port: process.env.PORT || 4173,
+    allowedHosts: 'all'
   },
+
   build: {
     outDir: 'dist',
     sourcemap: false,
