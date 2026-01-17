@@ -4,13 +4,15 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-
   base: '/',
 
   preview: {
     host: true,
     port: process.env.PORT || 4173,
-    allowedHosts: 'all'
+    allowedHosts: [
+      'jajisfrontend.up.railway.app',
+      '.up.railway.app'
+    ]
   },
 
   build: {
