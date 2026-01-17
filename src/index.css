@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css2?family=Bitcount+Grid+Single:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+@import "tailwindcss";
+
+html,
+body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* Body text and paragraphs */
+p,
+li,
+span,
+a {
+  font-family: "Nova Slim", system-ui;
+  font-weight: 200;
+  font-style: normal;
+
+}
+
+/* Headings remain bold and impactful */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Anton", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: px;
+}
+
+/* --------------shop online button------------------------- */
+
+@keyframes colorChange {
+  0% {
+    background-color: black;
+  }
+  50% {
+    background-color: rgb(134, 134, 134);
+  }
+  100% {
+    background-color: black;
+  }
+}
+
+
+
+.animate-colorChange {
+  animation: colorChange 2s infinite ease-in-out;
+}
+
+
+
+
+
+/* Fix react-range mobile drag issue */
+.react-range__thumb {
+  touch-action: none;
+}
+
+.react-range__track {
+  touch-action: none;
+}
+
+
+
+
