@@ -10,8 +10,10 @@ export default defineConfig({
     host: true,
     port: process.env.PORT || 4173,
     allowedHosts: [
-      '.up.railway.app'
-    ]
+      'www.jajisinnovation.com',
+      'jajisinnovation.com',
+      '.up.railway.app',
+    ],
   },
 
   build: {
