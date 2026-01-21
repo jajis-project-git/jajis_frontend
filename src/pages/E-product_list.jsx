@@ -11,7 +11,7 @@ const FilterContent = ({
   setMinInput,
   maxInput,
   setMaxInput,
-  handleApplyFilter
+  handleApplyFilter,
 }) => (
   <div className="border p-6 bg-white shadow-sm rounded-lg select-none">
     <h2 className="text-xl font-bold mb-6 pb-3 border-b-2">Filters</h2>
@@ -77,8 +77,8 @@ export default function EcommerceHome() {
   const MAX = 5000;
   const [minPrice, setMinPrice] = useState(null);
   const [maxPrice, setMaxPrice] = useState(null);
-  const [minInput, setMinInput] = useState('');
-  const [maxInput, setMaxInput] = useState('');
+  const [minInput, setMinInput] = useState("");
+  const [maxInput, setMaxInput] = useState("");
 
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -171,7 +171,7 @@ export default function EcommerceHome() {
 
       showMessage(
         toggled ? "Added to wishlist!" : "Removed from wishlist!",
-        "success"
+        "success",
       );
     } catch (err) {
       console.error(err);
@@ -245,7 +245,9 @@ export default function EcommerceHome() {
         selected === "all" || productCategory === selected;
 
       const matchesPrice =
-        !minPrice || !maxPrice || (lowestPrice >= minPrice && lowestPrice <= maxPrice);
+        !minPrice ||
+        !maxPrice ||
+        (lowestPrice >= minPrice && lowestPrice <= maxPrice);
 
       const title = (p.title || "").toString().toLowerCase();
 
@@ -286,8 +288,8 @@ export default function EcommerceHome() {
             message.type === "success"
               ? "bg-green-500"
               : message.type === "error"
-              ? "bg-red-500"
-              : "bg-yellow-500"
+                ? "bg-red-500"
+                : "bg-yellow-500"
           }`}
         >
           {message.text}
@@ -351,13 +353,13 @@ export default function EcommerceHome() {
                 const discount =
                   highestMRP > 0
                     ? Math.round(
-                        ((highestMRP - lowestPrice) / highestMRP) * 100
+                        ((highestMRP - lowestPrice) / highestMRP) * 100,
                       )
                     : 0;
 
                 const totalStock = variants.reduce(
                   (sum, v) => sum + Number(v.stock || 0),
-                  0
+                  0,
                 );
 
                 return (

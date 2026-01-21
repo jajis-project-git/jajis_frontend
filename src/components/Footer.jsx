@@ -92,6 +92,7 @@ export default function Footer() {
               <li><Link to="/food-court" className="hover:text-white transition">Food Court</Link></li>
               <li><Link to="/academy" className="hover:text-white transition">Academy</Link></li>
               <li><Link to="/franchise" className="hover:text-white transition">Franchise</Link></li>
+              <li><Link to="/management" className="hover:text-white transition">Management</Link></li>
               <li><Link to="/about-us" className="hover:text-white transition">About Us</Link></li>
               <li><Link to="/contact" className="hover:text-white transition">Contact</Link></li>
             </ul>
@@ -117,10 +118,10 @@ export default function Footer() {
           <p className="text-sm text-gray-400">
             © {new Date().getFullYear()} <span className="text-white font-medium">Jajis</span>. All rights reserved.
           </p>
-          <p className="text-sm text-gray-200 hover:text-white transition">
+          <p className="text-sm text-gray-200 hover:text-white transition mt-4 md:mt-0">
             <a href="https://www.inspirezesttechnologies.com/">Developed by InspireZesttechnologies Pvt Ltd</a>
           </p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
+          <div className="flex space-x-6 mt-4 mb-20 md:mb-0 md:mt-0">
             <Link to="/privacy" className="hover:text-white text-sm transition">
               Privacy Policy
             </Link>

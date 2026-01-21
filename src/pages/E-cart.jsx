@@ -90,6 +90,24 @@ export default function CartPage() {
 
   const updateQuantity = async (itemId, newQuantity) => {
     if (newQuantity < 1) return;
+
+    // Find the item to check stock
+    const item = cartItems.find((i) => i.id === itemId);
+    if (item && newQuantity > item.quantity) {
+      // User is trying to increase quantity, check stock
+      if (item.variant.stock < 1) {
+        showMessage("No quantity available", "warning");
+        return;
+      }
+      if (newQuantity > item.variant.stock) {
+        showMessage(
+          `Only ${item.variant.stock} item(s) available in stock`,
+          "warning"
+        );
+        return;
+      }
+    }
+
     try {
       await API.post("/cart/update/", {
         item_id: itemId,
@@ -200,6 +218,16 @@ export default function CartPage() {
   const startCheckout = async () => {
     if (!token) {
       navigate("/login");
+      return;
+    }
+
+    // Check if all items have stock available
+    const outOfStockItems = cartItems.filter((item) => item.variant.stock < 1);
+    if (outOfStockItems.length > 0) {
+      showMessage(
+        `${outOfStockItems.length} item(s) in your cart are out of stock`,
+        "error"
+      );
       return;
     }
 
@@ -329,12 +357,25 @@ export default function CartPage() {
                   return (
                     <div
                       key={itemId}
-                      className="flex flex-col sm:flex-row items-center gap-6 p-5 border-b hover:bg-gray-50"
+                      className={`flex flex-col sm:flex-row items-center gap-6 p-5 border-b hover:bg-gray-50 ${
+                        v.stock < 1 ? "opacity-50 bg-gray-100" : ""
+                      }`}
                     >
-                      <div className="w-24 h-24 flex-shrink-0">
+                      <div
+                        className={`w-24 h-24 flex-shrink-0 ${
+                          v.stock < 1 ? "cursor-not-allowed" : "cursor-pointer"
+                        }`}
+                        onClick={() => {
+                          if (v.stock > 0) {
+                            navigate(`/product/${v.product.id}`);
+                          }
+                        }}
+                      >
                         <img
                           src={imageUrl}
-                          className="w-full h-full object-cover rounded"
+                          className={`w-full h-full object-cover rounded ${
+                            v.stock < 1 ? "grayscale" : "hover:shadow-lg"
+                          }`}
                           alt={p.title}
                           onError={(e) => {
                             e.target.src =
@@ -378,14 +419,24 @@ export default function CartPage() {
                         <div className="flex gap-4 mt-3">
                           <button
                             onClick={() => updateQuantity(itemId, qty - 1)}
-                            className="px-3 py-1 border rounded"
+                            className={`px-3 py-1 border rounded ${
+                              v.stock < 1
+                                ? "cursor-not-allowed opacity-50"
+                                : "hover:bg-gray-200"
+                            }`}
+                            disabled={v.stock < 1}
                           >
                             −
                           </button>
                           <span className="font-semibold">{qty}</span>
                           <button
                             onClick={() => updateQuantity(itemId, qty + 1)}
-                            className="px-3 py-1 border rounded"
+                            className={`px-3 py-1 border rounded ${
+                              v.stock < 1
+                                ? "cursor-not-allowed opacity-50"
+                                : "hover:bg-gray-200"
+                            }`}
+                            disabled={v.stock < 1}
                           >
                             +
                           </button>

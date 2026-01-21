@@ -83,6 +83,16 @@ export default function ProductDetails() {
         </span>
       </div>
     );
+
+  if (!product) {
+    return (
+      <div className="w-full py-20 mt-24 flex flex-col items-center justify-center gap-4">
+        <span className="text-sm font-medium text-gray-600">
+          Product not found
+        </span>
+      </div>
+    );
+  }
  
   const images = [
     product.image1,
@@ -90,7 +100,7 @@ export default function ProductDetails() {
     product.image3,
     product.image4,
   ].filter(Boolean);
-  const selectedImage = images[selectedImageIndex];
+  const selectedImage = images[selectedImageIndex] || images[0];
 
   // Navigate Lightbox Images
   const handleNextImage = () => {
@@ -121,31 +131,35 @@ export default function ProductDetails() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
         {/* LEFT IMAGES */}
         <div>
-          <div
-            className="relative w-full h-[500px] rounded-xl overflow-hidden shadow cursor-pointer"
-            onClick={() => setIsOpen(true)}
-          >
-            <img
-              src={selectedImage}
-              alt="Selected"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-          </div>
+          {selectedImage && (
+            <>
+              <div
+                className="relative w-full h-[500px] rounded-xl overflow-hidden shadow cursor-pointer"
+                onClick={() => setIsOpen(true)}
+              >
+                <img
+                  src={selectedImage}
+                  alt="Selected"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              </div>
 
-          <div className="flex gap-3 mt-4">
-            {images.map((img, idx) => (
-              <img
-                key={idx}
-                src={img}
-                onClick={() => setSelectedImageIndex(idx)}
-                className={`w-20 h-20 object-cover rounded border-2 cursor-pointer ${
-                  selectedImageIndex === idx
-                    ? "border-black"
-                    : "border-gray-300"
-                }`}
-              />
-            ))}
-          </div>
+              <div className="flex gap-3 mt-4">
+                {images.map((img, idx) => (
+                  <img
+                    key={idx}
+                    src={img}
+                    onClick={() => setSelectedImageIndex(idx)}
+                    className={`w-20 h-20 object-cover rounded border-2 cursor-pointer ${
+                      selectedImageIndex === idx
+                        ? "border-black"
+                        : "border-gray-300"
+                    }`}
+                  />
+                ))}
+              </div>
+            </>
+          )}
         </div>
 
         {/* RIGHT DETAILS */}
@@ -218,7 +232,7 @@ export default function ProductDetails() {
 
           {/* ADD TO CART + SHARE BUTTON */}
           <div className="flex gap-4">
-            {selectedVariant.stock < 1 ? (
+            {selectedVariant && selectedVariant.stock < 1 ? (
               <button
                 className="px-6 py-3 bg-gray-400 text-white rounded-lg cursor-not-allowed"
                 disabled
@@ -229,6 +243,7 @@ export default function ProductDetails() {
               <button
                 className="px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800"
                 onClick={handleAddToCart}
+                disabled={!selectedVariant}
               >
                 {addingItem ? "Adding…" : "Add to Cart"}
               </button>

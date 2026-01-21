@@ -56,10 +56,10 @@ export default function Navbar() {
           </Link>
 
           {/* Right */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1">
             <Link
               to="/products"
-              className="hidden md:block me-6 border border-black font-semibold px-4 py-2 bg-black text-white transition animate-colorChange"
+              className="hidden md:block me-6 rounded-3xl border border-black font-semibold px-4 py-2 bg-black text-white transition animate-colorChange"
             >
               SHOP ONLINE
             </Link>
@@ -123,7 +123,7 @@ export default function Navbar() {
       <div className="fixed bottom-4 right-6 z-[90] hidden md:flex flex-col gap-3">
         <Link
           to="/cart"
-          className="flex items-center gap-2 bg-black text-white px-4 py-2.5 rounded-full shadow-lg"
+          className="flex items-center gap-2 bg-black text-white  px-4 py-2.5 rounded-full shadow-lg"
         >
           <ShoppingCart className="w-5 h-5" />
           Cart

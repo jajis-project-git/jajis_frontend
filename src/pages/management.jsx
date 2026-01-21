@@ -27,14 +27,14 @@ export default function Management() {
 
       {/* ================= FOUNDER SECTION ================= */}
       <section className="max-w-7xl mx-auto px-6 py-20">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid md:grid-cols-2 gap-12 items-center" >
           <img
             src={JAJI}
             alt="Dr. Jajimole K Founder of Jajis Innovation"
-            className="rounded-2xl shadow-xl object-cover w-full h-[480px]"
+            className="rounded-2xl shadow-xl object-cover w-full h-[480px]" data-aos="slide-right"
           />
 
-          <div className="text-justify">
+          <div className="text-justify" data-aos="slide-left">
             <h2 className="text-3xl font-bold mb-4">Dr. Jajimole K</h2>
             <p className="text-lg font-semibold text-gray-600 mb-4">
               Founder & Director, Jaji’s Innovation Pvt Ltd
@@ -88,7 +88,7 @@ export default function Management() {
 
         <div className="grid md:grid-cols-2 gap-12">
           {/* ===== KEERTHI SUNIL ===== */}
-          <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+          <div className="bg-white rounded-2xl shadow-lg overflow-hidden" data-aos="flip-left">
             <div className="relative h-[420px] w-full">
               <img
                 src={DIRECTOR}
@@ -114,7 +114,7 @@ export default function Management() {
           </div>
 
           {/* ===== KARTHIK SUNIL ===== */}
-          <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+          <div className="bg-white rounded-2xl shadow-lg overflow-hidden" data-aos="flip-right">
             <div className="relative h-[420px] w-full">
               <img
                 src={CEO}
