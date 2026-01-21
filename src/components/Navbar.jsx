@@ -29,6 +29,7 @@ export default function Navbar() {
     { path: "/designing-stitching", label: "Designing & Stitching" },
     { path: "/academy", label: "Academy" },
     { path: "/franchise", label: "Franchise" },
+    { path: "/management", label: "Management" },
     { path: "/about-us", label: "About Us" },
     { path: "/contact", label: "Contact" },
   ];
@@ -68,9 +69,7 @@ export default function Navbar() {
               className="flex items-center justify-center p-2 border border-gray-900 rounded-full hover:bg-gray-200 transition"
             >
               <User className="w-6 h-6 text-gray-800" />
-              {!isAuthenticated && (
-                <span className="ml-2 text-lg">Login</span>
-              )}
+              {!isAuthenticated && <span className="ml-2 text-lg">Login</span>}
             </Link>
           </div>
         </div>
@@ -175,9 +174,7 @@ export default function Navbar() {
           <Link
             to="/cart"
             className={`flex flex-col items-center justify-center text-xs ${
-              location.pathname === "/cart"
-                ? "text-red-600"
-                : "text-gray-600"
+              location.pathname === "/cart" ? "text-red-600" : "text-gray-600"
             }`}
           >
             <ShoppingCart className="w-5 h-5" />
@@ -199,8 +196,7 @@ export default function Navbar() {
           <Link
             to={isAuthenticated ? "/profile" : "/login"}
             className={`flex flex-col items-center justify-center text-xs ${
-              location.pathname === "/profile" ||
-              location.pathname === "/login"
+              location.pathname === "/profile" || location.pathname === "/login"
                 ? "text-red-600"
                 : "text-gray-600"
             }`}

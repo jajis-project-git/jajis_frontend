@@ -121,7 +121,7 @@ export default function Footer() {
             <a href="https://www.inspirezesttechnologies.com/">Developed by InspireZesttechnologies Pvt Ltd</a>
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link to="/privacy-policy" className="hover:text-white text-sm transition">
+            <Link to="/privacy" className="hover:text-white text-sm transition">
               Privacy Policy
             </Link>
             <Link to="/terms" className="hover:text-white text-sm transition">

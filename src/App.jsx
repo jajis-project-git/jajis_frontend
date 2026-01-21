@@ -20,6 +20,9 @@ import Academy from "./pages/Academy";
 import Franchise from "./pages/Franchise";
 import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
+import Privacy from "./pages/privacy";
+import Terms from "./pages/terms";
+import Management from "./pages/management";
 
 // Auth
 import Login from "./pages/E-Login";
@@ -68,6 +71,10 @@ export default function App() {
             <Route path="/franchise" element={<Franchise />} />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/management" element={<Management />} />
+
 
             {/* Auth */}
             <Route path="/login" element={<Login />} />
