@@ -4,7 +4,7 @@ import JAJI from "../assets/management/jaji.jpeg";
 
 export default function Management() {
   return (
-    <div className="w-full text-gray-800 text-justify">
+    <div className="w-full text-gray-800 ">
       {/* ================= HERO / PARALLAX BANNER ================= */}
       <div
         className="relative h-[40vh] mt-12 w-full bg-fixed bg-cover bg-center"
@@ -82,7 +82,7 @@ export default function Management() {
 
       {/* ================= NEXT GENERATION ================= */}
       <section className="max-w-7xl mx-auto px-6 py-20">
-        <h2 className="text-3xl font-bold text-center mb-16">
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-16">
           The Next Generation of Leadership
         </h2>
 
@@ -103,7 +103,7 @@ export default function Management() {
               <p className="text-gray-500 font-medium mb-4">
                 Director — “The Next Jaji”
               </p>
-              <p className="text-gray-600 leading-relaxed text-sm">
+              <p className="text-gray-600 leading-relaxed text-sm text-justify">
                 A talented makeup and nail artist with dual Master’s degrees in
                 Business Management and English Literature, Keerthi blends
                 artistic expression with strategic insight. Carrying forward her
@@ -129,7 +129,7 @@ export default function Management() {
               <p className="text-gray-500 font-medium mb-4">
                 Creative Director — “The Art of Transformation”
               </p>
-              <p className="text-gray-600 leading-relaxed text-sm">
+              <p className="text-gray-600 leading-relaxed text-sm text-justify">
                 With a Master’s in Entrepreneurship & Innovation Management from
                 Loughborough University and Vidal Sassoon certification, Karthik
                 brings global expertise to advanced hair artistry. His
