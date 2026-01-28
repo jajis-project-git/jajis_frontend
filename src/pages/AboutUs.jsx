@@ -14,8 +14,11 @@ import {
   FaShoppingBag,
 } from "react-icons/fa";
 
-export default function AboutUs() {
+import CEO from "../assets/management/ceo.jpeg";
+import DIRECTOR from "../assets/management/jaji main image.PNG";
+import JAJI from "../assets/management/jaji.jpeg";
 
+export default function AboutUs() {
   return (
     <div className="min-h-screen bg-black">
       {/* Hero Section */}
@@ -30,8 +33,6 @@ export default function AboutUs() {
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
               About Us
             </h1>
-
-        
           </div>
         </div>
       </div>
@@ -117,6 +118,79 @@ export default function AboutUs() {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+
+      
+      {/* Team Section */}
+      <section
+        className="relative bg-fixed bg-center bg-cover"
+        style={{
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600')",
+        }}
+      >
+        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="relative py-32">
+          <div className="text-center mb-20">
+            <span className="text-sm font-bold tracking-widest text-gray-400 uppercase">
+              Meet The Experts
+            </span>
+            <h2 className="text-5xl font-bold text-white mt-4 mb-6">
+              Our Leadership Team
+            </h2>
+            <div className="w-20 h-1 bg-white mx-auto"></div>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                name: "Dr. Jajimole K",
+                role: "Founder & Directo",
+                image: JAJI,
+              },
+
+              {
+                name: "Keerthi Sunil",
+                role: "Director",
+                image: DIRECTOR,
+              },
+
+              {
+                name: "Karthik Sunil",
+                role: "Creative Director",
+                image: CEO,
+              },
+            ].map((member, i) => (
+              <div
+                key={i}
+                className="group text-center p-8 
+              transition-all duration-300 rounded-2xl"
+              >
+                {/* Profile Image */}
+                <div className="relative w-62 h-62 mx-auto mb-6">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-top object-cover rounded-full 
+                 border-1 border-white 
+                 transition-all duration-300"
+                  />
+                </div>
+
+                {/* Name */}
+                <h3 className="text-xl font-bold text-white mb-1 transition-colors duration-300">
+                  {member.name}
+                </h3>
+
+                {/* Role */}
+                <p className="text-gray-300 text-sm uppercase tracking-wider transition-colors duration-300">
+                  {member.role}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -255,76 +329,6 @@ export default function AboutUs() {
         </div>
       </section>
 
-      {/* Team Section */}
-      <section
-        className="relative bg-fixed bg-center bg-cover"
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600')",
-        }}
-      >
-        <div className="absolute inset-0 bg-black/60"></div>
-        <div className="relative py-32">
-          <div className="text-center mb-20">
-            <span className="text-sm font-bold tracking-widest text-gray-400 uppercase">
-              Meet The Experts
-            </span>
-            <h2 className="text-5xl font-bold text-white mt-4 mb-6">
-              Our Leadership Team
-            </h2>
-            <div className="w-20 h-1 bg-white mx-auto"></div>
-          </div>
-
-          <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                name: "Sarah Johnson",
-                role: "CEO & Founder",
-                image: "https://randomuser.me/api/portraits/women/44.jpg",
-              },
-              {
-                name: "Michael Chen",
-                role: "Operations Manager",
-                image: "https://randomuser.me/api/portraits/men/32.jpg",
-              },
-              {
-                name: "Emily Davis",
-                role: "Creative Director",
-                image: "https://randomuser.me/api/portraits/women/65.jpg",
-              },
-              {
-                name: "David Wilson",
-                role: "Technical Lead",
-                image: "https://randomuser.me/api/portraits/men/85.jpg",
-              },
-            ].map((member, i) => (
-              <div
-                key={i}
-                className="group text-center p-8 bg-white/5 backdrop-blur-sm border border-white/20 hover:bg-white hover:-translate-y-3 transition-all duration-300"
-              >
-                {/* Profile Image */}
-                <div className="relative w-28 h-28 mx-auto mb-6">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-28 h-28 object-cover rounded-full border-4 border-white group-hover:border-black transition-all duration-300"
-                  />
-                </div>
-
-                {/* Name */}
-                <h3 className="text-xl font-bold text-white group-hover:text-black mb-2 transition-colors duration-300">
-                  {member.name}
-                </h3>
-
-                {/* Role */}
-                <p className="text-gray-300 group-hover:text-gray-700 text-sm uppercase tracking-wide transition-colors duration-300">
-                  {member.role}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Final CTA Section */}
       <section

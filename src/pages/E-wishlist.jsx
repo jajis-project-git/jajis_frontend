@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Trash2, ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
 import { API } from "../config/api";
+import { SkeletonWishlistItem } from "../components/SkeletonLoader";
 
 export default function Wishlist() {
   const [items, setItems] = useState([]); 
@@ -113,7 +114,7 @@ export default function Wishlist() {
         </div>
       </header>
 
-      {items.length === 0 ? (
+      {items.length === 0 && !loading ? (
         <div className="text-center mt-12">
           <p className="text-gray-600 text-lg">Your wishlist is empty</p>
           <Link
@@ -125,76 +126,84 @@ export default function Wishlist() {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {items.map((item) => {
-            // item: { id, variant: {...}, product_title, product_brand, product_image }
-            const variant = item.variant || {};
-            const productTitle = item.product_title || (variant.product && variant.product.title) || "Product";
-            const productBrand = item.product_brand || (variant.product && variant.product.brand) || "";
-            const productImage =
-              item.product_image || (variant.product && variant.product.image1) || "/static/no-image.png";
+          {loading ? (
+            <>
+              {[...Array(8)].map((_, i) => (
+                <SkeletonWishlistItem key={`skeleton-${i}`} />
+              ))}
+            </>
+          ) : (
+            items.map((item) => {
+              // item: { id, variant: {...}, product_title, product_brand, product_image }
+              const variant = item.variant || {};
+              const productTitle = item.product_title || (variant.product && variant.product.title) || "Product";
+              const productBrand = item.product_brand || (variant.product && variant.product.brand) || "";
+              const productImage =
+                item.product_image || (variant.product && variant.product.image1) || "/static/no-image.png";
 
-            // price info from variant (if present)
-            const price = variant.price || variant.mrp || 0;
-            const mrp = variant.mrp || price;
-            const discount = mrp ? Math.round(((mrp - price) / mrp) * 100) : 0;
+              // price info from variant (if present)
+              const price = variant.price || variant.mrp || 0;
+              const mrp = variant.mrp || price;
+              const discount = mrp ? Math.round(((mrp - price) / mrp) * 100) : 0;
 
-            const variantId = variant.id;
+              const variantId = variant.id;
 
-            return (
-              <div
-                key={item.id}
-                className="bg-white border border-gray-200 hover:border-gray-900 transition-all duration-300 group relative overflow-hidden "
-              >
-                {/* Delete */}
-                <button
-                  onClick={() => handleRemove(variantId)}
-                  className="absolute top-3 right-3 z-10 p-2 rounded-full bg-white/90 backdrop-blur-sm shadow-md hover:bg-red-100 transition-all"
-                  title="Remove from Wishlist"
+              return (
+                <div
+                  key={item.id}
+                  className="bg-white border border-gray-200 hover:border-gray-900 transition-all duration-300 group relative overflow-hidden "
                 >
-                  <Trash2 className="w-4 h-4 text-red-600" />
-                </button>
+                  {/* Delete */}
+                  <button
+                    onClick={() => handleRemove(variantId)}
+                    className="absolute top-3 right-3 z-10 p-2 rounded-full bg-white/90 backdrop-blur-sm shadow-md hover:bg-red-100 transition-all"
+                    title="Remove from Wishlist"
+                  >
+                    <Trash2 className="w-4 h-4 text-red-600" />
+                  </button>
 
-                {/* Image */}
-                <div className="relative overflow-hidden aspect-square">
-                  <img
-                    src={productImage}
-                    alt={productTitle}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-
-                {/* Details */}
-                <div className="p-4">
-                  <p className="text-xs uppercase tracking-wider text-gray-500 mb-1">{productBrand}</p>
-                  <h3 className="text-base font-semibold text-black mb-2 leading-tight">{productTitle}</h3>
-
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="text-lg font-bold text-black">₹{price}</span>
-                    {mrp && mrp !== price ? <span className="text-sm text-gray-400 line-through">₹{mrp}</span> : null}
-                    {discount ? <span className="text-xs font-medium text-green-600">{discount}% off</span> : null}
+                  {/* Image */}
+                  <div className="relative overflow-hidden aspect-square">
+                    <img
+                      src={productImage}
+                      alt={productTitle}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
                   </div>
 
-                  <div className="flex gap-3">
-                    <button
-                      onClick={() => handleMoveToCart(variantId)}
-                      className="flex-1 flex items-center justify-center gap-2 bg-black hover:bg-gray-800 text-white text-xs font-semibold px-4 py-2 transition-colors uppercase tracking-wider"
-                      disabled={movingToCart === variantId}
-                    >
-                      <ShoppingCart className="w-4 h-4" />
-                      {movingToCart === variantId ? "Moving..." : "Move to Cart"}
-                    </button>
+                  {/* Details */}
+                  <div className="p-4">
+                    <p className="text-xs uppercase tracking-wider text-gray-500 mb-1">{productBrand}</p>
+                    <h3 className="text-base font-semibold text-black mb-2 leading-tight">{productTitle}</h3>
 
-                    <Link
-                      to={`/product/${variant.product ? variant.product.id : ""}`}
-                      className="flex items-center justify-center gap-2 border border-gray-200 px-4 py-2 text-xs"
-                    >
-                      View
-                    </Link>
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-lg font-bold text-black">₹{price}</span>
+                      {mrp && mrp !== price ? <span className="text-sm text-gray-400 line-through">₹{mrp}</span> : null}
+                      {discount ? <span className="text-xs font-medium text-green-600">{discount}% off</span> : null}
+                    </div>
+
+                    <div className="flex gap-3">
+                      <button
+                        onClick={() => handleMoveToCart(variantId)}
+                        className="flex-1 flex items-center justify-center gap-2 bg-black hover:bg-gray-800 text-white text-xs font-semibold px-4 py-2 transition-colors uppercase tracking-wider"
+                        disabled={movingToCart === variantId}
+                      >
+                        <ShoppingCart className="w-4 h-4" />
+                        {movingToCart === variantId ? "Moving..." : "Move to Cart"}
+                      </button>
+
+                      <Link
+                        to={`/product/${variant.product ? variant.product.id : ""}`}
+                        className="flex items-center justify-center gap-2 border border-gray-200 px-4 py-2 text-xs"
+                      >
+                        View
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })
+          )}
         </div>
       )}
     </div>

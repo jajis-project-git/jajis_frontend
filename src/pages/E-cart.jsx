@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { API } from "../config/api";
 import { Link, useNavigate } from "react-router-dom";
+import { SkeletonCartItem } from "../components/SkeletonLoader";
 
 const emptyAddress = {
   label: "Home",
@@ -336,115 +337,125 @@ export default function CartPage() {
       </header>
 
       <div className="container mx-auto px-4 lg:px-12 py-8">
-        {cartItems.length > 0 ? (
+        {cartItems.length > 0 || loadingCart ? (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* LEFT SIDE - ITEMS */}
             <div className="lg:col-span-2">
               <div className="border rounded-xl shadow-sm">
-                {cartItems.map((item) => {
-                  const { variant: v, quantity: qty, id: itemId } = item;
-                  const { product: p } = v;
-
-                  const imageUrl =
-                    p.image1?.startsWith("http")
-                      ? p.image1
-                      : `${BASE_URL}${p.image1}`;
-
-                  const discountPercent = Math.round(
-                    ((v.mrp - v.price) / v.mrp) * 100
-                  );
-
-                  return (
-                    <div
-                      key={itemId}
-                      className={`flex flex-col sm:flex-row items-center gap-6 p-5 border-b hover:bg-gray-50 ${
-                        v.stock < 1 ? "opacity-50 bg-gray-100" : ""
-                      }`}
-                    >
-                      <div
-                        className={`w-24 h-24 flex-shrink-0 ${
-                          v.stock < 1 ? "cursor-not-allowed" : "cursor-pointer"
-                        }`}
-                        onClick={() => {
-                          if (v.stock > 0) {
-                            navigate(`/product/${v.product.id}`);
-                          }
-                        }}
-                      >
-                        <img
-                          src={imageUrl}
-                          className={`w-full h-full object-cover rounded ${
-                            v.stock < 1 ? "grayscale" : "hover:shadow-lg"
-                          }`}
-                          alt={p.title}
-                          onError={(e) => {
-                            e.target.src =
-                              "https://via.placeholder.com/150?text=No+Image";
-                          }}
-                        />
+                {loadingCart ? (
+                  <>
+                    {[...Array(3)].map((_, i) => (
+                      <div key={`skeleton-${i}`} className="border-b">
+                        <SkeletonCartItem />
                       </div>
+                    ))}
+                  </>
+                ) : (
+                  cartItems.map((item) => {
+                    const { variant: v, quantity: qty, id: itemId } = item;
+                    const { product: p } = v;
 
-                      <div className="flex-1 w-full">
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <h3 className="text-lg font-semibold">{p.title}</h3>
-                            <p className="text-sm text-gray-500">{p.brand}</p>
-                            <p className="text-sm text-gray-600 mt-1">
-                              Variant: <b>{v.quantity_label}</b>
-                            </p>
+                    const imageUrl =
+                      p.image1?.startsWith("http")
+                        ? p.image1
+                        : `${BASE_URL}${p.image1}`;
+
+                    const discountPercent = Math.round(
+                      ((v.mrp - v.price) / v.mrp) * 100
+                    );
+
+                    return (
+                      <div
+                        key={itemId}
+                        className={`flex flex-col sm:flex-row items-center gap-6 p-5 border-b hover:bg-gray-50 ${
+                          v.stock < 1 ? "opacity-50 bg-gray-100" : ""
+                        }`}
+                      >
+                        <div
+                          className={`w-24 h-24 flex-shrink-0 ${
+                            v.stock < 1 ? "cursor-not-allowed" : "cursor-pointer"
+                          }`}
+                          onClick={() => {
+                            if (v.stock > 0) {
+                              navigate(`/product/${v.product.id}`);
+                            }
+                          }}
+                        >
+                          <img
+                            src={imageUrl}
+                            className={`w-full h-full object-cover rounded ${
+                              v.stock < 1 ? "grayscale" : "hover:shadow-lg"
+                            }`}
+                            alt={p.title}
+                            onError={(e) => {
+                              e.target.src =
+                                "https://via.placeholder.com/150?text=No+Image";
+                            }}
+                          />
+                        </div>
+
+                        <div className="flex-1 w-full">
+                          <div className="flex justify-between items-start">
+                            <div>
+                              <h3 className="text-lg font-semibold">{p.title}</h3>
+                              <p className="text-sm text-gray-500">{p.brand}</p>
+                              <p className="text-sm text-gray-600 mt-1">
+                                Variant: <b>{v.quantity_label}</b>
+                              </p>
+                            </div>
+
+                            <button
+                              onClick={() => removeItem(itemId)}
+                              className="p-2 hover:bg-red-100 rounded-full"
+                            >
+                              <Trash2 size={20} className="text-red-600" />
+                            </button>
                           </div>
 
-                          <button
-                            onClick={() => removeItem(itemId)}
-                            className="p-2 hover:bg-red-100 rounded-full"
-                          >
-                            <Trash2 size={20} className="text-red-600" />
-                          </button>
-                        </div>
+                          <div className="flex items-center gap-2 mt-2">
+                            <b className="text-lg">₹{v.price}</b>
+                            <span className="line-through text-gray-400">
+                              ₹{v.mrp}
+                            </span>
+                            <span className="text-green-600 text-xs">
+                              {discountPercent}% off
+                            </span>
+                          </div>
 
-                        <div className="flex items-center gap-2 mt-2">
-                          <b className="text-lg">₹{v.price}</b>
-                          <span className="line-through text-gray-400">
-                            ₹{v.mrp}
-                          </span>
-                          <span className="text-green-600 text-xs">
-                            {discountPercent}% off
-                          </span>
-                        </div>
+                          <p className="text-sm text-gray-600 mt-1">
+                            Subtotal: ₹{(v.price * qty).toFixed(2)}
+                          </p>
 
-                        <p className="text-sm text-gray-600 mt-1">
-                          Subtotal: ₹{(v.price * qty).toFixed(2)}
-                        </p>
-
-                        <div className="flex gap-4 mt-3">
-                          <button
-                            onClick={() => updateQuantity(itemId, qty - 1)}
-                            className={`px-3 py-1 border rounded ${
-                              v.stock < 1
-                                ? "cursor-not-allowed opacity-50"
-                                : "hover:bg-gray-200"
-                            }`}
-                            disabled={v.stock < 1}
-                          >
-                            −
-                          </button>
-                          <span className="font-semibold">{qty}</span>
-                          <button
-                            onClick={() => updateQuantity(itemId, qty + 1)}
-                            className={`px-3 py-1 border rounded ${
-                              v.stock < 1
-                                ? "cursor-not-allowed opacity-50"
-                                : "hover:bg-gray-200"
-                            }`}
-                            disabled={v.stock < 1}
-                          >
-                            +
-                          </button>
+                          <div className="flex gap-4 mt-3">
+                            <button
+                              onClick={() => updateQuantity(itemId, qty - 1)}
+                              className={`px-3 py-1 border rounded ${
+                                v.stock < 1
+                                  ? "cursor-not-allowed opacity-50"
+                                  : "hover:bg-gray-200"
+                              }`}
+                              disabled={v.stock < 1}
+                            >
+                              −
+                            </button>
+                            <span className="font-semibold">{qty}</span>
+                            <button
+                              onClick={() => updateQuantity(itemId, qty + 1)}
+                              className={`px-3 py-1 border rounded ${
+                                v.stock < 1
+                                  ? "cursor-not-allowed opacity-50"
+                                  : "hover:bg-gray-200"
+                              }`}
+                              disabled={v.stock < 1}
+                            >
+                              +
+                            </button>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })
+                )}
               </div>
             </div>
 

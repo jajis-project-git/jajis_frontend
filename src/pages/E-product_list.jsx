@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { API } from "../config/api";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { SkeletonProductCard } from "../components/SkeletonLoader";
 
 const FilterContent = ({
   categories,
@@ -86,6 +87,7 @@ export default function EcommerceHome() {
   const [wishlist, setWishlist] = useState([]);
 
   const [loading, setLoading] = useState(true);
+  const [cardsLoading, setCardsLoading] = useState({});
   const [addingItem, setAddingItem] = useState(null);
   const [togglingWishlist, setTogglingWishlist] = useState(null);
 
@@ -270,16 +272,6 @@ export default function EcommerceHome() {
     return filtered;
   }, [products, selectedCategory, minPrice, maxPrice, searchTerm]);
 
-  if (loading)
-    return (
-      <div className="w-full py-20 mt-24 flex flex-col items-center justify-center gap-4">
-        <div className="h-10 w-10 rounded-full border-4 border-gray-300 border-t-black animate-spin"></div>
-        <span className="text-sm font-medium text-gray-600 tracking-wide">
-          Loading, please wait…
-        </span>
-      </div>
-    );
-
   return (
     <div className="bg-gray-50 min-h-screen mt-20 relative">
       {message && (
@@ -329,118 +321,131 @@ export default function EcommerceHome() {
           </aside>
 
           <div className="lg:col-span-3">
-            <p className="text-sm text-gray-600 mb-4">
-              {filteredProducts.length} products found
-            </p>
+            {!loading && (
+              <p className="text-sm text-gray-600 mb-4">
+                {filteredProducts.length} products found
+              </p>
+            )}
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredProducts.map((product) => {
-                const variants = Array.isArray(product.variants)
-                  ? product.variants
-                  : [];
-                const firstVariantId = variants[0]?.id;
+              {/* Show skeletons while loading */}
+              {loading && (
+                <>
+                  {[...Array(9)].map((_, i) => (
+                    <SkeletonProductCard key={`skeleton-${i}`} />
+                  ))}
+                </>
+              )}
 
-                const isWishlisted = firstVariantId
-                  ? wishlist.includes(firstVariantId)
-                  : false;
+              {/* Show actual products after loading */}
+              {!loading &&
+                filteredProducts.map((product) => {
+                  const variants = Array.isArray(product.variants)
+                    ? product.variants
+                    : [];
+                  const firstVariantId = variants[0]?.id;
 
-                const prices = variants.map((v) => Number(v.price || 0));
-                const mrps = variants.map((v) => Number(v.mrp || 0));
+                  const isWishlisted = firstVariantId
+                    ? wishlist.includes(firstVariantId)
+                    : false;
 
-                const lowestPrice = prices.length ? Math.min(...prices) : 0;
-                const highestMRP = mrps.length ? Math.max(...mrps) : 0;
+                  const prices = variants.map((v) => Number(v.price || 0));
+                  const mrps = variants.map((v) => Number(v.mrp || 0));
 
-                const discount =
-                  highestMRP > 0
-                    ? Math.round(
-                        ((highestMRP - lowestPrice) / highestMRP) * 100,
-                      )
-                    : 0;
+                  const lowestPrice = prices.length ? Math.min(...prices) : 0;
+                  const highestMRP = mrps.length ? Math.max(...mrps) : 0;
 
-                const totalStock = variants.reduce(
-                  (sum, v) => sum + Number(v.stock || 0),
-                  0,
-                );
+                  const discount =
+                    highestMRP > 0
+                      ? Math.round(
+                          ((highestMRP - lowestPrice) / highestMRP) * 100,
+                        )
+                      : 0;
 
-                return (
-                  <div
-                    key={product.id}
-                    className="bg-white relative overflow-hidden border border-gray-200 hover:border-gray-500 rounded-lg shadow-sm flex flex-col transition-all duration-300 group"
-                  >
-                    <button
-                      onClick={() => handleWishlistToggle(product)}
-                      className="absolute top-4 right-4 text-xl z-10 transition-transform hover:scale-110"
-                      disabled={togglingWishlist === firstVariantId}
-                      title={
-                        isWishlisted
-                          ? "Remove from wishlist"
-                          : "Add to wishlist"
-                      }
+                  const totalStock = variants.reduce(
+                    (sum, v) => sum + Number(v.stock || 0),
+                    0,
+                  );
+
+                  return (
+                    <div
+                      key={product.id}
+                      className="bg-white relative overflow-hidden border border-gray-200 hover:border-gray-500 rounded-lg shadow-sm flex flex-col transition-all duration-300 group"
                     >
-                      {isWishlisted ? (
-                        <FaHeart className="text-red-600" />
-                      ) : (
-                        <FaRegHeart className="text-red-00 hover:text-red-700" />
-                      )}
-                    </button>
-
-                    <div className="w-full aspect-square overflow-hidden">
-                      <Link to={`/product/${product.id}`}>
-                        <img
-                          src={product.image1}
-                          alt={product.title}
-                          className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
-                        />
-                      </Link>
-                    </div>
-
-                    <div className="p-5 flex flex-col flex-1">
-                      <h3 className="font-semibold text-lg mb-2">
-                        {product.title}
-                      </h3>
-
-                      <div className="flex gap-2 items-center mb-3">
-                        <strong className="text-lg">₹{lowestPrice}</strong>
-                        {highestMRP > 0 && (
-                          <>
-                            <span className="line-through text-gray-400">
-                              ₹{highestMRP}
-                            </span>
-                            {discount > 0 && (
-                              <span className="text-green-600 text-xs">
-                                {discount}% off
-                              </span>
-                            )}
-                          </>
+                      <button
+                        onClick={() => handleWishlistToggle(product)}
+                        className="absolute top-4 right-4 text-xl z-10 transition-transform hover:scale-110"
+                        disabled={togglingWishlist === firstVariantId}
+                        title={
+                          isWishlisted
+                            ? "Remove from wishlist"
+                            : "Add to wishlist"
+                        }
+                      >
+                        {isWishlisted ? (
+                          <FaHeart className="text-red-600" />
+                        ) : (
+                          <FaRegHeart className="text-red-00 hover:text-red-700" />
                         )}
+                      </button>
+
+                      <div className="w-full aspect-square overflow-hidden">
+                        <Link to={`/product/${product.id}`}>
+                          <img
+                            src={product.image1}
+                            alt={product.title}
+                            className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
+                          />
+                        </Link>
                       </div>
 
-                      {totalStock < 1 ? (
-                        <button
-                          className="bg-gray-400 text-white w-full py-2 mt-auto rounded"
-                          disabled
-                        >
-                          Out of Stock
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-black text-white w-full py-2 mt-auto hover:bg-gray-800 transition-colors rounded"
-                          onClick={() =>
-                            handleAddToCart(firstVariantId, product.id)
-                          }
-                          disabled={
-                            addingItem === product.id || !firstVariantId
-                          }
-                        >
-                          {addingItem === product.id
-                            ? "Adding…"
-                            : "Add to Cart"}
-                        </button>
-                      )}
+                      <div className="p-5 flex flex-col flex-1">
+                        <h3 className="font-semibold text-lg mb-2">
+                          {product.title}
+                        </h3>
+
+                        <div className="flex gap-2 items-center mb-3">
+                          <strong className="text-lg">₹{lowestPrice}</strong>
+                          {highestMRP > 0 && (
+                            <>
+                              <span className="line-through text-gray-400">
+                                ₹{highestMRP}
+                              </span>
+                              {discount > 0 && (
+                                <span className="text-green-600 text-xs">
+                                  {discount}% off
+                                </span>
+                              )}
+                            </>
+                          )}
+                        </div>
+
+                        {totalStock < 1 ? (
+                          <button
+                            className="bg-gray-400 text-white w-full py-2 mt-auto rounded"
+                            disabled
+                          >
+                            Out of Stock
+                          </button>
+                        ) : (
+                          <button
+                            className="bg-black text-white w-full py-2 mt-auto hover:bg-gray-800 transition-colors rounded"
+                            onClick={() =>
+                              handleAddToCart(firstVariantId, product.id)
+                            }
+                            disabled={
+                              addingItem === product.id || !firstVariantId
+                            }
+                          >
+                            {addingItem === product.id
+                              ? "Adding…"
+                              : "Add to Cart"}
+                          </button>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
             </div>
           </div>
         </div>

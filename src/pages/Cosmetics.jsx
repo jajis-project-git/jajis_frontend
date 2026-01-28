@@ -3,6 +3,7 @@ import axios from "axios";
 import { API } from "../config/api";
 
 import AboutImg from "../assets/images/cosmatics.png";
+import { Link } from "react-router-dom";
 
 // Import required icons
 import {
@@ -18,42 +19,6 @@ import {
 } from "react-icons/fa";
 
 export default function Cosmetics() {
-  const categories = [
-    {
-      title: "Face Cream",
-      image:
-        "https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=800&q=80",
-      price: "₹899",
-      icon: <FaHandSparkles className="text-pink-400 text-4xl mx-auto" />,
-      description:
-        "Moisturizing creams, anti-aging serums, and face treatments",
-    },
-    {
-      title: "Shampoo",
-      image:
-        "https://5.imimg.com/data5/SELLER/Default/2025/8/534793762/DK/AX/ME/42061417/ghkghk-500x500.jpeg",
-      price: "₹549",
-      icon: <FaSpa className="text-pink-400 text-4xl mx-auto" />,
-      description: "Gentle cleansing shampoos for all hair types",
-    },
-    {
-      title: "Lipstick",
-      image:
-        "https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=800&q=80",
-      price: "₹699",
-      icon: <FaKissWinkHeart className="text-pink-400 text-4xl mx-auto" />,
-      description: "Bold and beautiful lip colors in matte and glossy finishes",
-    },
-    {
-      title: "Foundation",
-      image:
-        "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80",
-      price: "₹1299",
-      icon: <FaTint className="text-pink-400 text-4xl mx-auto" />,
-      description: "Full coverage liquid foundation for flawless complexion",
-    },
-  ];
-
   const [data, setData] = useState({ content: "", page: "" });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -128,12 +93,12 @@ export default function Cosmetics() {
               className="flex flex-wrap gap-4 justify-center"
               data-aos="fade-up"
             >
-              <a
-                href="/products"
-                className="px-8 py-3 bg-white text-black rounded-full font-semibold hover:bg-gray-200 transform hover:-translate-y-1 transition-all"
+              <Link
+                to="/products"
+                className="px-8 py-3 border border-white rounded-full font-semibold hover:bg-white hover:text-black transform hover:-translate-y-1 transition-all"
               >
-                Buy Products
-              </a>
+                View Products
+              </Link>
             </div>
           </div>
         </div>
@@ -170,78 +135,16 @@ export default function Cosmetics() {
                 ingredients and work with renowned beauty experts to create
                 products that deliver exceptional results.
               </p>
-              <button className="border border-black px-8 py-3 text-sm tracking-widest hover:bg-black hover:text-white transition-all duration-300">
-                OUR STORY
-              </button>
+              <Link
+                to="/products"
+                className="bg-black text-white px-6 py-3 font-semibold hover:bg-white hover:text-black hover:border transition-colors"
+              >
+                View Products
+              </Link>{" "}
             </div>
           </div>
         </div>
       </div>
-
-      {/* Cosmetics Products Section with Fixed Background */}
-      <section
-        className="py-28 bg-fixed bg-cover bg-center relative"
-        style={{
-          backgroundImage: `
-          linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.5)),
-          url("https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1600&q=80")
-        `,
-        }}
-      >
-        <div className="max-w-7xl mx-auto px-6">
-          {/* Section Heading */}
-          <div className="text-center mb-16">
-            <h2 className="text-5xl font-light text-white mb-4 tracking-wide">
-              Jaji's Products
-            </h2>
-            <div className="w-20 h-1 bg-white mx-auto rounded-full"></div>
-          </div>
-
-          {/* Cards */}
-          <div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10"
-            data-aos="fade-up"
-          >
-            {categories.map((category, index) => (
-              <div
-                key={index}
-                className="group bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden shadow-lg border border-white/20 hover:bg-white/20 transition-transform transform hover:-translate-y-2 hover:shadow-2xl"
-              >
-                {/* Product Image */}
-                <div className="relative">
-                  <img
-                    src={category.image}
-                    alt={category.title}
-                    className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-4 left-4 bg-white text-black text-xs px-3 py-1 rounded-full shadow-md">
-                    {category.price}
-                  </div>
-                </div>
-
-                {/* Card Content */}
-                <div className="p-6">
-                  <h3 className="text-2xl text-white font-light text-center mb-2">
-                    {category.title}
-                  </h3>
-                  <p className="text-gray-300 text-center text-sm mb-6">
-                    {category.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        {/* View More Button */}
-        <div className="text-center mt-12">
-          <a
-            href=""
-            className="px-6 py-3 bg-transparent text-white text-sm font-semibold uppercase tracking-wide border border-white hover:bg-white hover:text-black hover:shadow-md transition-all duration-300"
-          >
-            Buy Now
-          </a>
-        </div>
-      </section>
 
       {/* Call to Action Section */}
       <div className="py-32 bg-black">
@@ -255,12 +158,12 @@ export default function Cosmetics() {
             essentials
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <a
-              href=""
+            <Link
+              to="/products"
               className="border border-white px-12 py-4 text-sm tracking-widest hover:bg-white hover:text-black transition-all duration-500"
             >
-              SHOP COLLECTION
-            </a>
+              PRODUCTS
+            </Link>
             <a
               href="/salons"
               className="bg-white text-black px-12 py-4 text-sm tracking-widest hover:bg-gray-100 transition-all duration-300"
