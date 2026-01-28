@@ -119,7 +119,7 @@ export default function Footer() {
             © {new Date().getFullYear()} <span className="text-white font-medium">Jajis</span>. All rights reserved.
           </p>
           <p className="text-sm text-gray-200 hover:text-white transition mt-4 md:mt-0">
-            <a href="https://www.inspirezesttechnologies.com/">Developed by InspireZesttechnologies Pvt Ltd</a>
+            <a href="https://www.inspirezesttechnologies.com/">Developed by InspireZest Technologies Pvt Ltd</a>
           </p>
           <div className="flex space-x-6 mt-4 mb-20 md:mb-0 md:mt-0">
             <Link to="/privacy" className="hover:text-white text-sm transition">
