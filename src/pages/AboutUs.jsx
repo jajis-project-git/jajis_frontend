@@ -148,7 +148,7 @@ export default function AboutUs() {
             {[
               {
                 name: "Dr. Jajimole K",
-                role: "Founder & Directo",
+                role: "Founder & Director",
                 image: JAJI,
               },
 
