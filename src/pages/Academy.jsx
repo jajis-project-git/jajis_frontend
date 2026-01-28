@@ -112,7 +112,7 @@ export default function CoursesPage() {
     <div className="bg-black text-white">
       {/* Banner */}
       <div
-        className="relative h-screen flex flex-col items-center justify-center text-center px-4 bg-fixed bg-cover bg-center border-b border-white"
+        className="relative h-[60vh] flex flex-col items-center justify-center text-center px-4 bg-fixed bg-cover bg-center border-b border-white"
         style={{
           backgroundImage:
             "linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://jooinn.com/images/beauty-65.jpg')",

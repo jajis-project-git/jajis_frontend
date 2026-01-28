@@ -126,7 +126,7 @@ export default function MyOrdersPage() {
     if (!createdAt) return "N/A";
 
     const deliveryDate = new Date(createdAt);
-    deliveryDate.setDate(deliveryDate.getDate() + 5); // add 5 days
+    deliveryDate.setDate(deliveryDate.getDate() + 5);
 
     return deliveryDate.toLocaleDateString("en-IN", {
       day: "2-digit",

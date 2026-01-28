@@ -121,7 +121,7 @@ export default function DesigningStitching() {
     <div className="min-h-screen bg-white">
       {/* Hero Section with Fixed Background */}
       <div 
-        className="relative h-screen flex items-center justify-center bg-fixed bg-cover bg-top bg-center"
+        className="relative h-[60vh] flex items-center justify-center bg-fixed bg-cover bg-top bg-center"
         style={{
           backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://png.pngtree.com/thumb_back/fw800/background/20230610/pngtree-beautiful-woman-sitting-in-trees-in-an-orange-lehenga-image_2943037.jpg')"
         }}

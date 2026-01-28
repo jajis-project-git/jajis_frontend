@@ -29,7 +29,6 @@ export default function Profile() {
   useEffect(() => {
     const token = localStorage.getItem("token");
 
-    // ⛔ No token → redirect
     if (!token) {
       navigate("/login");
       return;

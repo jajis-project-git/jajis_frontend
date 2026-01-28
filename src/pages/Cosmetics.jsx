@@ -70,7 +70,7 @@ export default function Cosmetics() {
     <div className="bg-black text-white">
       {/* Hero Banner Section with Fixed Background */}
       <div
-        className="relative h-[100vh] w-full bg-fixed bg-cover bg-center"
+        className="relative h-[60vh] w-full bg-fixed bg-cover bg-center"
         style={{
           backgroundImage: `url("https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y29zbWV0aWN8ZW58MHx8MHx8fDA%3D")`,
         }}

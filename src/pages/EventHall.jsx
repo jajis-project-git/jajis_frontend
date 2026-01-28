@@ -75,7 +75,7 @@ export default function EventHall() {
     <div className="bg-black text-white">
       {/* Hero Section */}
       <div
-        className="relative h-[100vh] w-full bg-fixed bg-cover bg-center border-b border-white"
+        className="relative h-[60vh] w-full bg-fixed bg-cover bg-center border-b border-white"
         style={{
           backgroundImage: `url("https://www.daiwikhotels.com/wp-content/uploads/2024/07/varta-2.jpg")`,
         }}
@@ -105,17 +105,14 @@ export default function EventHall() {
       <section
         id="event"
         className="relative bg-fixed bg-center bg-cover py-20"
-        style={{
-          backgroundImage:
-            "url('https://img.freepik.com/premium-photo/empty-dark-luxury-stage-ceremonial-celebrations_956920-59174.jpg')",
-        }}
+    
       >
         {/* Dark overlay */}
-        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="absolute inset-0 bg-white"></div>
 
         <div className="relative max-w-7xl mx-auto px-4">
           {/* Section Title */}
-          <h2 className="text-3xl font-bold text-center mb-12 text-white">
+          <h2 className="text-3xl font-bold text-center mb-12 text-black">
             Our Premium Event Venues
           </h2>
 
@@ -173,7 +170,7 @@ export default function EventHall() {
             ].map((venue, index) => (
               <div
                 key={index}
-                className="bg-white/5 backdrop-blur-md border border-white/20 rounded-xl shadow-2xl overflow-hidden hover:scale-[1.02] transition-all duration-300"
+                className="bg-white/5 backdrop-blur-md border border-black/20 rounded-xl  overflow-hidden hover:scale-[1.02] transition-all duration-300"
               >
                 {/* Image Section */}
                 <div className="relative h-48 overflow-hidden">
@@ -190,10 +187,10 @@ export default function EventHall() {
 
                 {/* Content Section */}
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-white mb-3">
+                  <h3 className="text-xl font-bold text-black mb-3">
                     {venue.title}
                   </h3>
-                  <p className="text-gray-200 mb-6 text-sm leading-relaxed">
+                  <p className="text-gray-800 mb-6 text-sm leading-relaxed">
                     {venue.description}
                   </p>
 

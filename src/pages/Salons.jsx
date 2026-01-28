@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { API } from "../config/api";
+import { Building } from "lucide-react";
 
 import {
   FaMapMarkerAlt,
@@ -177,7 +178,7 @@ export default function Salons() {
     <div className="min-h-screen text-white">
       {/* Hero Banner Section */}
       <div
-        className="relative h-[600px] w-full bg-fixed bg-cover bg-center"
+        className="relative h-[60vh] w-full bg-fixed bg-cover bg-center"
         style={{
           backgroundImage: `url(${
             data.banner_image ||
@@ -420,7 +421,8 @@ export default function Salons() {
 
           {data.data.length === 0 ? (
             <div className="text-center">
-              <div className="text-6xl mb-4">🏢</div>
+              <Building className="w-20 h-20 mx-auto text-white" />
+
               <p className="text-xl text-gray-300">
                 New locations coming soon!
               </p>
