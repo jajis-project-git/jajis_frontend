@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { API } from "../config/api";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { FaHeart, FaRegHeart, FaFilter } from "react-icons/fa";
 import { SkeletonProductCard } from "../components/SkeletonLoader";
 
 const FilterContent = ({
@@ -15,24 +15,25 @@ const FilterContent = ({
   handleApplyFilter,
 }) => (
   <div className="border p-6 bg-white shadow-sm rounded-lg select-none">
-    <h2 className="text-xl font-bold mb-6 pb-3 border-b-2">Filters</h2>
+    <h2 className="text-xl font-bold mb-6 pb-3 border-b-2 flex items-center gap-2">
+      <FaFilter className="text-gray-700" />
+      Filters
+    </h2>
 
-    <ul className="space-y-1">
-      {categories.map((cat) => (
-        <li key={cat}>
-          <button
-            onClick={() => setSelectedCategory(cat)}
-            className={`block w-full px-4 py-2 rounded ${
-              selectedCategory === cat
-                ? "bg-black text-white"
-                : "hover:bg-gray-100"
-            }`}
-          >
+    <div className="w-full">
+      <label className="block text-sm font-medium mb-2">Category</label>
+      <select
+        value={selectedCategory}
+        onChange={(e) => setSelectedCategory(e.target.value)}
+        className="w-full border rounded-lg px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-black"
+      >
+        {categories.map((cat) => (
+          <option key={cat} value={cat}>
             {cat}
-          </button>
-        </li>
-      ))}
-    </ul>
+          </option>
+        ))}
+      </select>
+    </div>
 
     <div className="mt-6">
       <h3 className="font-semibold border-b pb-2 mb-4">Price Range</h3>
