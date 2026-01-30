@@ -47,7 +47,7 @@ export default function JajisHomepage() {
       link: "/salons",
       layout: "left",
       bgImage:
-        "https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=2069&q=80",
+        "https://png.pngtree.com/thumb_back/fh260/background/20230425/pngtree-salon-service-salon-design-hd-image_2512958.jpg",
       cardImage:
         "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=2069&q=80",
     },
@@ -71,9 +71,9 @@ export default function JajisHomepage() {
       link: "/event-hall",
       layout: "left",
       bgImage:
-        "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=2098&q=80",
+        "https://assets.simplotel.com/simplotel/image/upload/x_0,y_100,w_1920,h_1080,r_0,c_crop,q_80,fl_progressive/w_900,f_auto,c_fit/jenneys-residency-coimbatore/diamond_banquet_hall_with_seating_arrangement_for_conference_and_weddings4_wq7t1z",
       cardImage:
-        "https://www.imperialpalacebanquethall.com/wp-content/uploads/2018/08/NWX_3528.jpg",
+        "https://www.princehotels.com/shinyokohama/wp-content/uploads/sites/8/2019/06/Z7T7769%E5%B0%8F.jpg",
     },
     {
       id: "food-court",
@@ -190,64 +190,76 @@ export default function JajisHomepage() {
   const heroImage = getFullUrl(heroImageRaw);
 
   const BusinessSection = ({ business }) => {
-    const isLeft = business.layout === "left";
-    return (
-      <section
-        className="relative w-full h-screen"
-        style={{
-          backgroundImage: `url(${business.bgImage})`,
-        }}
-      >
-        <div
-          className={`absolute inset-0 ${
-            isLeft
-              ? "bg-gradient-to-r from-black/80 via-black/50 to-transparent"
-              : "bg-gradient-to-l from-black/80 via-black/50 to-transparent"
-          }`}
-        ></div>
+  const isLeft = business.layout === "left";
 
-        <div className="relative z-10 container mx-auto h-full flex flex-col md:flex-row items-center px-6 md:px-12">
-          <div
-            className={`w-full md:w-1/2 text-center md:text-left ${
-              !isLeft ? "md:order-2 md:pl-12" : "md:pr-12"
-            }`}
-          >
-            <div className="flex items-center justify-center md:justify-start mb-4">
-              <div className="p-3 bg-white text-black rounded-full mr-4 mt-20 md:mt-0 shadow-lg">
+  return (
+    <section
+      className="relative w-full min-h-screen bg-fixed bg-center bg-cover bg-no-repeat flex items-center"
+      style={{
+        backgroundImage: `url(${business.bgImage})`,
+      }}
+    >
+      {/* Overlay */}
+      <div
+        className={`absolute inset-0 ${
+          isLeft
+            ? "bg-gradient-to-r from-black/85 via-black/60 to-black/10"
+            : "bg-gradient-to-l from-black/85 via-black/60 to-black/10"
+        }`}
+      />
+
+      {/* Content */}
+      <div className="relative z-10 container mx-auto px-6 md:px-12 py-20">
+        <div
+          className={`flex flex-col md:flex-row items-center ${
+            !isLeft ? "md:flex-row-reverse" : ""
+          }`}
+        >
+          {/* TEXT */}
+          <div className="w-full md:w-1/2 text-center md:text-left">
+            <div className="flex justify-center md:justify-start mb-6">
+              <div className="p-4 bg-white text-black rounded-full shadow-xl">
                 {business.icon}
               </div>
             </div>
-            <h1 className="text-4xl  md:text-6xl  font-extrabold mb-6 drop-shadow-lg">
+
+            <h2 className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
               {business.title}
-            </h1>
-            <p className="text-base sm:text-lg md:text-xl mb-8 leading-relaxed text-gray-200 drop-shadow-md">
+            </h2>
+
+            <p className="text-base sm:text-lg md:text-xl mb-10 leading-relaxed text-gray-200 max-w-xl mx-auto md:mx-0">
               {business.description}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <Link
-                to={business.link}
-                className="px-6 sm:px-8 py-3 sm:py-4 bg-white text-black rounded-full font-semibold shadow-lg hover:bg-gray-200 transition duration-300 flex items-center justify-center"
-              >
-                Explore {business.title} <ArrowRight className="ml-2 w-5 h-5" />
-              </Link>
-            </div>
+
+            <Link
+              to={business.link}
+              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black rounded-full font-semibold shadow-lg hover:bg-gray-200 hover:scale-105 transition-all duration-300"
+            >
+              Explore {business.title}
+              <ArrowRight className="w-5 h-5" />
+            </Link>
           </div>
 
-          <div
-            className={`w-full md:w-1/2 h-80 md:h-[600px] mt-8 md:mt-0 ${
-              !isLeft ? "md:order-1 md:pr-12" : "md:pl-12"
-            }`}
-          >
-            <img
-              src={business.cardImage}
-              alt={`${business.title} Showcase`}
-              className="w-full h-full object-cover rounded-4xl transition-transform duration-300 hover:scale-105"
-            />
+          {/* IMAGE CARD */}
+          <div className="w-full md:w-1/2 mt-12 md:mt-0">
+            <div
+              className={`relative h-80 md:h-[520px] rounded-3xl overflow-hidden shadow-2xl ${
+                !isLeft ? "md:mr-12" : "md:ml-12"
+              }`}
+            >
+              <img
+                src={business.cardImage}
+                alt={`${business.title} showcase`}
+                className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+              />
+            </div>
           </div>
         </div>
-      </section>
-    );
-  };
+      </div>
+    </section>
+  );
+};
+
 
   return (
     <div className="min-h-screen bg-black text-white">
