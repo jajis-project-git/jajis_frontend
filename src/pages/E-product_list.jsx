@@ -21,11 +21,11 @@ const FilterContent = ({
     </h2>
 
     <div className="w-full">
-      <label className="block text-sm font-medium mb-2">Category</label>
+      <label className="block  text-sm font-medium mb-2">Category</label>
       <select
         value={selectedCategory}
         onChange={(e) => setSelectedCategory(e.target.value)}
-        className="w-full border rounded-lg px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-black"
+        className="w-full bg-black border rounded-lg px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-black"
       >
         {categories.map((cat) => (
           <option key={cat} value={cat}>
