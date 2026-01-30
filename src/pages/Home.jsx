@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { API } from "../config/api";
@@ -24,11 +24,67 @@ import cosmeticsImg from "../assets/images/cosmatics.png";
 import cosmetics_bg from "../assets/images/cos-bg.jpg";
 import LOGO from "../assets/images/logo.png";
 
+
+
+function Counter({ value }) {
+  const numericValue = parseInt(value);
+  const suffix = value.replace(numericValue, "");
+
+  const [count, setCount] = useState(0);
+  const [hasStarted, setHasStarted] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasStarted) {
+          setHasStarted(true);
+        }
+      },
+      { threshold: 0.4 } // 40% visible
+    );
+
+    if (ref.current) observer.observe(ref.current);
+
+    return () => {
+      if (ref.current) observer.unobserve(ref.current);
+    };
+  }, [hasStarted]);
+
+  useEffect(() => {
+    if (!hasStarted) return;
+
+    let start = 0;
+    const duration = 1500;
+    const step = Math.ceil(numericValue / (duration / 30));
+
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= numericValue) {
+        setCount(numericValue);
+        clearInterval(timer);
+      } else {
+        setCount(start);
+      }
+    }, 30);
+
+    return () => clearInterval(timer);
+  }, [hasStarted, numericValue]);
+
+  return (
+    <span ref={ref}>
+      {count}
+      {suffix}
+    </span>
+  );
+}
+
+
 export default function JajisHomepage() {
   const stats = [
     { number: "10+", label: "Years Experience" },
     { number: "5000+", label: "Happy Customers" },
-    { number: "50+", label: "Expert Staff" },
+    { number: "75+", label: "Expert Staff" },
     { number: "7", label: "Business Verticals" },
   ];
 
@@ -190,76 +246,75 @@ export default function JajisHomepage() {
   const heroImage = getFullUrl(heroImageRaw);
 
   const BusinessSection = ({ business }) => {
-  const isLeft = business.layout === "left";
+    const isLeft = business.layout === "left";
 
-  return (
-    <section
-      className="relative w-full min-h-screen bg-fixed bg-center bg-cover bg-no-repeat flex items-center"
-      style={{
-        backgroundImage: `url(${business.bgImage})`,
-      }}
-    >
-      {/* Overlay */}
-      <div
-        className={`absolute inset-0 ${
-          isLeft
-            ? "bg-gradient-to-r from-black/85 via-black/60 to-black/10"
-            : "bg-gradient-to-l from-black/85 via-black/60 to-black/10"
-        }`}
-      />
-
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-6 md:px-12 py-20">
+    return (
+      <section
+        className="relative w-full min-h-screen bg-fixed bg-center bg-cover bg-no-repeat flex items-center"
+        style={{
+          backgroundImage: `url(${business.bgImage})`,
+        }}
+      >
+        {/* Overlay */}
         <div
-          className={`flex flex-col md:flex-row items-center ${
-            !isLeft ? "md:flex-row-reverse" : ""
+          className={`absolute inset-0 ${
+            isLeft
+              ? "bg-gradient-to-r from-black/85 via-black/60 to-black/10"
+              : "bg-gradient-to-l from-black/85 via-black/60 to-black/10"
           }`}
-        >
-          {/* TEXT */}
-          <div className="w-full md:w-1/2 text-center md:text-left">
-            <div className="flex justify-center md:justify-start mb-6">
-              <div className="p-4 bg-white text-black rounded-full shadow-xl">
-                {business.icon}
+        />
+
+        {/* Content */}
+        <div className="relative z-10 container mx-auto px-6 md:px-12 py-20">
+          <div
+            className={`flex flex-col md:flex-row items-center ${
+              !isLeft ? "md:flex-row-reverse" : ""
+            }`}
+          >
+            {/* TEXT */}
+            <div className="w-full md:w-1/2 text-center md:text-left">
+              <div className="flex justify-center md:justify-start mb-6">
+                <div className="p-4 bg-white text-black rounded-full shadow-xl">
+                  {business.icon}
+                </div>
               </div>
+
+              <h2 className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
+                {business.title}
+              </h2>
+
+              <p className="text-base sm:text-lg md:text-xl mb-10 leading-relaxed text-gray-200 max-w-xl mx-auto md:mx-0">
+                {business.description}
+              </p>
+
+              <Link
+                to={business.link}
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black rounded-full font-semibold shadow-lg hover:bg-gray-200 hover:scale-105 transition-all duration-300"
+              >
+                Explore {business.title}
+                <ArrowRight className="w-5 h-5" />
+              </Link>
             </div>
 
-            <h2 className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
-              {business.title}
-            </h2>
-
-            <p className="text-base sm:text-lg md:text-xl mb-10 leading-relaxed text-gray-200 max-w-xl mx-auto md:mx-0">
-              {business.description}
-            </p>
-
-            <Link
-              to={business.link}
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black rounded-full font-semibold shadow-lg hover:bg-gray-200 hover:scale-105 transition-all duration-300"
-            >
-              Explore {business.title}
-              <ArrowRight className="w-5 h-5" />
-            </Link>
-          </div>
-
-          {/* IMAGE CARD */}
-          <div className="w-full md:w-1/2 mt-12 md:mt-0">
-            <div
-              className={`relative h-80 md:h-[520px] rounded-3xl overflow-hidden shadow-2xl ${
-                !isLeft ? "md:mr-12" : "md:ml-12"
-              }`}
-            >
-              <img
-                src={business.cardImage}
-                alt={`${business.title} showcase`}
-                className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-              />
+            {/* IMAGE CARD */}
+            <div className="w-full md:w-1/2 mt-12 md:mt-0">
+              <div
+                className={`relative h-80 md:h-[520px] rounded-3xl overflow-hidden shadow-2xl ${
+                  !isLeft ? "md:mr-12" : "md:ml-12"
+                }`}
+              >
+                <img
+                  src={business.cardImage}
+                  alt={`${business.title} showcase`}
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-  );
-};
-
+      </section>
+    );
+  };
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -305,65 +360,77 @@ export default function JajisHomepage() {
 
       {/* Stats Section */}
       <section className="py-12 bg-black text-white">
-        <div className="pb-10 mb-10 text-center py-6">
-          <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-6 tracking-wide">
+        <div className="pb-8 text-center px-4">
+          <h2 className="text-2xl md:text-3xl font-extrabold mb-4 tracking-wide">
             Shop With Jajis
           </h2>
-          <p className="text-gray-400 max-w-xl mx-auto mb-8 text-sm md:text-base">
+
+          <p className="text-gray-400 max-w-xl mx-auto mb-6 text-sm md:text-base">
             Your one-stop destination for premium beauty, lifestyle, and fashion
             products.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-4">
-            {/* 🛍️ Shop Online */}
+          {/* ACTION BUTTONS */}
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-4">
             <Link
               to="/products"
-              className="flex items-center gap-2 bg-black border border-white text-white px-6 py-2.5 rounded-full shadow-lg hover:bg-red-600 hover:border-red-600 transition-all"
+              className="flex flex-col items-center justify-center gap-2 
+                   bg-white text-black border border-white
+                   w-full sm:w-auto px-4 py-3 rounded-xl 
+                   shadow hover:bg-gray-100 transition"
             >
               <ShoppingCart className="w-5 h-5" />
-              <span className="text-sm font-semibold uppercase">Shop Now</span>
+              <span className="text-xs font-semibold uppercase">Shop</span>
             </Link>
 
-            {/* 📦 My Orders */}
             <Link
               to="/myorders"
-              className="flex items-center gap-2 bg-white text-black border border-black px-6 py-2.5 rounded-full shadow-md hover:bg-gray-100 transition-all"
+              className="flex flex-col items-center justify-center gap-2 
+                   bg-black text-white border border-white
+                   w-full sm:w-auto px-4 py-3 rounded-xl 
+                   shadow hover:bg-gray-800 transition"
             >
               <ShoppingBag className="w-5 h-5" />
-              <span className="text-sm font-semibold uppercase">My Orders</span>
+              <span className="text-xs font-semibold uppercase">Orders</span>
             </Link>
 
-            {/* ❤️ Wishlist */}
             <Link
               to="/wishlist"
-              className="flex items-center gap-2 bg-red-800 border border-red-600 text-white px-6 py-2.5 rounded-full shadow-lg hover:bg-red-700 transition-all"
+              className="flex flex-col items-center justify-center gap-2 
+                   bg-red-700 text-white 
+                   w-full sm:w-auto px-4 py-3 rounded-xl 
+                   shadow hover:bg-red-600 transition"
             >
               <Heart className="w-5 h-5" fill="currentColor" />
-              <span className="text-sm font-semibold uppercase">Wishlist</span>
+              <span className="text-xs font-semibold uppercase">Wishlist</span>
             </Link>
 
-            {/* 👤 Profile */}
             <Link
               to="/profile"
-              className="flex items-center gap-2 bg-gray-800 border border-gray-600 text-white px-6 py-2.5 rounded-full shadow-lg hover:bg-gray-700 transition-all"
+              className="flex flex-col items-center justify-center gap-2 
+                   bg-gray-700 text-white 
+                   w-full sm:w-auto px-4 py-3 rounded-xl 
+                   shadow hover:bg-gray-600 transition"
             >
               <User className="w-5 h-5" />
-              <span className="text-sm font-semibold uppercase">Profile</span>
+              <span className="text-xs font-semibold uppercase">Profile</span>
             </Link>
           </div>
         </div>
 
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        {/* STATS */}
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
             {stats.map((stat, index) => (
               <div
                 key={index}
-                className="group p-6 rounded-xl bg-white/5 backdrop-blur-md hover:shadow-2xl hover:bg-white/10 hover:border-white transition-all duration-300"
+                className="group p-4 rounded-xl bg-white/5 hover:bg-white/10 transition"
               >
-                <div className="text-3xl md:text-3xl font-extrabold mb-2 text-white group-hover:text-gray-300 transition-all duration-300">
-                  {stat.number}
+                <div className="text-2xl md:text-3xl font-extrabold mb-1">
+                  <Counter value={stat.number} />
                 </div>
-                <div className="text-sm text-gray-400 group-hover:text-white transition-all duration-300">
+
+                <div className="text-xs md:text-sm text-gray-400">
                   {stat.label}
                 </div>
               </div>

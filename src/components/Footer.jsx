@@ -6,77 +6,92 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import { ShoppingCart, Package, Heart, User } from "lucide-react";
+import { ShoppingCart, ShoppingBag, Heart, User } from "lucide-react";
 import Logo from "../assets/images/logo.png";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+    <footer className="bg-gray-900 text-white rounded-t-3xl w-[95%] mx-auto mt-20">
+      <div className="max-w-7xl mx-auto px-8 lg:px-16 py-14">
+
         {/* === Top Shop Section === */}
-        <div className="border-b border-gray-700 pb-10 mb-10 text-center">
-          <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-6 tracking-wide">
+        <section className="py-12 text-white text-center border-b border-gray-800">
+          <h2 className="text-2xl md:text-3xl font-extrabold mb-4 tracking-wide">
             Shop With Jajis
           </h2>
+
           <p className="text-gray-400 max-w-xl mx-auto mb-8 text-sm md:text-base">
-            Your one-stop destination for premium beauty, lifestyle, and fashion products.
+            Your one-stop destination for premium beauty, lifestyle, and
+            fashion products.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-4">
-            {/* 🛍️ Shop Online */}
+          {/* ACTION BUTTONS */}
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-5">
             <Link
               to="/products"
-              className="flex items-center gap-2 bg-black border border-white text-white px-6 py-2.5 rounded-full shadow-lg hover:bg-red-600 hover:border-red-600 transition-all"
+              className="flex flex-col items-center justify-center gap-2 
+                         bg-white text-black border border-white
+                         w-full sm:w-auto px-5 py-3 rounded-xl 
+                         shadow hover:bg-gray-100 transition"
             >
               <ShoppingCart className="w-5 h-5" />
-              <span className="text-sm font-semibold uppercase">Shop Now</span>
+              <span className="text-xs font-semibold uppercase">Shop</span>
             </Link>
 
-            {/* 📦 My Orders */}
             <Link
               to="/myorders"
-              className="flex items-center gap-2 bg-white text-black border border-black px-6 py-2.5 rounded-full shadow-md hover:bg-gray-100 transition-all"
+              className="flex flex-col items-center justify-center gap-2 
+                         bg-black text-white border border-white
+                         w-full sm:w-auto px-5 py-3 rounded-xl 
+                         shadow hover:bg-gray-800 transition"
             >
-              <Package className="w-5 h-5" />
-              <span className="text-sm font-semibold uppercase">My Orders</span>
+              <ShoppingBag className="w-5 h-5" />
+              <span className="text-xs font-semibold uppercase">Orders</span>
             </Link>
 
-            {/* ❤️ Wishlist */}
             <Link
               to="/wishlist"
-              className="flex items-center gap-2 bg-red-600 border border-red-600 text-white px-6 py-2.5 rounded-full shadow-lg hover:bg-red-700 transition-all"
+              className="flex flex-col items-center justify-center gap-2 
+                         bg-red-700 text-white 
+                         w-full sm:w-auto px-5 py-3 rounded-xl 
+                         shadow hover:bg-red-600 transition"
             >
               <Heart className="w-5 h-5" fill="currentColor" />
-              <span className="text-sm font-semibold uppercase">Wishlist</span>
+              <span className="text-xs font-semibold uppercase">
+                Wishlist
+              </span>
             </Link>
 
-            {/* 👤 Profile */}
             <Link
               to="/profile"
-              className="flex items-center gap-2 bg-gray-800 border border-gray-600 text-white px-6 py-2.5 rounded-full shadow-lg hover:bg-gray-700 transition-all"
+              className="flex flex-col items-center justify-center gap-2 
+                         bg-gray-700 text-white 
+                         w-full sm:w-auto px-5 py-3 rounded-xl 
+                         shadow hover:bg-gray-600 transition"
             >
               <User className="w-5 h-5" />
-              <span className="text-sm font-semibold uppercase">Profile</span>
+              <span className="text-xs font-semibold uppercase">Profile</span>
             </Link>
           </div>
-        </div>
+        </section>
 
         {/* === Main Footer Content === */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mt-12">
+
           {/* Logo & Description */}
-          <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center space-x-3 mb-4">
-              <img
-                src={Logo}
-                alt="Jajis Logo"
-                className="h-28 w-auto object-contain filter brightness-0 invert"
-              />
-            </div>
-            <p className="text-gray-400 leading-relaxed text-sm md:text-base">
-              Experience <span className="text-white font-semibold">beauty</span>,{" "}
+          <div className="md:col-span-2">
+            <img
+              src={Logo}
+              alt="Jajis Logo"
+              className="h-28 w-auto mb-4 filter brightness-0 invert"
+            />
+            <p className="text-gray-400 leading-relaxed text-sm md:text-base max-w-lg">
+              Experience{" "}
+              <span className="text-white font-semibold">beauty</span>,{" "}
               <span className="text-white font-semibold">lifestyle</span>, and{" "}
-              <span className="text-white font-semibold">entertainment</span> like never before.
-              Jajis brings everything under one luxurious brand.
+              <span className="text-white font-semibold">entertainment</span>{" "}
+              like never before. Jajis brings everything under one luxurious
+              brand.
             </p>
           </div>
 
@@ -86,15 +101,26 @@ export default function Footer() {
               Quick Links
             </h4>
             <ul className="space-y-2 text-sm">
-              <li><Link to="/salons" className="hover:text-white transition">Salons</Link></li>
-              <li><Link to="/cosmetics" className="hover:text-white transition">Cosmetics</Link></li>
-              <li><Link to="/event-hall" className="hover:text-white transition">Event Hall</Link></li>
-              <li><Link to="/food-court" className="hover:text-white transition">Food Court</Link></li>
-              <li><Link to="/academy" className="hover:text-white transition">Academy</Link></li>
-              <li><Link to="/franchise" className="hover:text-white transition">Franchise</Link></li>
-              <li><Link to="/management" className="hover:text-white transition">Management</Link></li>
-              <li><Link to="/about-us" className="hover:text-white transition">About Us</Link></li>
-              <li><Link to="/contact" className="hover:text-white transition">Contact</Link></li>
+              {[
+                ["Salons", "/salons"],
+                ["Cosmetics", "/cosmetics"],
+                ["Event Hall", "/event-hall"],
+                ["Food Court", "/food-court"],
+                ["Academy", "/academy"],
+                ["Franchise", "/franchise"],
+                ["Management", "/management"],
+                ["About Us", "/about-us"],
+                ["Contact", "/contact"],
+              ].map(([label, path]) => (
+                <li key={path}>
+                  <Link
+                    to={path}
+                    className="hover:text-white transition hover:pl-1"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -104,24 +130,40 @@ export default function Footer() {
               Follow Us
             </h4>
             <div className="flex space-x-5">
-              <a href="#" className="hover:text-red-500 transition"><FaFacebookF className="h-5 w-5" /></a>
-              <a href="#" className="hover:text-red-500 transition"><FaXTwitter className="h-5 w-5" /></a>
-              <a href="#" className="hover:text-red-500 transition"><FaInstagram className="h-5 w-5" /></a>
-              <a href="#" className="hover:text-red-500 transition"><FaLinkedinIn className="h-5 w-5" /></a>
-              <a href="#" className="hover:text-red-500 transition"><FaYoutube className="h-5 w-5" /></a>
+              <a href="#" className="hover:text-red-500 transition">
+                <FaFacebookF className="h-5 w-5" />
+              </a>
+              <a href="#" className="hover:text-red-500 transition">
+                <FaXTwitter className="h-5 w-5" />
+              </a>
+              <a href="#" className="hover:text-red-500 transition">
+                <FaInstagram className="h-5 w-5" />
+              </a>
+              <a href="#" className="hover:text-red-500 transition">
+                <FaLinkedinIn className="h-5 w-5" />
+              </a>
+              <a href="#" className="hover:text-red-500 transition">
+                <FaYoutube className="h-5 w-5" />
+              </a>
             </div>
           </div>
         </div>
 
         {/* === Bottom Section === */}
-        <div className="border-t border-gray-800 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
+        <div className="border-t border-gray-800 mt-12 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-gray-400">
-            © {new Date().getFullYear()} <span className="text-white font-medium">Jajis</span>. All rights reserved.
+            © {new Date().getFullYear()}{" "}
+            <span className="text-white font-medium">Jajis</span>. All rights
+            reserved.
           </p>
-          <p className="text-sm text-gray-200 hover:text-white transition mt-4 md:mt-0">
-            <a href="https://www.inspirezesttechnologies.com/">Developed by InspireZest Technologies Pvt Ltd</a>
+
+          <p className="text-sm text-gray-300 hover:text-white transition">
+            <a href="https://www.inspirezesttechnologies.com/">
+              Developed by InspireZest Technologies Pvt Ltd
+            </a>
           </p>
-          <div className="flex space-x-6 mt-4 mb-20 md:mb-0 md:mt-0">
+
+          <div className="flex space-x-6">
             <Link to="/privacy" className="hover:text-white text-sm transition">
               Privacy Policy
             </Link>
@@ -130,6 +172,7 @@ export default function Footer() {
             </Link>
           </div>
         </div>
+
       </div>
     </footer>
   );
