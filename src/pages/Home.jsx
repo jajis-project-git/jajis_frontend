@@ -17,6 +17,7 @@ import {
   Star,
   ArrowRight,
   BookOpen,
+  ShoppingBag,
 } from "lucide-react";
 
 import cosmeticsImg from "../assets/images/cosmatics.png";
@@ -133,7 +134,7 @@ export default function JajisHomepage() {
       try {
         setLoading(true);
         // Django home view is mapped to path '' under /api/, so this hits /api/
-        const response = await API.get(""); 
+        const response = await API.get("");
         setData(response.data);
       } catch (err) {
         setError(err.message || "Failed to load home page");
@@ -144,31 +145,21 @@ export default function JajisHomepage() {
     fetchData();
   }, []);
 
+  if (loading) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-white px-4">
+        {/* Logo */}
+        <img
+          src={LOGO}
+          alt="Jajis Lifestyle"
+          className="h-24 w-auto mb-6 animate-pulse"
+        />
 
-
-  
-if (loading) {
-  return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-white px-4">
-      
-      {/* Logo */}
-      <img
-        src={LOGO}
-        alt="Jajis Lifestyle"
-        className="h-24 w-auto mb-6 animate-pulse"
-      />
-
-      {/* Spinner */}
-      <div className="h-7 w-7 border-4 border-gray-200 border-t-gray-900 rounded-full animate-spin" />
-
-      
-
-    </div>
-  );
-}
-
-
-
+        {/* Spinner */}
+        <div className="h-7 w-7 border-4 border-gray-200 border-t-gray-900 rounded-full animate-spin" />
+      </div>
+    );
+  }
 
   if (error) {
     return (
@@ -202,7 +193,7 @@ if (loading) {
     const isLeft = business.layout === "left";
     return (
       <section
-        className="relative w-full h-screen text-white overflow-hidden bg-fixed bg-center bg-cover"
+        className="relative w-full h-screen"
         style={{
           backgroundImage: `url(${business.bgImage})`,
         }}
@@ -250,7 +241,7 @@ if (loading) {
             <img
               src={business.cardImage}
               alt={`${business.title} Showcase`}
-              className="w-full h-full object-cover rounded-xl shadow-2xl transform transition-transform duration-300 hover:scale-105"
+              className="w-full h-full object-cover rounded-4xl transition-transform duration-300 hover:scale-105"
             />
           </div>
         </div>
@@ -263,112 +254,104 @@ if (loading) {
       {/* Hero Section */}
       <section
         id="home"
-        className="relative h-screen w-full overflow-hidden bg-fixed bg-center bg-cover bg-top"
+        className="relative h-[100vh] overflow-hidden bg-fixed bg-center bg-cover"
         style={{ backgroundImage: `url(${heroImage})` }}
       >
         {/* Overlay */}
         <div className="absolute inset-0 bg-black/40"></div>
 
         {/* Content */}
-        <div className="relative z-20 flex items-center h-screen">
-          <div className="max-w-5xl px-6 md:px-12 md:text-left text-center md:text-left">
-            <div className="inline-flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-4 animate-fadeIn mx-auto md:mx-0">
-              <Star className="w-5 h-5 text-yellow-400 mr-2" />
-              <span className="text-white font-semibold uppercase tracking-widest text-sm">
-                Premium Lifestyle
-              </span>
-            </div>
-
+        <div className="relative z-20 flex items-center justify-center h-full">
+          <div className="max-w-5xl px-6 md:px-12 text-center">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight animate-slideUp uppercase">
-              Jajis Lifestyle
+              Step into Jaji’s
             </h1>
 
-            <p className="mt-6 text-gray-200 text-md md:text-xl animate-fadeIn delay-300">
-              Your premier destination for beauty, fashion, events, and culinary
-              experiences.
-              <br /> Excellence in every service, memories in every moment.
+            <p className="mt-6 text-gray-100 text-xl md:text-3xl animate-fadeIn delay-300">
+              where beauty isn’t just experienced—it's created
             </p>
 
-            <div className="mt-8 flex flex-col sm:flex-row gap-5 justify-center md:justify-start animate-fadeIn delay-500">
+            <p className="mt-4 text-md md:text-base text-gray-200 max-w-3xl mx-auto">
+              From our salons and cafés to our exclusive Jaji’s cosmetics line,
+              we bring skin, hair, and self-care essentials right to your
+              fingertips. Discover Jaji’s online store and embrace your
+              signature lifestyle
+            </p>
+
+            <div className="mt-8 flex flex-col sm:flex-row gap-5 justify-center animate-fadeIn delay-500">
               <Link
                 to="/products"
-                className="relative px-8 py-4 bg-white text-black rounded-full font-semibold flex items-center justify-center uppercase tracking-wide shadow-2xl hover:scale-105 transition-transform duration-300"
+                className="relative px-6 py-4 border border-white text-white hover:bg-white hover:text-black font-semibold flex items-center justify-center uppercase hover:scale-105 transition-transform duration-300"
               >
                 Shop Online
                 <ArrowRight className="ml-2 w-5 h-5" />
-              </Link>
-
-              <Link
-                to="/salons"
-                className="relative px-8 py-4 border-2 border-white text-white rounded-full font-semibold flex items-center justify-center uppercase tracking-wide shadow-lg hover:bg-white hover:text-black transition-all duration-300"
-              >
-                <BookOpen className="mr-2 w-5 h-5" /> Salon finder
               </Link>
             </div>
           </div>
         </div>
       </section>
-      <div className="border-b border-gray-700 pb-10 mb-10 text-center py-6">
-        <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-6 tracking-wide">
-          Shop With Jajis
-        </h2>
-        <p className="text-gray-400 max-w-xl mx-auto mb-8 text-sm md:text-base">
-          Your one-stop destination for premium beauty, lifestyle, and fashion
-          products.
-        </p>
-
-        <div className="flex flex-wrap justify-center gap-4">
-          {/* 🛍️ Shop Online */}
-          <Link
-            to="/products"
-            className="flex items-center gap-2 bg-black border border-white text-white px-6 py-2.5 rounded-full shadow-lg hover:bg-red-600 hover:border-red-600 transition-all"
-          >
-            <ShoppingCart className="w-5 h-5" />
-            <span className="text-sm font-semibold uppercase">Shop Now</span>
-          </Link>
-
-          {/* 📦 My Orders */}
-          <Link
-            to="/myorders"
-            className="flex items-center gap-2 bg-white text-black border border-black px-6 py-2.5 rounded-full shadow-md hover:bg-gray-100 transition-all"
-          >
-            <Package className="w-5 h-5" />
-            <span className="text-sm font-semibold uppercase">My Orders</span>
-          </Link>
-
-          {/* ❤️ Wishlist */}
-          <Link
-            to="/wishlist"
-            className="flex items-center gap-2 bg-red-600 border border-red-600 text-white px-6 py-2.5 rounded-full shadow-lg hover:bg-red-700 transition-all"
-          >
-            <Heart className="w-5 h-5" fill="currentColor" />
-            <span className="text-sm font-semibold uppercase">Wishlist</span>
-          </Link>
-
-          {/* 👤 Profile */}
-          <Link
-            to="/profile"
-            className="flex items-center gap-2 bg-gray-800 border border-gray-600 text-white px-6 py-2.5 rounded-full shadow-lg hover:bg-gray-700 transition-all"
-          >
-            <User className="w-5 h-5" />
-            <span className="text-sm font-semibold uppercase">Profile</span>
-          </Link>
-        </div>
-      </div>
 
       {/* Stats Section */}
-      <section className="py-16 bg-gradient-to-br from-black via-gray-900 to-black text-white">
+      <section className="py-12 bg-black text-white">
+        <div className="pb-10 mb-10 text-center py-6">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-6 tracking-wide">
+            Shop With Jajis
+          </h2>
+          <p className="text-gray-400 max-w-xl mx-auto mb-8 text-sm md:text-base">
+            Your one-stop destination for premium beauty, lifestyle, and fashion
+            products.
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-4">
+            {/* 🛍️ Shop Online */}
+            <Link
+              to="/products"
+              className="flex items-center gap-2 bg-black border border-white text-white px-6 py-2.5 rounded-full shadow-lg hover:bg-red-600 hover:border-red-600 transition-all"
+            >
+              <ShoppingCart className="w-5 h-5" />
+              <span className="text-sm font-semibold uppercase">Shop Now</span>
+            </Link>
+
+            {/* 📦 My Orders */}
+            <Link
+              to="/myorders"
+              className="flex items-center gap-2 bg-white text-black border border-black px-6 py-2.5 rounded-full shadow-md hover:bg-gray-100 transition-all"
+            >
+              <ShoppingBag className="w-5 h-5" />
+              <span className="text-sm font-semibold uppercase">My Orders</span>
+            </Link>
+
+            {/* ❤️ Wishlist */}
+            <Link
+              to="/wishlist"
+              className="flex items-center gap-2 bg-red-800 border border-red-600 text-white px-6 py-2.5 rounded-full shadow-lg hover:bg-red-700 transition-all"
+            >
+              <Heart className="w-5 h-5" fill="currentColor" />
+              <span className="text-sm font-semibold uppercase">Wishlist</span>
+            </Link>
+
+            {/* 👤 Profile */}
+            <Link
+              to="/profile"
+              className="flex items-center gap-2 bg-gray-800 border border-gray-600 text-white px-6 py-2.5 rounded-full shadow-lg hover:bg-gray-700 transition-all"
+            >
+              <User className="w-5 h-5" />
+              <span className="text-sm font-semibold uppercase">Profile</span>
+            </Link>
+          </div>
+        </div>
+
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {stats.map((stat, index) => (
               <div
                 key={index}
-                className="group p-6 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md shadow-lg hover:shadow-2xl hover:border-white/20 transition-all duration-300"
+                className="group p-6 rounded-xl bg-white/5 backdrop-blur-md hover:shadow-2xl hover:bg-white/10 hover:border-white transition-all duration-300"
               >
-                <div className="text-4xl md:text-5xl font-extrabold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-500 group-hover:from-purple-500 group-hover:to-pink-400 transition-all duration-300">
+                <div className="text-3xl md:text-3xl font-extrabold mb-2 text-white group-hover:text-gray-300 transition-all duration-300">
                   {stat.number}
                 </div>
-                <div className="text-lg text-gray-300 group-hover:text-white transition-all duration-300">
+                <div className="text-sm text-gray-400 group-hover:text-white transition-all duration-300">
                   {stat.label}
                 </div>
               </div>

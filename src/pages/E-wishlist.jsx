@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Trash2, ShoppingCart } from "lucide-react";
+import { Trash2, ShoppingCart, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
 import { API } from "../config/api";
 import { SkeletonWishlistItem } from "../components/SkeletonLoader";
@@ -115,15 +115,17 @@ export default function Wishlist() {
       </header>
 
       {items.length === 0 && !loading ? (
-        <div className="text-center mt-12">
-          <p className="text-gray-600 text-lg">Your wishlist is empty</p>
-          <Link
-            to="/products"
-            className="inline-block mt-6 bg-black text-white px-6 py-3 font-semibold text-sm uppercase tracking-wider rounded-full hover:bg-gray-800 transition"
-          >
-            Continue Shopping
-          </Link>
-        </div>
+        <div className="flex justify-center items-center min-h-[60vh]">
+                    <Link to="/products">
+                      <div className="p-8 border rounded-xl text-center hover:shadow-lg">
+                        <Heart className="w-12 h-12 text-red-500 mx-auto mb-4" />
+                        <p className="text-gray-500 text-lg">Your Wishlist is empty</p>
+                        <p className="text-gray-400 text-sm">
+                          Click to browse products
+                        </p>
+                      </div>
+                    </Link>
+                  </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {loading ? (
@@ -151,7 +153,7 @@ export default function Wishlist() {
               return (
                 <div
                   key={item.id}
-                  className="bg-white border border-gray-200 hover:border-gray-900 transition-all duration-300 group relative overflow-hidden "
+                  className="bg-white border border-gray-200 hover:border-gray-900 transition-all duration-300 group relative overflow-hidden rounded-xl"
                 >
                   {/* Delete */}
                   <button

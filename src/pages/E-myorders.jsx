@@ -12,6 +12,7 @@ import {
   CreditCard,
 } from "lucide-react";
 import { API } from "../config/api";
+import { Link } from "react-router-dom";
 
 export default function MyOrdersPage() {
   const [orders, setOrders] = useState([]);
@@ -170,6 +171,9 @@ export default function MyOrdersPage() {
         {!error && ordersSorted.length === 0 && (
           <div className="text-center text-gray-600 py-16">
             <p>No orders yet. Start shopping to see them here.</p>
+            <Link to="/products" className="inline-block mt-6 bg-black text-white px-6 py-3 font-semibold text-sm uppercase tracking-wider rounded-full hover:bg-gray-800 transition">
+              Continue Shopping
+            </Link>
           </div>
         )}
 

@@ -121,16 +121,16 @@ export default function Cosmetics() {
 
             {/* TEXT SECOND ON MOBILE */}
             <div className="order-2 lg:order-1">
-              <h2 className="text-5xl font-thin mb-8 tracking-wide">
+              <h2 className="text-3xl font-thin mb-8 tracking-wide">
                 About Our Brand
               </h2>
               <div className="w-24 h-px bg-black mb-8"></div>
-              <p className="text-lg leading-relaxed mb-6 text-gray-700">
+              <p className="text-lg leading-relaxed mb-6 text-gray-700 text-justify">
                 For over two decades, we have been at the forefront of beauty
                 innovation, crafting products that enhance natural beauty while
                 maintaining the highest standards of quality and luxury.
               </p>
-              <p className="text-lg leading-relaxed text-gray-700 mb-8">
+              <p className="text-lg leading-relaxed text-gray-700 mb-8 text-justify">
                 Our commitment to excellence drives us to source the finest
                 ingredients and work with renowned beauty experts to create
                 products that deliver exceptional results.

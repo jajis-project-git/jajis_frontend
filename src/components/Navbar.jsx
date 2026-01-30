@@ -9,6 +9,7 @@ import {
   User,
   Home,
   Store,
+  ShoppingBag,
 } from "lucide-react";
 import logo from "../assets/images/logo.png";
 import { FaInstagram, FaFacebookF, FaYoutube } from "react-icons/fa";
@@ -44,7 +45,7 @@ export default function Navbar() {
             onClick={() => setIsOpen(true)}
             className="text-black hover:opacity-70 transition"
           >
-            <Menu className="w-10 h-auto text-red-500" />
+            <Menu className="w-10 h-auto text-black hover:text-red-500" />
           </button>
 
           {/* Logo */}
@@ -123,7 +124,7 @@ export default function Navbar() {
       <div className="fixed bottom-4 right-6 z-[90] hidden md:flex flex-col gap-3">
         <Link
           to="/cart"
-          className="flex items-center gap-2 bg-black text-white  px-4 py-2.5 rounded-full shadow-lg"
+          className="flex items-center gap-2 bg-black text-white  px-4 py-2 rounded-full shadow-lg"
         >
           <ShoppingCart className="w-5 h-5" />
           Cart
@@ -131,15 +132,15 @@ export default function Navbar() {
 
         <Link
           to="/myorders"
-          className="flex items-center gap-2 bg-white border px-4 py-2.5 rounded-full"
+          className="flex items-center gap-2 bg-white border px-4 py-2 rounded-full"
         >
-          <Package className="w-5 h-5" />
+          <ShoppingBag  className="w-5 h-5" />
           Orders
         </Link>
 
         <Link
           to="/wishlist"
-          className="flex items-center gap-2 bg-red-600 text-white px-4 py-2.5 rounded-full"
+          className="flex items-center gap-2 bg-red-800 text-white px-4 py-2 rounded-full"
         >
           <Heart className="w-5 h-5" />
           Wishlist
