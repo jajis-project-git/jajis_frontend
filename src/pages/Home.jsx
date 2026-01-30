@@ -56,7 +56,7 @@ function Counter({ value }) {
 
     let start = 0;
     const duration = 1500;
-    const step = Math.ceil(numericValue / (duration / 30));
+    const step = Math.ceil(numericValue / (duration / 14));
 
     const timer = setInterval(() => {
       start += step;
