@@ -211,11 +211,11 @@ export default function Salons() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div className="transform hover:scale-105 transition-transform">
-              <div className="text-4xl font-bold text-white mb-2">50K+</div>
+              <div className="text-4xl font-bold text-white mb-2">5000+</div>
               <div className="text-gray-400">Happy Clients</div>
             </div>
             <div className="transform hover:scale-105 transition-transform">
-              <div className="text-4xl font-bold text-white mb-2">13+</div>
+              <div className="text-4xl font-bold text-white mb-2">10+</div>
               <div className="text-gray-400">Years Experience</div>
             </div>
             <div className="transform hover:scale-105 transition-transform">

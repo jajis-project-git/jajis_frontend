@@ -45,7 +45,7 @@ export default function AboutUs() {
         <div className="relative max-w-7xl mx-auto px-6 py-32">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             {/* Left Content */}
-            <div className="space-y-8">
+            <div className="space-y-8" data-aos="fade-right">
               <span className="text-sm font-bold tracking-widest text-gray-600 uppercase">
                 Our Journey
               </span>
@@ -89,8 +89,8 @@ export default function AboutUs() {
             </div>
 
             {/* Right Content - Cards */}
-            <div className="space-y-10">
-              <div className="bg-white p-10 rounded-2xl shadow-lg border border-gray-300 hover:shadow-xl transition-all group">
+            <div className="space-y-10" >
+              <div className="bg-white p-10 rounded-2xl shadow-lg border border-gray-300 hover:shadow-xl transition-all group" data-aos="zoom-in">
                 <div className="w-16 h-16 flex items-center justify-center rounded-full bg-gray-100 text-black text-4xl mb-6 group-hover:scale-110 transition-transform">
                   <FaBuilding />
                 </div>
@@ -104,7 +104,7 @@ export default function AboutUs() {
                 </p>
               </div>
 
-              <div className="bg-white p-10 rounded-2xl shadow-lg border border-gray-300 hover:shadow-xl transition-all group">
+              <div className="bg-white p-10 rounded-2xl shadow-lg border border-gray-300 hover:shadow-xl transition-all group" data-aos="zoom-out">
                 <div className="w-16 h-16 flex items-center justify-center rounded-full bg-gray-100 text-black text-4xl mb-6 group-hover:scale-110 transition-transform">
                   <FaStar />
                 </div>
@@ -167,7 +167,7 @@ export default function AboutUs() {
               <div
                 key={i}
                 className="group text-center p-8 
-              transition-all duration-300 rounded-2xl"
+              transition-all duration-300 rounded-2xl" data-aos="flip-right"
               >
                 {/* Profile Image */}
                 <div className="relative w-62 h-62 mx-auto mb-6">

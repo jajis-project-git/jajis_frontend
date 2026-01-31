@@ -110,7 +110,7 @@ export default function Cosmetics() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* IMAGE FIRST ON MOBILE */}
             <div className="relative order-1 lg:order-2">
-              <div className="aspect-square  overflow-hidden">
+              <div className="aspect-square  overflow-hidden" data-aos='zoom-in'>
                 <img
                   src={AboutImg}
                   alt="About our brand"
@@ -120,7 +120,7 @@ export default function Cosmetics() {
             </div>
 
             {/* TEXT SECOND ON MOBILE */}
-            <div className="order-2 lg:order-1">
+            <div className="order-2 lg:order-1" data-aos='zoom-out'>
               <h2 className="text-3xl font-thin mb-8 tracking-wide">
                 About Our Brand
               </h2>

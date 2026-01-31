@@ -303,7 +303,7 @@ export default function JajisHomepage() {
                   !isLeft ? "md:mr-12" : "md:ml-12"
                 }`}
               >
-                <img
+                <img data-aos="zoom-in"
                   src={business.cardImage}
                   alt={`${business.title} showcase`}
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
@@ -321,7 +321,7 @@ export default function JajisHomepage() {
       {/* Hero Section */}
       <section
         id="home"
-        className="relative h-[100vh] overflow-hidden bg-fixed bg-center bg-cover"
+        className="relative h-[100vh] overflow-hidden bg-fixed bg-center bg-cover" data-aos="fade-in"
         style={{ backgroundImage: `url(${heroImage})` }}
       >
         {/* Overlay */}
@@ -371,7 +371,7 @@ export default function JajisHomepage() {
           </p>
 
           {/* ACTION BUTTONS */}
-          <div className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-4">
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-4" data-aos="zoom-in">
             <Link
               to="/products"
               className="flex flex-col items-center justify-center gap-2 

@@ -121,9 +121,9 @@ export default function Navbar() {
       </div>
 
       {/* ================= FLOATING ACTION BUTTONS ================= */}
-      <div className="fixed bottom-4 right-6 z-[90] hidden md:flex flex-col gap-3">
+      <div className="fixed bottom-4 right-6 z-[90] hidden md:flex flex-col gap-3" data-aos="fade-down">
         <Link
-          to="/cart"
+          to="/cart" 
           className="flex items-center gap-2 bg-black text-white border-t hover:border-b px-4 py-2.5 rounded-full shadow-lg"
         >
           <ShoppingCart className="w-5 h-5" />
@@ -131,7 +131,7 @@ export default function Navbar() {
         </Link>
 
         <Link
-          to="/myorders"
+          to="/myorders" 
           className="flex items-center gap-2 bg-black text-white border-t hover:border-b px-4 py-2.5 rounded-full shadow-lg"
         >
           <ShoppingBag className="w-5 h-5" />
@@ -139,7 +139,7 @@ export default function Navbar() {
         </Link>
 
         <Link
-          to="/wishlist"
+          to="/wishlist" 
           className="flex items-center gap-2 bg-black text-white border-t hover:border-b px-4 py-2.5 rounded-full shadow-lg"
         >
           <Heart className="w-5 h-5" />
