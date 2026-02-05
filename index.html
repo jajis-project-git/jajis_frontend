@@ -75,22 +75,23 @@
           max-width: 420px;
           background: #ffffff;
           border-radius: 16px;
-          padding: 20px;
+          padding: 22px 20px;
           text-align: center;
           font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
         ">
           <div style="
             width: 56px;
             height: 56px;
-            margin: 0 auto 12px;
+            margin: 0 auto 14px;
             border-radius: 14px;
             background: #f4f4f4;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: #000;
             font-size: 22px;
           ">
-            📱
+            <i class="fa-solid fa-mobile-screen"></i>
           </div>
 
           <h3 style="
@@ -103,12 +104,12 @@
           </h3>
 
           <p style="
-            margin: 0 0 16px;
+            margin: 0 0 18px;
             font-size: 14px;
             color: #555;
-            line-height: 1.4;
+            line-height: 1.45;
           ">
-            Get quick access and an app-like experience.
+            Quick access with a smooth app-like experience.
           </p>
 
           <div style="display: flex; gap: 12px;">
@@ -123,7 +124,7 @@
               font-weight: 500;
               cursor: pointer;
             ">
-              Add Now
+              <i class="fa-solid fa-plus"></i>&nbsp; Add Now
             </button>
 
             <button id="closeBtn" style="
@@ -154,6 +155,7 @@
     document.getElementById('closeBtn').onclick = () => overlay.remove();
   }
 </script>
+
 
 
 
