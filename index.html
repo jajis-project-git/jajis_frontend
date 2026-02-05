@@ -1,171 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
-  <!-- Favicon for browsers -->
-  <link rel="icon" type="image/png" sizes="32x32" href="/src/assets/images/logo.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/src/assets/images/logo.png" />
-
-  <!-- Apple Touch Icon -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/src/assets/images/logo.png">
-
-  <!-- PWA -->
-  <link rel="manifest" href="/site.webmanifest" />
-  <meta name="theme-color" content="#ffffff" />
-
-  <!-- Microsoft / Windows -->
-  <meta name="msapplication-TileColor" content="#000000" />
-  <meta name="msapplication-TileImage" content="/src/assets/images/logo.png" />
-  <meta name="theme-color" content="#000000" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+  />
 
   <title>JAJI'S</title>
 
-  <!-- Google tag (gtag.js) -->
+  <!-- ================= PWA ================= -->
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- ================= Icons ================= -->
+  <link rel="icon" href="/logo.png" />
+  <link rel="apple-touch-icon" href="/logo.png" />
+
+  <!-- ================= iOS PWA ================= -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="JAJI'S" />
+
+  <!-- ================= Font Awesome ================= -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+
+  <!-- ================= Google Analytics ================= -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-355RCS9LKF"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
-    gtag('config', 'G-355RCS9LKF', {
-      send_page_view: false
-    });
+    gtag('config', 'G-355RCS9LKF', { send_page_view: false });
   </script>
 
+  <!-- ================= A2HS (Android) ================= -->
+  <script>
+    let deferredPrompt;
 
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
 
+      // Show only once
+      if (localStorage.getItem('a2hs_shown')) return;
+      localStorage.setItem('a2hs_shown', 'true');
 
+      showInstallPopup();
+    });
 
+    function showInstallPopup() {
+      if (document.getElementById('a2hs-overlay')) return;
 
-
-<script>
-  let deferredPrompt;
-
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    showInstallPopup();
-  });
-
-  function showInstallPopup() {
-    if (document.getElementById('a2hs-overlay')) return;
-
-    const overlay = document.createElement('div');
-    overlay.id = 'a2hs-overlay';
-    overlay.innerHTML = `
-      <div style="
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.45);
-        z-index: 9999;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 16px;
-        box-sizing: border-box;
-      ">
+      const overlay = document.createElement('div');
+      overlay.id = 'a2hs-overlay';
+      overlay.innerHTML = `
         <div style="
-          width: 100%;
-          max-width: 420px;
-          background: #ffffff;
-          border-radius: 16px;
-          padding: 22px 20px;
-          text-align: center;
-          font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+          position: fixed;
+          inset: 0;
+          background: rgba(0,0,0,0.45);
+          z-index: 9999;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 16px;
         ">
           <div style="
-            width: 56px;
-            height: 56px;
-            margin: 0 auto 14px;
-            border-radius: 14px;
-            background: #f4f4f4;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #000;
-            font-size: 22px;
+            width: 100%;
+            max-width: 420px;
+            background: #fff;
+            border-radius: 16px;
+            padding: 22px 20px;
+            text-align: center;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
           ">
-            <i class="fa-solid fa-mobile-screen"></i>
-          </div>
-
-          <h3 style="
-            margin: 0 0 8px;
-            font-size: 18px;
-            font-weight: 600;
-            color: #111;
-          ">
-            Add JAJI'S to Home Screen
-          </h3>
-
-          <p style="
-            margin: 0 0 18px;
-            font-size: 14px;
-            color: #555;
-            line-height: 1.45;
-          ">
-            Quick access with a smooth app-like experience.
-          </p>
-
-          <div style="display: flex; gap: 12px;">
-            <button id="installBtn" style="
-              flex: 1;
-              background: #000;
-              color: #fff;
-              border: none;
-              padding: 12px;
-              border-radius: 10px;
-              font-size: 14px;
-              font-weight: 500;
-              cursor: pointer;
+            <div style="
+              width: 56px;
+              height: 56px;
+              margin: 0 auto 14px;
+              border-radius: 14px;
+              background: #f4f4f4;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 22px;
+              color: #000;
             ">
-              <i class="fa-solid fa-plus"></i>&nbsp; Add Now
-            </button>
+              <i class="fa-solid fa-mobile-screen"></i>
+            </div>
 
-            <button id="closeBtn" style="
-              flex: 1;
-              background: #f2f2f2;
-              border: none;
-              padding: 12px;
-              border-radius: 10px;
-              font-size: 14px;
-              cursor: pointer;
+            <h3 style="
+              margin: 0 0 8px;
+              font-size: 18px;
+              font-weight: 600;
+              color: #111;
             ">
-              Later
-            </button>
+              Add JAJI'S to Home Screen
+            </h3>
+
+            <p style="
+              margin: 0 0 18px;
+              font-size: 14px;
+              color: #555;
+              line-height: 1.45;
+            ">
+              Quick access with a smooth app-like experience.
+            </p>
+
+            <div style="display: flex; gap: 12px;">
+              <button id="installBtn" style="
+                flex: 1;
+                background: #000;
+                color: #fff;
+                border: none;
+                padding: 12px;
+                border-radius: 10px;
+                font-size: 14px;
+                cursor: pointer;
+              ">
+                <i class="fa-solid fa-plus"></i>&nbsp; Add Now
+              </button>
+
+              <button id="closeBtn" style="
+                flex: 1;
+                background: #f2f2f2;
+                border: none;
+                padding: 12px;
+                border-radius: 10px;
+                font-size: 14px;
+                cursor: pointer;
+              ">
+                Later
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    `;
+      `;
 
-    document.body.appendChild(overlay);
+      document.body.appendChild(overlay);
 
-    document.getElementById('installBtn').onclick = async () => {
-      overlay.remove();
-      deferredPrompt.prompt();
-      await deferredPrompt.userChoice;
-      deferredPrompt = null;
-    };
+      document.getElementById('installBtn').onclick = async () => {
+        overlay.remove();
+        deferredPrompt.prompt();
+        await deferredPrompt.userChoice;
+        deferredPrompt = null;
+      };
 
-    document.getElementById('closeBtn').onclick = () => overlay.remove();
-  }
-</script>
+      document.getElementById('closeBtn').onclick = () => overlay.remove();
+    }
+  </script>
 
+  <!-- ================= iOS A2HS Instruction ================= -->
+  <script>
+    const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    const isStandalone = window.navigator.standalone === true;
 
-
-
-
+    if (isIOS && !isStandalone) {
+      setTimeout(() => {
+        alert("Tap Share → Add to Home Screen to install JAJI'S");
+      }, 2000);
+    }
+  </script>
 </head>
-
 
 <body>
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
 </body>
-
 </html>
