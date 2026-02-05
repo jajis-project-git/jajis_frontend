@@ -306,7 +306,7 @@ export default function JajisHomepage() {
                 <img data-aos="zoom-in"
                   src={business.cardImage}
                   alt={`${business.title} showcase`}
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-500 "
                 />
               </div>
             </div>
