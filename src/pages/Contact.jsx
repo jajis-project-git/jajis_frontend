@@ -188,7 +188,7 @@ ${formData.message}`;
                 {
                   icon: <FaEnvelope />,
                   title: "Email",
-                  content: "info@jajis.com",
+                  content: "Jajisinnovation@gmail.com",
                 },
                 {
                   icon: <FaClock />,
