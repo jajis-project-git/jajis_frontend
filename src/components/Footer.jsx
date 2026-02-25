@@ -1,11 +1,5 @@
 import { Link } from "react-router-dom";
-import {
-  FaFacebookF,
-  FaInstagram,
-  FaLinkedinIn,
-  FaYoutube,
-} from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
+import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
 import { ShoppingCart, ShoppingBag, Heart, User } from "lucide-react";
 import Logo from "../assets/images/logo.png";
 
@@ -13,7 +7,6 @@ export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white rounded-t-3xl w-[95%] mx-auto mt-20">
       <div className="max-w-7xl mx-auto px-8 lg:px-16 py-14">
-
         {/* === Top Shop Section === */}
         <section className="py-12 text-white text-center border-b border-gray-800">
           <h2 className="text-2xl md:text-3xl font-extrabold mb-4 tracking-wide">
@@ -21,8 +14,8 @@ export default function Footer() {
           </h2>
 
           <p className="text-gray-400 max-w-xl mx-auto mb-8 text-sm md:text-base">
-            Your one-stop destination for premium beauty, lifestyle, and
-            fashion products.
+            Your one-stop destination for premium beauty, lifestyle, and fashion
+            products.
           </p>
 
           {/* ACTION BUTTONS */}
@@ -57,9 +50,7 @@ export default function Footer() {
                          shadow hover:bg-red-600 transition"
             >
               <Heart className="w-5 h-5" fill="currentColor" />
-              <span className="text-xs font-semibold uppercase">
-                Wishlist
-              </span>
+              <span className="text-xs font-semibold uppercase">Wishlist</span>
             </Link>
 
             <Link
@@ -77,7 +68,6 @@ export default function Footer() {
 
         {/* === Main Footer Content === */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mt-12">
-
           {/* Logo & Description */}
           <div className="md:col-span-2">
             <img
@@ -130,19 +120,28 @@ export default function Footer() {
               Follow Us
             </h4>
             <div className="flex space-x-5">
-              <a href="#" className="hover:text-red-500 transition">
+              <a
+                href="https://www.facebook.com/share/1DPhDM11zx/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-red-500 transition"
+              >
                 <FaFacebookF className="h-5 w-5" />
               </a>
-              <a href="#" className="hover:text-red-500 transition">
-                <FaXTwitter className="h-5 w-5" />
-              </a>
-              <a href="#" className="hover:text-red-500 transition">
+              <a
+                href="https://www.instagram.com/jajisgroup?igsh=MXFzeDQ2M2MyMjI2Mg=="
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-red-500 transition"
+              >
                 <FaInstagram className="h-5 w-5" />
               </a>
-              <a href="#" className="hover:text-red-500 transition">
-                <FaLinkedinIn className="h-5 w-5" />
-              </a>
-              <a href="#" className="hover:text-red-500 transition">
+              <a
+                href="https://youtube.com/@jajisunil?si=t0gPOcqKqbuv-g85"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-red-500 transition"
+              >
                 <FaYoutube className="h-5 w-5" />
               </a>
             </div>
@@ -163,7 +162,7 @@ export default function Footer() {
             </a>
           </p>
 
-          <div className="flex space-x-6">
+          <div className="flex space-x-6 mb-22 md:mb-0">
             <Link to="/privacy" className="hover:text-white text-sm transition">
               Privacy Policy
             </Link>
@@ -172,7 +171,6 @@ export default function Footer() {
             </Link>
           </div>
         </div>
-
       </div>
     </footer>
   );

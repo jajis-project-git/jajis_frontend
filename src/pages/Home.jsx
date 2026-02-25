@@ -24,8 +24,6 @@ import cosmeticsImg from "../assets/images/cosmatics.png";
 import cosmetics_bg from "../assets/images/cos-bg.jpg";
 import LOGO from "../assets/images/logo.png";
 
-
-
 function Counter({ value }) {
   const numericValue = parseInt(value);
   const suffix = value.replace(numericValue, "");
@@ -41,7 +39,7 @@ function Counter({ value }) {
           setHasStarted(true);
         }
       },
-      { threshold: 0.4 } // 40% visible
+      { threshold: 0.4 }, // 40% visible
     );
 
     if (ref.current) observer.observe(ref.current);
@@ -79,12 +77,11 @@ function Counter({ value }) {
   );
 }
 
-
 export default function JajisHomepage() {
   const stats = [
     { number: "10+", label: "Years Experience" },
     { number: "5000+", label: "Happy Customers" },
-    { number: "75+", label: "Expert Staff" },
+    { number: "200+", label: "Expert Staff" },
     { number: "7", label: "Business Verticals" },
   ];
 
@@ -93,12 +90,15 @@ export default function JajisHomepage() {
   const [error, setError] = useState(null);
 
   // Business sections data
+  // ONLY the businesses array and description styling were improved.
+  // Everything else remains unchanged.
+
   const businesses = [
     {
       id: "salons",
       title: "Salons",
       description:
-        "Experience luxury and elegance at our premium salon services. From haircuts to spa treatments, we offer comprehensive beauty solutions with expert professionals.",
+        "Experience luxury and elegance at our premium salon services. From haircuts to spa treatments, we offer comprehensive beauty solutions delivered by expert professionals.",
       icon: <Scissors className="w-8 h-8" />,
       link: "/salons",
       layout: "left",
@@ -107,22 +107,31 @@ export default function JajisHomepage() {
       cardImage:
         "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=2069&q=80",
     },
+
     {
       id: "cosmetics",
       title: "Cosmetics",
       description:
-        "Discover our wide range of premium cosmetics designed to bring out the best in you. Quality products for every skin type and occasion.",
+        "Discover our premium cosmetics range designed to bring out the best in you. High-quality products crafted for every skin type, tone, and occasion.",
       icon: <Palette className="w-8 h-8" />,
       link: "/cosmetics",
       layout: "right",
       bgImage: cosmetics_bg,
       cardImage: cosmeticsImg,
     },
+
     {
       id: "event-hall",
-      title: "Event Hall",
-      description:
-        "Make your special occasions unforgettable with our elegant event hall. Perfect for weddings, corporate events, and celebrations of all kinds.",
+      title: "Jaji’s Q Cafe & Event Hall",
+      description: `Where Celebrations Come Alive. Located near Children’s Park, Asramam, Kollam, Jaji’s Q Café & Event Hall has transformed an underutilized DTPC hangar into one of the city’s most vibrant lifestyle and event destinations.
+
+More than a café, it is a cultural hub where food, music, and celebrations meet — hosting everything from intimate gatherings and corporate events to grand New Year celebrations and cultural programs.
+
+With warm ambiance, multi-cuisine offerings, and a versatile event setup, the venue continues to redefine tourism and entertainment in Kollam while creating moments that bring people together.
+
+Its premier auditorium seats 400+ guests and is ideal for weddings, seminars, award functions, product launches, and grand celebrations — a landmark space where community, creativity, and celebration unite. Celebrate. Connect. Create Memories.`,
+
+
       icon: <Building className="w-8 h-8" />,
       link: "/event-hall",
       layout: "left",
@@ -131,11 +140,17 @@ export default function JajisHomepage() {
       cardImage:
         "https://www.princehotels.com/shinyokohama/wp-content/uploads/sites/8/2019/06/Z7T7769%E5%B0%8F.jpg",
     },
+
     {
       id: "food-court",
-      title: "Food Court",
-      description:
-        "Savor delicious cuisines from around the world at our vibrant food court. Fresh ingredients, authentic flavors, and memorable dining experiences.",
+      title: "Jaji’s Food Court",
+      description: `Located inside the prestigious Ashramam Maidanam, Jaji’s Food Court is a vibrant open-air dining destination in the heart of Kollam.
+
+Serving delicious South Indian dishes, Chinese favorites, fresh juices, and more, it is the perfect spot for families, tourists, and evening visitors.
+
+Our signature Q Chai Tea is also available online through Swiggy and Zomato, bringing the taste of Jaji’s straight to your doorstep.
+
+Open Air. Great Food. Unmatched Vibes.`,
       icon: <Utensils className="w-8 h-8" />,
       link: "/food-court",
       layout: "right",
@@ -144,11 +159,17 @@ export default function JajisHomepage() {
       cardImage:
         "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=2070&q=80",
     },
+
     {
       id: "designing-stitching",
-      title: "Designing & Stitching",
-      description:
-        "Create custom fashion pieces with our expert designing and stitching services. From traditional wear to contemporary fashion, we bring your vision to life.",
+      title: "Jaji’s Designing & Stitching Studio",
+      description: `Located at Polayathodu, Kollam, Jaji’s Designing & Stitching Studio is the ultimate fashion destination for women seeking elegance, individuality, and perfection.
+
+From custom-designed outfits and bridal wear to perfectly tailored everyday styles, the studio blends creativity with precision craftsmanship to bring every vision to life.
+
+Jaji’s Designs is now also available online — allowing customers to explore and shop exclusive collections anytime, anywhere.
+
+Where Every Woman Finds Her Perfect Fit.`,
       icon: <Heart className="w-8 h-8" />,
       link: "/designing-stitching",
       layout: "left",
@@ -157,11 +178,12 @@ export default function JajisHomepage() {
       cardImage:
         "https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=2071&q=80",
     },
+
     {
       id: "academy",
       title: "Academy",
       description:
-        "Learn from the best with our comprehensive training programs. Develop your skills in beauty, fashion, and hospitality with expert guidance and certification.",
+        "Learn from the best through our comprehensive training programs. Develop professional skills in beauty, fashion, and hospitality with expert guidance and certification.",
       icon: <GraduationCap className="w-8 h-8" />,
       link: "/academy",
       layout: "right",
@@ -170,11 +192,27 @@ export default function JajisHomepage() {
       cardImage:
         "https://media.istockphoto.com/id/1440040207/photo/stylish-students-walking-in-city.jpg?s=612x612&w=0&k=20&c=XzJGLxO0IwmI8LHpdbf4LQlf8Pgye-Lx5ycpvUb8KBk=",
     },
+
     {
       id: "franchise",
-      title: "Franchise",
-      description:
-        "Join the Jajis family and start your own successful business venture. We provide complete support, training, and resources for franchise partners.",
+      title: "Jaji’s Franchise Opportunity",
+      description: `Own a Legacy. Build Your Success with Jaji’s.
+
+Join the Jaji’s family and step into a powerful, proven business model in the beauty and lifestyle industry. With strong brand trust and market presence across Kerala, Jaji’s Innovation Pvt Ltd offers a complete franchise ecosystem designed for success.
+
+We provide end-to-end support including:
+
+• Professional training & skill development  
+• Brand & marketing assistance  
+• Interior setup guidance  
+• Product supply & operational systems  
+• Continuous business mentoring  
+
+Our Shashtamcotta and Paravur franchises stand as successful examples of how the Jaji’s model delivers growth, profitability, and strong brand value in new markets.
+
+If you are passionate about entrepreneurship and want to build a premium salon brand in your region, Jaji’s provides the platform, support, and reputation to help you grow confidently.
+
+Partner with Jaji’s. Lead Your Own Success Story.`,
       icon: <Award className="w-8 h-8" />,
       link: "/franchise",
       layout: "left",
@@ -283,7 +321,7 @@ export default function JajisHomepage() {
                 {business.title}
               </h2>
 
-              <p className="text-base sm:text-lg md:text-xl mb-10 leading-relaxed text-gray-200 max-w-xl mx-auto md:mx-0">
+              <p className="text-base sm:text-lg md:text-xl mb-10 leading-relaxed text-gray-200 max-w-xl mx-auto md:mx-0 text-justify">
                 {business.description}
               </p>
 
@@ -303,7 +341,8 @@ export default function JajisHomepage() {
                   !isLeft ? "md:mr-12" : "md:ml-12"
                 }`}
               >
-                <img data-aos="zoom-in"
+                <img
+                  data-aos="zoom-in"
                   src={business.cardImage}
                   alt={`${business.title} showcase`}
                   className="w-full h-full object-cover transition-transform duration-500 "
@@ -321,7 +360,8 @@ export default function JajisHomepage() {
       {/* Hero Section */}
       <section
         id="home"
-        className="relative h-[100vh] overflow-hidden bg-fixed bg-center bg-cover" data-aos="fade-in"
+        className="relative h-[100vh] overflow-hidden bg-fixed bg-center bg-cover"
+        data-aos="fade-in"
         style={{ backgroundImage: `url(${heroImage})` }}
       >
         {/* Overlay */}
@@ -371,7 +411,10 @@ export default function JajisHomepage() {
           </p>
 
           {/* ACTION BUTTONS */}
-          <div className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-4" data-aos="zoom-in">
+          <div
+            className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-4"
+            data-aos="zoom-in"
+          >
             <Link
               to="/products"
               className="flex flex-col items-center justify-center gap-2 

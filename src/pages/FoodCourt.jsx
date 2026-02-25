@@ -77,7 +77,8 @@ export default function FoodCourt() {
           let image = item.image || "";
           // If backend returns relative path like "/media/...",
           // prefix with current origin so it works in production too.
-          if (image.startsWith("/")) image = `${window.location.origin}${image}`;
+          if (image.startsWith("/"))
+            image = `${window.location.origin}${image}`;
           return { ...item, image };
         });
 
@@ -199,15 +200,18 @@ export default function FoodCourt() {
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-wide border-b-4 border-white inline-block pb-2">
                 ABOUT US
               </h2>
-              <p className="text-base md:text-lg leading-relaxed text-gray-200">
+              <p className="text-base md:text-lg leading-relaxed text-gray-200 text-justify">
                 Welcome to <span className="font-bold">Jaji’s Food Court</span>,
-                where flavor meets experience. We bring together the best
-                cuisines under one roof to satisfy every craving — from local
-                delicacies to global favorites.
+                Located inside the prestigious Ashramam Maidanam, Jaji’s Food
+                Court is a vibrant open-air dining destination in the heart of
+                Kollam. Serving delicious South Indian dishes, Chinese
+                favorites, fresh juices, and more, it’s the perfect spot for
+                families, tourists, and evening visitors.
               </p>
-              <p className="text-base md:text-lg leading-relaxed text-gray-200">
-                Our chefs use only the freshest ingredients, preparing each dish
-                with love and passion to ensure every bite is unforgettable.
+              <p className="text-base md:text-lg leading-relaxed text-gray-200 text-justify">
+                Our signature Q Chai Tea is also available online through Swiggy
+                and Zomato, bringing the taste of Jaji’s straight to your
+                doorstep.
               </p>
 
               {/* Quick Stats */}

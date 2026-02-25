@@ -13,6 +13,7 @@ const FilterContent = ({
   maxInput,
   setMaxInput,
   handleApplyFilter,
+  onApplyFilter,
 }) => (
   <div className="border p-6 bg-white shadow-sm rounded-lg select-none">
     <h2 className="text-xl font-bold mb-6 pb-3 border-b-2 flex items-center gap-2">
@@ -62,7 +63,10 @@ const FilterContent = ({
       </div>
 
       <button
-        onClick={handleApplyFilter}
+        onClick={() => {
+          handleApplyFilter();
+          onApplyFilter?.();
+        }}
         className="w-full bg-black text-white py-2 rounded hover:bg-gray-800"
       >
         Apply Filter
@@ -74,6 +78,7 @@ const FilterContent = ({
 export default function EcommerceHome() {
   const [categories, setCategories] = useState(["All"]);
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedCategoryInput, setSelectedCategoryInput] = useState("All");
 
   const MIN = 10;
   const MAX = 5000;
@@ -114,7 +119,10 @@ export default function EcommerceHome() {
           ? res.data.categories.map((c) => c.name).filter(Boolean)
           : [];
 
-        setCategories(["All", ...categoryNames]);
+        const allCategories = ["All", ...categoryNames];
+        setCategories(allCategories);
+        setSelectedCategory("All");
+        setSelectedCategoryInput("All");
       } catch (err) {
         console.error(err);
         showMessage("Failed to load products", "error");
@@ -207,6 +215,7 @@ export default function EcommerceHome() {
     const max = maxInput ? Number(maxInput) : null;
     setMinPrice(min);
     setMaxPrice(max);
+    setSelectedCategory(selectedCategoryInput);
   };
 
   const fuzzyMatch = (text, query) => {
@@ -311,8 +320,8 @@ export default function EcommerceHome() {
           <aside className="hidden lg:block lg:col-span-1 sticky top-28">
             <FilterContent
               categories={categories}
-              selectedCategory={selectedCategory}
-              setSelectedCategory={setSelectedCategory}
+              selectedCategory={selectedCategoryInput}
+              setSelectedCategory={setSelectedCategoryInput}
               minInput={minInput}
               setMinInput={setMinInput}
               maxInput={maxInput}
@@ -386,7 +395,7 @@ export default function EcommerceHome() {
                         {isWishlisted ? (
                           <FaHeart className="text-red-600" />
                         ) : (
-                          <FaRegHeart className="text-red-00 hover:text-red-700" />
+                          <FaRegHeart className="text-red-600 hover:text-red-700" />
                         )}
                       </button>
 
@@ -463,13 +472,14 @@ export default function EcommerceHome() {
             </button>
             <FilterContent
               categories={categories}
-              selectedCategory={selectedCategory}
-              setSelectedCategory={setSelectedCategory}
+              selectedCategory={selectedCategoryInput}
+              setSelectedCategory={setSelectedCategoryInput}
               minInput={minInput}
               setMinInput={setMinInput}
               maxInput={maxInput}
               setMaxInput={setMaxInput}
               handleApplyFilter={handleApplyFilter}
+              onApplyFilter={() => setMobileFilterOpen(false)}
             />
           </div>
         </div>

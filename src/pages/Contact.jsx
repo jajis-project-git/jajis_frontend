@@ -2,12 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { API } from "../config/api";
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock } from "react-icons/fa";
-import {
-  FaFacebookF,
-  FaInstagram,
-  FaTwitter,
-  FaLinkedinIn,
-} from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
+import { Phone, MessageCircle } from "lucide-react";
 
 export default function Contact() {
   const [data, setData] = useState({ content: "", page: "" });
@@ -48,8 +44,31 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    alert("Thank you for your message! We'll get back to you soon.");
+
+    // Build the message from form data
+    const message = `Hello, I would like to get in touch.
+
+Name: ${formData.name}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Subject: ${formData.subject}
+
+Message:
+${formData.message}`;
+
+    // Encode the message for URL
+    const encodedMessage = encodeURIComponent(message);
+
+    // WhatsApp number (without + in URL)
+    const whatsappNumber = "919744012345";
+
+    // Create WhatsApp URL
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+    // Open WhatsApp in new tab
+    window.open(whatsappUrl, "_blank");
+
+    // Reset form
     setFormData({
       name: "",
       email: "",
@@ -58,32 +77,6 @@ export default function Contact() {
       message: "",
     });
   };
-
-  // if (loading) {
-  //   return (
-  //     <div className="min-h-screen flex items-center justify-center bg-black">
-  //       <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-white"></div>
-  //     </div>
-  //   );
-  // }
-
-  if (error) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-black text-white">
-        <div className="text-center">
-          <div className="text-red-500 text-6xl mb-4">⚠️</div>
-          <h2 className="text-2xl font-bold mb-2">Oops!</h2>
-          <p>{error}</p>
-          <button
-            onClick={() => window.location.reload()}
-            className="mt-4 px-6 py-2 bg-white text-black rounded-lg hover:bg-gray-200 transition-colors"
-          >
-            Try Again
-          </button>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="bg-black text-white">
@@ -110,7 +103,7 @@ export default function Contact() {
       <div className="bg-gray-100 text-black py-20">
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12">
           {/* Form */}
-          <div className="bg-white rounded-2xl shadow-xl p-3">
+          <div className="bg-white rounded-2xl shadow-xl p-8 md:h-[530px]">
             <h2 className="text-2xl font-bold mb-6">Send us a Message</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
@@ -184,14 +177,13 @@ export default function Contact() {
               {[
                 {
                   icon: <FaMapMarkerAlt />,
-                  title: "Address",
-                  content:
-                    "123 Beauty Street, Fashion District, City, State 12345",
+                  title: "Our Headquarters",
+                  content: "JAJI'S INNOVATION PVT LTD",
                 },
                 {
                   icon: <FaPhone />,
                   title: "Phone",
-                  content: "+1 (555) 123-4567",
+                  content: "+91 9744 012345",
                 },
                 {
                   icon: <FaEnvelope />,
@@ -201,7 +193,7 @@ export default function Contact() {
                 {
                   icon: <FaClock />,
                   title: "Business Hours",
-                  content: "Mon-Sat: 9 AM - 8 PM, Sun: 10 AM - 6 PM",
+                  content: "10 AM - 9 PM (All Days)",
                 },
               ].map((info, index) => (
                 <div key={index} className="flex items-start space-x-4">
@@ -218,30 +210,247 @@ export default function Contact() {
             <div>
               <h3 className="text-xl font-semibold mb-4">Follow Us</h3>
               <div className="flex space-x-4">
-                {[FaFacebookF, FaInstagram, FaLinkedinIn].map((Icon, i) => (
+                {[
+                  {
+                    Icon: FaFacebookF,
+                    url: "https://www.facebook.com/share/1DPhDM11zx/",
+                  },
+                  {
+                    Icon: FaInstagram,
+                    url: "https://www.instagram.com/jajisgroup?igsh=MXFzeDQ2M2MyMjI2Mg==",
+                  },
+                  {
+                    Icon: FaYoutube,
+                    url: "https://youtube.com/@jajisunil?si=t0gPOcqKqbuv-g85",
+                  },
+                ].map((social, i) => (
                   <a
                     key={i}
-                    href="#"
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-12 h-12 bg-black/10 text-black rounded-full flex items-center justify-center hover:bg-black hover:text-white transition-colors"
                   >
-                    <Icon className="text-xl" />
+                    <social.Icon className="text-xl" />
                   </a>
                 ))}
+              </div>
+            </div>
+
+            {/* WhatsApp */}
+            <div>
+              <h3 className="text-xl font-semibold mb-4">Quick Contact</h3>
+              <div className="flex gap-4">
+                <a
+                  href="tel:+919744012345"
+                  className="inline-flex items-center space-x-2 px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                >
+                  <Phone className="w-5 h-5" />
+                  <span>Call Us</span>
+                </a>
+                <a
+                  href="https://wa.me/919744012345"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center space-x-2 px-6 py-3 bg-green-500 text-white rounded-lg font-semibold hover:bg-green-600 transition-colors"
+                >
+                  <MessageCircle className="w-5 h-5" />
+                  <span>WhatsApp</span>
+                </a>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Map */}
-      {/* <div className="bg-black py-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-center mb-12">Find Us</h2>
-          <div className="bg-white/5 backdrop-blur-lg rounded-2xl h-96 flex items-center justify-center">
-            <p className="text-gray-400">Interactive map will be displayed here</p>
+      {/* All Locations Section */}
+      <div
+        className="relative bg-fixed bg-center bg-cover text-white py-20"
+        style={{
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=2070&q=80')",
+        }}
+      >
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/60"></div>
+
+        {/* Content */}
+        <div className="relative z-10">
+          <div className="max-w-7xl mx-auto px-6">
+            <h2 className="text-4xl font-bold text-center mb-4">
+              Our Locations & Ventures
+            </h2>
+            <p className="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
+              Experience the Jaji's lifestyle across multiple locations in
+              Kerala
+            </p>
+
+            {/* Salons */}
+            <div className="mb-16">
+              <h3 className="text-2xl font-bold mb-8 flex items-center">
+                <span className="w-8 h-8 bg-white text-black rounded-full flex items-center justify-center font-bold mr-3">
+                  I
+                </span>
+                Salons
+              </h3>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[
+                  {
+                    name: "Jajis Innovation Unisex Beauty Salon",
+                    address: "4th Floor, RP Mall, Kollam, Kerala",
+                    contact: "+91 98479 48242",
+                    location: "RP Mall, Kollam",
+                  },
+                  {
+                    name: "Jaji's Innovation Unisex Beauty Salon",
+                    address:
+                      "2nd Floor, KC Center, Opp. Boys Higher Secondary School, Near KSRTC Bus Stand, Karunagappally, Kollam, Kerala 690518",
+                    contact: "+91 70346 2625",
+                    location: "Karunagappally",
+                  },
+                  {
+                    name: "Jajis Express Family Salon & Bride/Groom Lounge",
+                    address:
+                      "1st Floor, Narayaneeyam, Near KFC, Polayathodu, Kollam",
+                    contact: "+91 97440 12345",
+                    location: "Polayathodu",
+                  },
+                  {
+                    name: "Jajis Innovation Unisex Beauty Salon & Bridal Makeup Studio",
+                    address:
+                      "Ground Floor, KEK Towers, Opposite Trivandrum Club, Vazhuthacaud, Kerala 695014",
+                    contact: "+91 9207 20 9207",
+                    location: "Vazhuthacaud, Trivandrum",
+                  },
+                  {
+                    name: "Jajis Innovation Unisex Beauty Salon & Bridal Makeup Studio",
+                    address:
+                      "Vijaya Tower, Adhikadu Junction, Chavara–Shasthamcotta Road, Kollam, Kerala 690521",
+                    contact: "Coming Soon",
+                    location: "Chavara",
+                  },
+                  {
+                    name: "Jajis Innovation Unisex Beauty Salon & Bridal Makeup Studio",
+                    address: "Kottuvankonam, Paravur, Kollam, Kerala 691301",
+                    contact: "+91 96332 10449",
+                    location: "Paravur",
+                  },
+                ].map((salon, index) => (
+                  <div
+                    key={index}
+                    className="bg-black/60 rounded-lg p-6 hover:bg-black/70 transition-colors"
+                  >
+                    <h4 className="font-semibold text-lg mb-2">
+                      {salon.location}
+                    </h4>
+                    <p className="text-sm text-gray-300 mb-4">{salon.name}</p>
+                    <p className="text-sm text-gray-400 mb-3">
+                      {salon.address}
+                    </p>
+                    <a
+                      href={`tel:${salon.contact.replace(/\s/g, "")}`}
+                      className="inline-flex items-center gap-2 bg-white/10 hover:bg-white hover:text-black 
+             text-white px-4 py-2 rounded-full transition-all duration-300 
+             backdrop-blur-sm border border-white/20"
+                    >
+                      <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white/20">
+                        <FaPhone size={14} />
+                      </span>
+                      <span className="font-semibold text-sm tracking-wide">
+                        {salon.contact}
+                      </span>
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Other Venues */}
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h3 className="text-2xl font-bold mb-8 flex items-center">
+                  <span className="w-8 h-8 bg-white text-black rounded-full flex items-center justify-center font-bold mr-3">
+                    II
+                  </span>
+                  Jajis Q Cafe & Event Hall
+                </h3>
+                <div className="bg-black/70 rounded-lg p-6 hover:bg-black/80 transition-colors">
+                  <p className="text-gray-300 mb-4">
+                    Near Children's Park, Asramam, Kollam, Kerala 691001
+                  </p>
+                  <a
+                    href="tel:+917034626625"
+                    className="text-white hover:text-gray-300 font-semibold flex items-center gap-2 "
+                  >
+                    <FaPhone /> +91 7034 626 625
+                  </a>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-2xl font-bold mb-8 flex items-center">
+                  <span className="w-8 h-8 bg-white text-black rounded-full flex items-center justify-center font-bold mr-3">
+                    III
+                  </span>
+                  Jajis Food Court
+                </h3>
+                <div className="bg-black/70 rounded-lg p-6 hover:bg-black/80 transition-colors">
+                  <p className="text-gray-300 mb-4">
+                    Ashramam Maidanam, Kollam, Kerala 691001
+                  </p>
+                  <a
+                    href="tel:+917034626627"
+                    className="text-white hover:text-gray-300 font-semibold flex items-center gap-2"
+                  >
+                    <FaPhone /> +91 70346 26627
+                  </a>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-2xl font-bold mb-8 flex items-center">
+                  <span className="w-8 h-8 bg-white text-black rounded-full flex items-center justify-center font-bold mr-3">
+                    IV
+                  </span>
+                  Jajis Designing & Stitching Studio
+                </h3>
+                <div className="bg-black/70 rounded-lg p-6 hover:bg-black/80 transition-colors">
+                  <p className="text-gray-300 mb-4">
+                    Opposite KFC, Polayathodu, Kollam, Kerala 691021
+                  </p>
+                  <a
+                    href="tel:+919645296450"
+                    className="text-white hover:text-gray-300 font-semibold flex items-center gap-2"
+                  >
+                    <FaPhone /> +91 96452 96450
+                  </a>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-2xl font-bold mb-8 flex items-center">
+                  <span className="w-8 h-8 bg-white text-black rounded-full flex items-center justify-center font-bold mr-3">
+                    V
+                  </span>
+                  Jaji's Beauty Academy
+                </h3>
+                <div className="bg-black/70 rounded-lg p-6 hover:bg-black/80 transition-colors">
+                  <p className="text-gray-300 mb-4">
+                    1st Floor, Narayaneeyam, Near KFC, Polayathodu, Kollam
+                    691021
+                  </p>
+                  <a
+                    href="tel:+919744012345"
+                    className="text-white hover:text-gray-300 font-semibold flex items-center gap-2"
+                  >
+                    <FaPhone /> +91 97440 12345
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 }
