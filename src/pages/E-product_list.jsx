@@ -268,17 +268,6 @@ export default function EcommerceHome() {
       return matchesCategory && matchesPrice && matchesSearch;
     });
 
-    // Sort by lowest price ascending (low to high)
-    filtered = filtered.sort((a, b) => {
-      const priceA = a.variants?.length
-        ? Math.min(...a.variants.map((v) => Number(v.price || 0)))
-        : 0;
-      const priceB = b.variants?.length
-        ? Math.min(...b.variants.map((v) => Number(v.price || 0)))
-        : 0;
-      return priceA - priceB;
-    });
-
     return filtered;
   }, [products, selectedCategory, minPrice, maxPrice, searchTerm]);
 
@@ -380,7 +369,7 @@ export default function EcommerceHome() {
                   return (
                     <div
                       key={product.id}
-                      className="bg-white relative overflow-hidden border border-gray-200 hover:border-gray-500 rounded-lg shadow-sm flex flex-col transition-all duration-300 group"
+                      className="bg-white relative overflow-hidden border border-gray-100 hover:border-gray-400 rounded-lg shadow-sm flex flex-col transition-all duration-300 group"
                     >
                       <button
                         onClick={() => handleWishlistToggle(product)}
@@ -410,7 +399,7 @@ export default function EcommerceHome() {
                       </div>
 
                       <div className="p-5 flex flex-col flex-1">
-                        <h3 className="font-semibold text-lg mb-2">
+                        <h3 className="font-semibold text-md mb-2">
                           {product.title}
                         </h3>
 
