@@ -103,7 +103,7 @@ export default function CartPage() {
       if (newQuantity > item.variant.stock) {
         showMessage(
           `Only ${item.variant.stock} item(s) available in stock`,
-          "warning"
+          "warning",
         );
         return;
       }
@@ -163,10 +163,13 @@ export default function CartPage() {
       fetchAddresses();
     } catch (err) {
       console.error("Save address failed", err);
-      const errorMsg = err.response?.data?.message || 
-                       err.response?.data?.detail ||
-                       Object.values(err.response?.data || {}).flat().join(", ") ||
-                       "Failed to save address";
+      const errorMsg =
+        err.response?.data?.message ||
+        err.response?.data?.detail ||
+        Object.values(err.response?.data || {})
+          .flat()
+          .join(", ") ||
+        "Failed to save address";
       showMessage(errorMsg, "error");
     } finally {
       setSavingAddress(false);
@@ -227,7 +230,7 @@ export default function CartPage() {
     if (outOfStockItems.length > 0) {
       showMessage(
         `${outOfStockItems.length} item(s) in your cart are out of stock`,
-        "error"
+        "error",
       );
       return;
     }
@@ -295,25 +298,26 @@ export default function CartPage() {
       setProcessingPayment(false);
     }
   };
-  
 
   const subtotal = cartItems.reduce(
     (sum, item) => sum + Number(item.variant.price) * item.quantity,
-    0
+    0,
   );
   const originalSubtotal = cartItems.reduce(
     (sum, item) => sum + Number(item.variant.mrp) * item.quantity,
-    0
+    0,
   );
   const totalDiscount = originalSubtotal - subtotal;
 
-  if (loadingCart) return <div className="w-full py-20 mt-24 flex flex-col items-center justify-center gap-4">
-  <div className="h-10 w-10 rounded-full border-4 border-gray-300 border-t-black animate-spin"></div>
-  <span className="text-sm font-medium text-gray-600 tracking-wide">
-    Loading, please wait…
-  </span>
-</div>
-;
+  if (loadingCart)
+    return (
+      <div className="w-full py-20 mt-24 flex flex-col items-center justify-center gap-4">
+        <div className="h-10 w-10 rounded-full border-4 border-gray-300 border-t-black animate-spin"></div>
+        <span className="text-sm font-medium text-gray-600 tracking-wide">
+          Loading, please wait…
+        </span>
+      </div>
+    );
 
   return (
     <div className="bg-white min-h-screen relative pb-16">
@@ -323,8 +327,8 @@ export default function CartPage() {
             message.type === "success"
               ? "bg-green-500"
               : message.type === "error"
-              ? "bg-red-500"
-              : "bg-yellow-500"
+                ? "bg-red-500"
+                : "bg-yellow-500"
           }`}
         >
           {message.text}
@@ -333,7 +337,9 @@ export default function CartPage() {
 
       <header className="mt-30 mb-6 text-center">
         <h1 className="text-3xl font-bold">Your Cart</h1>
-        <p className="text-gray-500 text-sm">Review items and complete checkout</p>
+        <p className="text-gray-500 text-sm">
+          Review items and complete checkout
+        </p>
       </header>
 
       <div className="container mx-auto px-4 lg:px-12 py-8">
@@ -355,13 +361,12 @@ export default function CartPage() {
                     const { variant: v, quantity: qty, id: itemId } = item;
                     const { product: p } = v;
 
-                    const imageUrl =
-                      p.image1?.startsWith("http")
-                        ? p.image1
-                        : `${BASE_URL}${p.image1}`;
+                    const imageUrl = p.image1?.startsWith("http")
+                      ? p.image1
+                      : `${BASE_URL}${p.image1}`;
 
                     const discountPercent = Math.round(
-                      ((v.mrp - v.price) / v.mrp) * 100
+                      ((v.mrp - v.price) / v.mrp) * 100,
                     );
 
                     return (
@@ -373,7 +378,9 @@ export default function CartPage() {
                       >
                         <div
                           className={`w-24 h-24 flex-shrink-0 ${
-                            v.stock < 1 ? "cursor-not-allowed" : "cursor-pointer"
+                            v.stock < 1
+                              ? "cursor-not-allowed"
+                              : "cursor-pointer"
                           }`}
                           onClick={() => {
                             if (v.stock > 0) {
@@ -397,7 +404,9 @@ export default function CartPage() {
                         <div className="flex-1 w-full">
                           <div className="flex justify-between items-start">
                             <div>
-                              <h3 className="text-lg font-semibold">{p.title}</h3>
+                              <h3 className="text-lg font-semibold">
+                                {p.title}
+                              </h3>
                               <p className="text-sm text-gray-500">{p.brand}</p>
                               <p className="text-sm text-gray-600 mt-1">
                                 Variant: <b>{v.quantity_label}</b>
@@ -483,7 +492,9 @@ export default function CartPage() {
                 {token ? (
                   <>
                     {loadingAddresses ? (
-                      <p className="text-sm text-gray-500">Loading addresses...</p>
+                      <p className="text-sm text-gray-500">
+                        Loading addresses...
+                      </p>
                     ) : addresses.length === 0 ? (
                       <p className="text-sm text-gray-600">
                         Add an address to continue.
@@ -525,7 +536,8 @@ export default function CartPage() {
                                 {addr.city}, {addr.state} - {addr.postal_code}
                               </p>
                               <p className="text-xs text-gray-500">
-                                {addr.country} {addr.phone ? `| ${addr.phone}` : ""}
+                                {addr.country}{" "}
+                                {addr.phone ? `| ${addr.phone}` : ""}
                               </p>
                             </div>
                             <div className="flex flex-col gap-2">
@@ -546,7 +558,9 @@ export default function CartPage() {
                                 disabled={deletingAddress === addr.id}
                                 className="text-sm px-2 py-1 border rounded text-red-600 hover:bg-red-50 disabled:opacity-50"
                               >
-                                {deletingAddress === addr.id ? "Deleting" : "Delete"}
+                                {deletingAddress === addr.id
+                                  ? "Deleting"
+                                  : "Delete"}
                               </button>
                             </div>
                           </label>
@@ -556,13 +570,19 @@ export default function CartPage() {
                   </>
                 ) : (
                   <p className="text-sm text-gray-600">
-                    Please <Link className="underline" to="/login">login</Link> to add an
-                    address.
+                    Please{" "}
+                    <Link className="underline" to="/login">
+                      login
+                    </Link>{" "}
+                    to add an address.
                   </p>
                 )}
 
                 {showAddressForm && (
-                  <form onSubmit={handleAddressSubmit} className="mt-4 space-y-3">
+                  <form
+                    onSubmit={handleAddressSubmit}
+                    className="mt-4 space-y-3"
+                  >
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <input
                         type="text"
@@ -570,7 +590,10 @@ export default function CartPage() {
                         className="border rounded px-3 py-2"
                         value={addressForm.label}
                         onChange={(e) =>
-                          setAddressForm({ ...addressForm, label: e.target.value })
+                          setAddressForm({
+                            ...addressForm,
+                            label: e.target.value,
+                          })
                         }
                       />
                       <input
@@ -578,9 +601,11 @@ export default function CartPage() {
                         placeholder="Phone"
                         className="border rounded px-3 py-2"
                         value={addressForm.phone}
-                        onChange={(e) =>
-                          setAddressForm({ ...addressForm, phone: e.target.value })
-                        }
+                        onChange={(e) => {
+                          const value = e.target.value.replace(/\D/g, "");
+                          setAddressForm({ ...addressForm, phone: value });
+                        }}
+                        maxLength={10}
                       />
                     </div>
                     <input
@@ -589,7 +614,10 @@ export default function CartPage() {
                       className="w-full border rounded px-3 py-2"
                       value={addressForm.line1}
                       onChange={(e) =>
-                        setAddressForm({ ...addressForm, line1: e.target.value })
+                        setAddressForm({
+                          ...addressForm,
+                          line1: e.target.value,
+                        })
                       }
                       required
                     />
@@ -599,7 +627,10 @@ export default function CartPage() {
                       className="w-full border rounded px-3 py-2"
                       value={addressForm.line2}
                       onChange={(e) =>
-                        setAddressForm({ ...addressForm, line2: e.target.value })
+                        setAddressForm({
+                          ...addressForm,
+                          line2: e.target.value,
+                        })
                       }
                     />
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -609,7 +640,10 @@ export default function CartPage() {
                         className="border rounded px-3 py-2"
                         value={addressForm.city}
                         onChange={(e) =>
-                          setAddressForm({ ...addressForm, city: e.target.value })
+                          setAddressForm({
+                            ...addressForm,
+                            city: e.target.value,
+                          })
                         }
                         required
                       />
@@ -619,7 +653,10 @@ export default function CartPage() {
                         className="border rounded px-3 py-2"
                         value={addressForm.state}
                         onChange={(e) =>
-                          setAddressForm({ ...addressForm, state: e.target.value })
+                          setAddressForm({
+                            ...addressForm,
+                            state: e.target.value,
+                          })
                         }
                       />
                     </div>
@@ -629,21 +666,27 @@ export default function CartPage() {
                         placeholder="Postal code"
                         className="border rounded px-3 py-2"
                         value={addressForm.postal_code}
-                        onChange={(e) =>
+                        onChange={(e) => {
+                          const value = e.target.value.replace(/\D/g, "");
                           setAddressForm({
                             ...addressForm,
-                            postal_code: e.target.value,
-                          })
-                        }
+                            postal_code: value,
+                          });
+                        }}
+                        maxLength={6}
                         required
                       />
+
                       <input
                         type="text"
                         placeholder="Country"
                         className="border rounded px-3 py-2"
                         value={addressForm.country}
                         onChange={(e) =>
-                          setAddressForm({ ...addressForm, country: e.target.value })
+                          setAddressForm({
+                            ...addressForm,
+                            country: e.target.value,
+                          })
                         }
                       />
                       <label className="flex items-center gap-2 text-sm">
@@ -669,7 +712,6 @@ export default function CartPage() {
                     </button>
                   </form>
                 )}
-
               </div>
 
               <div className="border rounded-xl shadow-sm p-6 h-fit sticky top-28">
