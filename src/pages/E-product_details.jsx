@@ -91,7 +91,7 @@ export default function ProductDetails() {
       </div>
     );
   }
- 
+
   const images = [
     product.image1,
     product.image2,
@@ -118,8 +118,8 @@ export default function ProductDetails() {
             message.type === "success"
               ? "bg-green-500"
               : message.type === "error"
-              ? "bg-red-500"
-              : "bg-yellow-500"
+                ? "bg-red-500"
+                : "bg-yellow-500"
           }`}
         >
           {message.text}
@@ -162,29 +162,29 @@ export default function ProductDetails() {
 
         {/* RIGHT DETAILS */}
         <div className="space-y-6">
-          <h1 className="text-3xl font-bold">{product.title}</h1>
+          <h1 className="text-2xl font-bold">{product.title}</h1>
           <p className="text-sm text-gray-600">by {product.brand}</p>
 
           {selectedVariant && (
             <div className="flex items-center gap-3">
-              <p className="text-3xl font-bold text-green-600">
+              <p className="text-4xl font-bold text-green-600 ">
                 ₹{selectedVariant.price}
               </p>
-              <p className="text-lg text-gray-400 line-through">
+              <p className="text-3xl text-red-400 line-through">
                 ₹{selectedVariant.mrp}
               </p>
               <span className="text-sm px-2 py-1 bg-green-100 text-green-700 rounded">
                 {Math.round(
                   ((selectedVariant.mrp - selectedVariant.price) /
                     selectedVariant.mrp) *
-                    100
+                    100,
                 )}
                 % OFF
               </span>
             </div>
           )}
 
-          <p className="text-gray-700">{product.description}</p>
+          <p className="text-gray-700 text-justify">{product.description}</p>
 
           {/* VARIANT SELECTOR */}
           <div>
@@ -215,15 +215,15 @@ export default function ProductDetails() {
                   selectedVariant.stock === 0
                     ? "text-red-600"
                     : selectedVariant.stock < 20
-                    ? "text-orange-400"
-                    : "text-green-600"
+                      ? "text-orange-400"
+                      : "text-green-600"
                 }
               >
                 {selectedVariant.stock === 0
                   ? "Out of stock"
                   : selectedVariant.stock < 20
-                  ? "Low stock"
-                  : "Available"}
+                    ? "Low stock"
+                    : "Available"}
               </b>
             </p>
           )}
@@ -283,7 +283,7 @@ export default function ProductDetails() {
                   className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white/80 p-2 rounded hover:bg-white"
                   onClick={() =>
                     setSelectedImageIndex(
-                      (prev) => (prev - 1 + images.length) % images.length
+                      (prev) => (prev - 1 + images.length) % images.length,
                     )
                   }
                 >

@@ -156,9 +156,12 @@ export default function Footer() {
             reserved.
           </p>
 
-          <p className="text-sm text-gray-300 hover:text-white transition">
+          <p className="text-sm text-gray-400 hover:text-white transition">
             <a href="https://www.inspirezesttechnologies.com/">
-              Developed by InspireZest Technologies Pvt Ltd
+              Developed by{" "}
+              <span className="text-white font-bold">
+                InspireZest Technologies Pvt Ltd
+              </span>
             </a>
           </p>
 

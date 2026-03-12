@@ -403,15 +403,15 @@ export default function EcommerceHome() {
                           {product.title}
                         </h3>
 
-                        <div className="flex gap-2 items-center mb-3">
-                          <strong className="text-lg">₹{lowestPrice}</strong>
+                        <div className="flex gap-2 items-center text-green-600 mb-3">
+                          <strong className="text-2xl">₹{lowestPrice}</strong>
                           {highestMRP > 0 && (
                             <>
-                              <span className="line-through text-gray-400">
+                              <span className="line-through text-red-400 text-lg">
                                 ₹{highestMRP}
                               </span>
                               {discount > 0 && (
-                                <span className="text-green-600 text-xs">
+                                <span className="text-green-600 text-lg">
                                   {discount}% off
                                 </span>
                               )}

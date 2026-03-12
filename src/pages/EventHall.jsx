@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { API } from "../config/api";
+import { Link } from "react-router-dom";
 
 // React Icons
 import {
@@ -105,7 +106,6 @@ export default function EventHall() {
       <section
         id="event"
         className="relative bg-fixed bg-center bg-cover py-20"
-    
       >
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-white"></div>
@@ -208,16 +208,18 @@ export default function EventHall() {
           </div>
         </div>
       </section>
-            {/* CTA Section */}
+      {/* CTA Section */}
       <section className="bg-black py-8 border-t border-gray-800">
         <div className="max-w-4xl mx-auto text-center px-4">
           <h2 className="text-3xl font-bold mb-6">Ready to Plan Your Event?</h2>
-       
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="tel:" className="border border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 hover:text-black transition">
-              Contact Us
-            </a>
-         
+            <Link
+              to="/contact"
+              className="border border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-black transition"
+            >
+              Book Now
+            </Link>
           </div>
         </div>
       </section>

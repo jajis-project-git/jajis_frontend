@@ -105,22 +105,18 @@ export default function Salons() {
     {
       icon: <FaCertificate />,
       title: "Expert Professionals",
-    
     },
     {
       icon: <FaSpa />,
       title: "Premium Products",
-
     },
     {
       icon: <FaHeart />,
       title: "Personalized Care",
- 
     },
     {
       icon: <FaAward />,
       title: "Best Service",
-
     },
   ];
 
@@ -195,12 +191,12 @@ export default function Salons() {
               Where Beauty Meets Excellence - Professional Services Since 2011
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <a
-                href="tel:"
+              <Link
+                to="/contact"
                 className="px-8 py-3 bg-white text-black rounded-full font-semibold hover:bg-gray-200 transform hover:-translate-y-1 transition-all"
               >
                 Book Appointment
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -276,7 +272,8 @@ export default function Salons() {
                 {achievements.map((achievement, index) => (
                   <div
                     key={index}
-                    className="bg-black/70 p-4 rounded-lg border border-gray-700" data-aos="fade-right"
+                    className="bg-black/70 p-4 rounded-lg border border-gray-700"
+                    data-aos="fade-right"
                   >
                     <div className="flex items-center gap-3 mb-2">
                       <div className="text-white">{achievement.icon}</div>
@@ -295,9 +292,6 @@ export default function Salons() {
         </div>
       </div>
 
-
-
-
       {/* Why Choose Us */}
       <div className="pt-8 bg-black">
         <h3 className="text-3xl font-bold text-center mb-12 text-white">
@@ -312,16 +306,11 @@ export default function Salons() {
               <div className="w-16 h-16 bg-white text-black rounded-full flex items-center justify-center text-2xl mx-auto mb-4 group-hover:shadow-lg">
                 {item.icon}
               </div>
-              <h4 className="font-bold mb-3 text-white">
-                {item.title}
-              </h4>
+              <h4 className="font-bold mb-3 text-white">{item.title}</h4>
             </div>
           ))}
         </div>
       </div>
-
-
-
 
       {/* Services Showcase Section */}
       <div
@@ -400,8 +389,6 @@ export default function Salons() {
           </div>
         </div>
       </div>
-
-      
 
       {/* Available Salons Section - Enhanced */}
       <div
@@ -484,13 +471,13 @@ export default function Salons() {
             difference
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <a
-              href="tel:"
+            <Link
+              to="/contact"
               className="px-8 py-4 bg-black text-white font-bold rounded-full hover:bg-gray-800 transition-colors flex items-center gap-2"
             >
-              <FaCalendarAlt />
-              Book Now
-            </a>
+              <FaPhone />
+              Contact Us
+            </Link>
           </div>
         </div>
       </div>

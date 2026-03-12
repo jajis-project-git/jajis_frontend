@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import {
   Scissors,
   Sparkles,
@@ -70,79 +71,135 @@ export default function DesigningStitching() {
       title: "Custom Design",
       icon: Palette,
       description: "Personalized clothing designs tailored to your style",
-      features: ["Personal Consultation", "Custom Sketching", "Color Palette Selection", "Fabric Consultation"],
-      image: "https://tse1.explicit.bing.net/th/id/OIP.NXxVKgbFsgdY3UjIF6PZogHaHa?rs=1&pid=ImgDetMain&o=7&rm=3"
+      features: [
+        "Personal Consultation",
+        "Custom Sketching",
+        "Color Palette Selection",
+        "Fabric Consultation",
+      ],
+      image:
+        "https://tse1.explicit.bing.net/th/id/OIP.NXxVKgbFsgdY3UjIF6PZogHaHa?rs=1&pid=ImgDetMain&o=7&rm=3",
     },
     {
       title: "Bridal Wear",
       icon: Crown,
       description: "Exquisite bridal collections for your special day",
-      features: ["Designer Wedding Gowns", "Bridal Lehengas", "Custom Accessories", "Professional Alterations"],
-      image: "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80"
+      features: [
+        "Designer Wedding Gowns",
+        "Bridal Lehengas",
+        "Custom Accessories",
+        "Professional Alterations",
+      ],
+      image:
+        "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80",
     },
     {
       title: "Party Wear",
       icon: PartyPopper,
       description: "Elegant attire for every celebration",
-      features: ["Evening Gowns", "Cocktail Dresses", "Designer Sarees", "Formal Suits"],
-      image: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=800&q=80"
+      features: [
+        "Evening Gowns",
+        "Cocktail Dresses",
+        "Designer Sarees",
+        "Formal Suits",
+      ],
+      image:
+        "https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=800&q=80",
     },
     {
       title: "Casual Wear",
       icon: Shirt,
       description: "Comfortable and stylish everyday clothing",
-      features: ["Designer Tops", "Casual Dresses", "Trendy Pants", "Contemporary Kurtas"],
-      image: "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=800&q=80"
+      features: [
+        "Designer Tops",
+        "Casual Dresses",
+        "Trendy Pants",
+        "Contemporary Kurtas",
+      ],
+      image:
+        "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=800&q=80",
     },
     {
       title: "Alterations",
       icon: Ruler,
       description: "Expert fitting and modification services",
-      features: ["Precise Size Adjustments", "Professional Hemming", "Custom Darting", "Perfect Fitting"],
-      image: "https://images.unsplash.com/photo-1521656693074-0ef32e80a5d5?w=800&q=80"
+      features: [
+        "Precise Size Adjustments",
+        "Professional Hemming",
+        "Custom Darting",
+        "Perfect Fitting",
+      ],
+      image:
+        "https://images.unsplash.com/photo-1521656693074-0ef32e80a5d5?w=800&q=80",
     },
     {
       title: "Embroidery",
       icon: Diamond,
       description: "Intricate hand and machine embroidery work",
-      features: ["Traditional Zari Work", "Stone Embellishment", "Sequin Detailing", "Luxury Beading"],
-      image: "https://tse3.mm.bing.net/th/id/OIP.uuIo3PTitIrUVsSdszWbugHaJQ?pid=ImgDet&w=184&h=230&c=7&dpr=1.3&o=7&rm=3"
-    }
+      features: [
+        "Traditional Zari Work",
+        "Stone Embellishment",
+        "Sequin Detailing",
+        "Luxury Beading",
+      ],
+      image:
+        "https://tse3.mm.bing.net/th/id/OIP.uuIo3PTitIrUVsSdszWbugHaJQ?pid=ImgDet&w=184&h=230&c=7&dpr=1.3&o=7&rm=3",
+    },
   ];
 
   const process = [
-    { step: "1", title: "Consultation", description: "Discuss your vision and requirements with our designers", icon: MessageSquare },
-    { step: "2", title: "Design", description: "Create bespoke designs and select premium fabrics", icon: PenTool },
-    { step: "3", title: "Stitching", description: "Expert craftsmanship and meticulous finishing", icon: Scissors },
-    { step: "4", title: "Fitting", description: "Final fitting and precision adjustments", icon: ShoppingBag }
+    {
+      step: "1",
+      title: "Consultation",
+      description: "Discuss your vision and requirements with our designers",
+      icon: MessageSquare,
+    },
+    {
+      step: "2",
+      title: "Design",
+      description: "Create bespoke designs and select premium fabrics",
+      icon: PenTool,
+    },
+    {
+      step: "3",
+      title: "Stitching",
+      description: "Expert craftsmanship and meticulous finishing",
+      icon: Scissors,
+    },
+    {
+      step: "4",
+      title: "Fitting",
+      description: "Final fitting and precision adjustments",
+      icon: ShoppingBag,
+    },
   ];
 
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section with Fixed Background */}
-      <div 
+      <div
         className="relative h-[60vh] flex items-center justify-center bg-fixed bg-cover bg-top bg-center"
         style={{
-          backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://png.pngtree.com/thumb_back/fw800/background/20230610/pngtree-beautiful-woman-sitting-in-trees-in-an-orange-lehenga-image_2943037.jpg')"
+          backgroundImage:
+            "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://png.pngtree.com/thumb_back/fw800/background/20230610/pngtree-beautiful-woman-sitting-in-trees-in-an-orange-lehenga-image_2943037.jpg')",
         }}
       >
         <div className="text-center z-10 px-4">
-          
           <h1 className="text-5xl md:text-7xl font-bold mb-2 text-white tracking-tight">
             Designing & Stitching
           </h1>
           <p className="text-2xl md:text-3xl mb-6 text-gray-200 font-light">
             Where Elegance Meets Craftsmanship
           </p>
-          
+
           <div className="flex flex-wrap gap-4 justify-center">
-              <a
-                href="#services"
-                className="px-8 py-3 bg-white text-black rounded-full font-semibold hover:bg-gray-200 transform hover:-translate-y-1 transition-all"
-              >
-                View Services
-              </a>
-            </div>
+            <a
+              href="#services"
+              className="px-8 py-3 bg-white text-black rounded-full font-semibold hover:bg-gray-200 transform hover:-translate-y-1 transition-all"
+            >
+              View Services
+            </a>
+          </div>
         </div>
       </div>
 
@@ -155,24 +212,24 @@ export default function DesigningStitching() {
             </h2>
             <div className="w-24 h-1 bg-black mx-auto"></div>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => {
               const IconComponent = service.icon;
               return (
-                <div 
-                  key={index} 
+                <div
+                  key={index}
                   className="group relative overflow-hidden bg-black hover:bg-white border-2 rounded-xl border-black transition-all duration-500"
                 >
                   {/* Image Background */}
                   <div className="absolute inset-0 opacity-50 group-hover:opacity-50 transition-opacity duration-500">
-                    <img 
-                      src={service.image} 
+                    <img
+                      src={service.image}
                       alt={service.title}
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  
+
                   {/* Content */}
                   <div className="relative p-8 z-10">
                     <div className="mb-6">
@@ -186,9 +243,16 @@ export default function DesigningStitching() {
                     </p>
                     <ul className="space-y-3">
                       {service.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-start text-sm">
-                          <span className="text-white group-hover:text-black mr-3 mt-1 transition-colors duration-500">▪</span>
-                          <span className="text-gray-300 group-hover:text-gray-800 transition-colors duration-500">{feature}</span>
+                        <li
+                          key={featureIndex}
+                          className="flex items-start text-sm"
+                        >
+                          <span className="text-white group-hover:text-black mr-3 mt-1 transition-colors duration-500">
+                            ▪
+                          </span>
+                          <span className="text-gray-300 group-hover:text-gray-800 transition-colors duration-500">
+                            {feature}
+                          </span>
                         </li>
                       ))}
                     </ul>
@@ -201,10 +265,11 @@ export default function DesigningStitching() {
       </div>
 
       {/* Process Section with Fixed Background */}
-      <div 
+      <div
         className="relative py-24 bg-fixed bg-cover bg-center"
         style={{
-          backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0.60)), url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1600&q=80')"
+          backgroundImage:
+            "linear-gradient(rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0.60)), url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1600&q=80')",
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -214,7 +279,7 @@ export default function DesigningStitching() {
             </h2>
             <div className="w-24 h-1 bg-white mx-auto"></div>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {process.map((step, index) => {
               const IconComponent = step.icon;
@@ -228,10 +293,15 @@ export default function DesigningStitching() {
                       <IconComponent className="w-12 h-12 text-white" />
                     </div>
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-3">{step.title}</h3>
+                  <h3 className="text-2xl font-bold text-white mb-3">
+                    {step.title}
+                  </h3>
                   <p className="text-gray-300">{step.description}</p>
                   {index < process.length - 1 && (
-                    <div className="hidden lg:block absolute top-12 left-1/2 w-full h-0.5 bg-gray-600" style={{ transform: 'translateX(50%)' }}></div>
+                    <div
+                      className="hidden lg:block absolute top-12 left-1/2 w-full h-0.5 bg-gray-600"
+                      style={{ transform: "translateX(50%)" }}
+                    ></div>
                   )}
                 </div>
               );
@@ -249,40 +319,53 @@ export default function DesigningStitching() {
             </h2>
             <div className="w-24 h-1 bg-black mx-auto"></div>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             <div className="text-center">
               <div className="bg-black w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Sparkles className="w-10 h-10 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-black mb-3">Premium Quality</h3>
-              <p className="text-gray-600">Only the finest fabrics and materials for exceptional results</p>
+              <h3 className="text-2xl font-bold text-black mb-3">
+                Premium Quality
+              </h3>
+              <p className="text-gray-600">
+                Only the finest fabrics and materials for exceptional results
+              </p>
             </div>
-            
+
             <div className="text-center">
               <div className="bg-black w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Users className="w-10 h-10 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-black mb-3">Expert Team</h3>
-              <p className="text-gray-600">Skilled designers and tailors with years of experience</p>
+              <h3 className="text-2xl font-bold text-black mb-3">
+                Expert Team
+              </h3>
+              <p className="text-gray-600">
+                Skilled designers and tailors with years of experience
+              </p>
             </div>
-            
+
             <div className="text-center">
               <div className="bg-black w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Crown className="w-10 h-10 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-black mb-3">Bespoke Service</h3>
-              <p className="text-gray-600">Personalized attention to every detail of your design</p>
+              <h3 className="text-2xl font-bold text-black mb-3">
+                Bespoke Service
+              </h3>
+              <p className="text-gray-600">
+                Personalized attention to every detail of your design
+              </p>
             </div>
           </div>
         </div>
       </div>
 
       {/* Call to Action with Fixed Background */}
-      <div 
+      <div
         className="relative py-32 bg-fixed bg-cover bg-center"
         style={{
-          backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=1600&q=80')"
+          backgroundImage:
+            "linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=1600&q=80')",
         }}
       >
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
@@ -290,13 +373,16 @@ export default function DesigningStitching() {
             Ready to Create Your Perfect Outfit?
           </h2>
           <p className="text-xl md:text-2xl mb-10 text-gray-200">
-            Book a consultation and let us bring your vision to life with precision and elegance.
+            Book a consultation and let us bring your vision to life with
+            precision and elegance.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <a href="tel:" className="bg-white text-black px-12 py-4 rounded-none font-bold hover:bg-gray-200 transition-all duration-300 transform hover:scale-105 text-lg">
+            <Link
+              to="/contact"
+              className="bg-transparent border-2 border-white text-white px-12 py-4 rounded-none font-bold hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-105 text-lg"
+            >
               Contact Us
-            </a>
-          
+            </Link>
           </div>
         </div>
       </div>

@@ -63,6 +63,7 @@ export default function Franchise() {
       {/* FRANCHISE OPPORTUNITY */}
       <section
         id="view"
+        data-aos="zoom-in"
         className="relative bg-fixed bg-center bg-cover"
         style={{
           backgroundImage:
@@ -151,7 +152,10 @@ export default function Franchise() {
 
             {/* RIGHT */}
             <div className="space-y-10">
-              <div className="bg-white p-10 rounded-2xl shadow-lg border">
+              <div
+                className="bg-white p-10 rounded-2xl shadow-lg border"
+                data-aos="fade-right"
+              >
                 <div className="text-4xl mb-4">
                   <FaBuilding />
                 </div>
@@ -163,7 +167,10 @@ export default function Franchise() {
                 </p>
               </div>
 
-              <div className="bg-white p-10 rounded-2xl shadow-lg border">
+              <div
+                className="bg-white p-10 rounded-2xl shadow-lg border"
+                data-aos="fade-left"
+              >
                 <div className="text-4xl mb-4">
                   <FaStar />
                 </div>

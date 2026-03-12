@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import {
   Armchair,
   Clock,
@@ -157,12 +158,12 @@ export default function FoodCourt() {
           {/* CTA Buttons */}
 
           <div className="flex flex-wrap gap-4 justify-center">
-            <a
-              href="tel:"
+            <Link
+              to="/contact"
               className="px-8 py-3 bg-white text-black rounded-full font-semibold hover:bg-gray-200 transform hover:-translate-y-1 transition-all"
             >
-              Book A Table
-            </a>
+              Contact Us
+            </Link>
           </div>
 
           {/* Extra Info */}
@@ -391,12 +392,13 @@ export default function FoodCourt() {
         <h2 className="text-5xl md:text-7xl font-bold mb-8 tracking-wider">
           VISIT US TODAY
         </h2>
-        <a
-          href="tel:"
-          className="px-12 py-4 border-2 border-white text-white font-bold tracking-wider hover:bg-white hover:text-black transition-all text-lg inline-block"
+
+        <Link
+          to="/contact"
+          className="px-8 py-3 bg-white text-black rounded-full font-semibold hover:bg-gray-200 transform hover:-translate-y-1 transition-all"
         >
-          Get Location
-        </a>
+          Contact Us
+        </Link>
       </div>
     </div>
   );

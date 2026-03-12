@@ -5,6 +5,8 @@ import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock } from "react-icons/fa";
 import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import { Phone, MessageCircle } from "lucide-react";
 
+
+
 export default function Contact() {
   const [data, setData] = useState({ content: "", page: "" });
   const [loading, setLoading] = useState(true);
@@ -275,7 +277,7 @@ ${formData.message}`;
         <div className="absolute inset-0 bg-black/60"></div>
 
         {/* Content */}
-        <div className="relative z-10">
+        <div className="relative z-10" >
           <div className="max-w-7xl mx-auto px-6">
             <h2 className="text-4xl font-bold text-center mb-4">
               Our Locations & Ventures
@@ -293,7 +295,7 @@ ${formData.message}`;
                 </span>
                 Salons
               </h3>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6" >
                 {[
                   {
                     name: "Jajis Innovation Unisex Beauty Salon",
