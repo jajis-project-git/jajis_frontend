@@ -63,7 +63,7 @@ export default function Franchise() {
       {/* FRANCHISE OPPORTUNITY */}
       <section
         id="view"
-        data-aos="zoom-in"
+        
         className="relative bg-fixed bg-center bg-cover"
         style={{
           backgroundImage:
@@ -72,7 +72,7 @@ export default function Franchise() {
       >
         <div className="absolute inset-0 bg-black/70" />
 
-        <div className="relative max-w-5xl mx-auto px-6 py-20">
+        <div className="relative max-w-5xl mx-auto px-6 py-20" data-aos="zoom-in">
           <h2 className="text-4xl font-extrabold text-center text-white mb-12">
             Beauty Saloon Franchise
           </h2>
