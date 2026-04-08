@@ -1,9 +1,5 @@
 import React from "react";
 
-/**
- * Skeleton loader component for product cards
- * Mimics modern mobile app loading patterns
- */
 export const SkeletonProductCard = () => {
   return (
     <div className="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden flex flex-col animate-pulse">
@@ -88,7 +84,7 @@ export const SkeletonProductDetails = () => {
  */
 export const SkeletonCartItem = () => {
   return (
-    <div className="border rounded-lg p-4 flex gap-4 animate-pulse">
+    <div className="rounded-lg p-4 flex gap-4 animate-pulse">
       <div className="w-20 h-20 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 rounded animate-shimmer"></div>
       <div className="flex-1 space-y-2">
         <div className="h-5 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 rounded w-3/4 animate-shimmer"></div>
@@ -104,7 +100,7 @@ export const SkeletonCartItem = () => {
  */
 export const SkeletonWishlistItem = () => {
   return (
-    <div className="bg-white border rounded-lg overflow-hidden animate-pulse">
+    <div className="bg-white rounded-lg overflow-hidden animate-pulse">
       <div className="w-full aspect-square bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 animate-shimmer"></div>
       <div className="p-4 space-y-3">
         <div className="h-5 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 rounded w-3/4 animate-shimmer"></div>

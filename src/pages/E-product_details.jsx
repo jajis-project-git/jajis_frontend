@@ -139,6 +139,7 @@ export default function ProductDetails() {
                   src={selectedImage}
                   alt="Selected"
                   className="absolute inset-0 w-full h-full object-cover"
+                  data-aos="fade-in"
                 />
               </div>
 

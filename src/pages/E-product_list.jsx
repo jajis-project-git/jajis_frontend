@@ -394,6 +394,7 @@ export default function EcommerceHome() {
                             src={product.image1}
                             alt={product.title}
                             className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
+                            data-aos="fade-in"
                           />
                         </Link>
                       </div>

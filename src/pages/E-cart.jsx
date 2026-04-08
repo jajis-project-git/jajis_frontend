@@ -309,16 +309,6 @@ export default function CartPage() {
   );
   const totalDiscount = originalSubtotal - subtotal;
 
-  if (loadingCart)
-    return (
-      <div className="w-full py-20 mt-24 flex flex-col items-center justify-center gap-4">
-        <div className="h-10 w-10 rounded-full border-4 border-gray-300 border-t-black animate-spin"></div>
-        <span className="text-sm font-medium text-gray-600 tracking-wide">
-          Loading, please wait…
-        </span>
-      </div>
-    );
-
   return (
     <div className="bg-white min-h-screen relative pb-16">
       {message && (
@@ -720,34 +710,59 @@ export default function CartPage() {
                   Order Summary
                 </h2>
 
-                <div className="space-y-3 text-sm">
-                  <div className="flex justify-between text-gray-600">
-                    <span>Original Subtotal</span>
-                    <span>₹{originalSubtotal.toFixed(2)}</span>
+                {loadingCart ? (
+                  <div className="space-y-3 text-sm animate-pulse">
+                    <div className="flex justify-between">
+                      <div className="h-4 bg-gray-200 rounded w-24"></div>
+                      <div className="h-4 bg-gray-200 rounded w-16"></div>
+                    </div>
+                    <div className="flex justify-between">
+                      <div className="h-4 bg-gray-200 rounded w-20"></div>
+                      <div className="h-4 bg-gray-200 rounded w-14"></div>
+                    </div>
+                    <div className="flex justify-between">
+                      <div className="h-4 bg-gray-200 rounded w-16"></div>
+                      <div className="h-4 bg-gray-200 rounded w-18"></div>
+                    </div>
+                    <hr className="mt-2" />
+                    <div className="flex justify-between">
+                      <div className="h-5 bg-gray-200 rounded w-12"></div>
+                      <div className="h-5 bg-gray-200 rounded w-20"></div>
+                    </div>
+                    <div className="mt-6 h-12 bg-gray-200 rounded-lg"></div>
                   </div>
-                  <div className="flex justify-between text-green-600 font-medium">
-                    <span>Discount</span>
-                    <span>-₹{totalDiscount.toFixed(2)}</span>
+                ) : (
+                  <div className="space-y-3 text-sm">
+                    <div className="flex justify-between text-gray-600">
+                      <span>Original Subtotal</span>
+                      <span>₹{originalSubtotal.toFixed(2)}</span>
+                    </div>
+                    <div className="flex justify-between text-green-600 font-medium">
+                      <span>Discount</span>
+                      <span>-₹{totalDiscount.toFixed(2)}</span>
+                    </div>
+                    <div className="flex justify-between text-gray-600">
+                      <span>Subtotal</span>
+                      <span>₹{subtotal.toFixed(2)}</span>
+                    </div>
+                    <hr className="mt-2" />
+                    <div className="flex justify-between font-bold text-black">
+                      <span>Total</span>
+                      <span>₹{subtotal.toFixed(2)}</span>
+                    </div>
                   </div>
-                  <div className="flex justify-between text-gray-600">
-                    <span>Subtotal</span>
-                    <span>₹{subtotal.toFixed(2)}</span>
-                  </div>
-                  <hr className="mt-2" />
-                  <div className="flex justify-between font-bold text-black">
-                    <span>Total</span>
-                    <span>₹{subtotal.toFixed(2)}</span>
-                  </div>
-                </div>
+                )}
 
-                <button
-                  className="mt-6 w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 flex items-center justify-center gap-2 disabled:opacity-60"
-                  onClick={startCheckout}
-                  disabled={processingPayment || subtotal <= 0}
-                >
-                  Proceed to Checkout
-                </button>
-                {!token && (
+                {!loadingCart && (
+                  <button
+                    className="mt-6 w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 flex items-center justify-center gap-2 disabled:opacity-60"
+                    onClick={startCheckout}
+                    disabled={processingPayment || subtotal <= 0}
+                  >
+                    Proceed to Checkout
+                  </button>
+                )}
+                {!token && !loadingCart && (
                   <p className="text-xs text-gray-500 mt-2 text-center">
                     Login to checkout and save addresses.
                   </p>

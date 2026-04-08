@@ -5,9 +5,9 @@ import { API } from "../config/api";
 import { SkeletonWishlistItem } from "../components/SkeletonLoader";
 
 export default function Wishlist() {
-  const [items, setItems] = useState([]); 
+  const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [removing, setRemoving] = useState(null); 
+  const [removing, setRemoving] = useState(null);
   const [movingToCart, setMovingToCart] = useState(null);
   const [message, setMessage] = useState(null);
 
@@ -88,8 +88,6 @@ export default function Wishlist() {
     }
   };
 
-  
-
   return (
     <div className="pb-20 px-6 lg:px-16 min-h-screen">
       {/* Toast */}
@@ -99,8 +97,8 @@ export default function Wishlist() {
             message.type === "success"
               ? "bg-green-600"
               : message.type === "error"
-              ? "bg-red-600"
-              : "bg-yellow-500"
+                ? "bg-red-600"
+                : "bg-yellow-500"
           }`}
         >
           {message.text}
@@ -109,23 +107,25 @@ export default function Wishlist() {
 
       <header className="bg-white sticky top-0 z-40 mt-24 mb-6">
         <div className="container mx-auto px-4 lg:px-12 py-6 flex flex-col items-center text-center">
-          <h1 className="text-3xl lg:text-3xl font-bold text-black tracking-tight">My Wishlist</h1>
-          <p className="text-sm text-gray-600 mt-1">Save your favorite products and shop them anytime.</p>
+          <h1 className="text-3xl lg:text-3xl font-bold text-black tracking-tight">
+            My Wishlist
+          </h1>
+          <p className="text-sm text-gray-600 mt-1">
+            Save your favorite products and shop them anytime.
+          </p>
         </div>
       </header>
 
       {items.length === 0 && !loading ? (
         <div className="flex justify-center items-center min-h-[60vh]">
-                    <Link to="/products">
-                      <div className="p-8 border rounded-xl text-center hover:shadow-lg">
-                        <Heart className="w-12 h-12 text-red-500 mx-auto mb-4" />
-                        <p className="text-gray-500 text-lg">Your Wishlist is empty</p>
-                        <p className="text-gray-400 text-sm">
-                          Click to browse products
-                        </p>
-                      </div>
-                    </Link>
-                  </div>
+          <Link to="/products">
+            <div className="p-8 border rounded-xl text-center hover:shadow-lg">
+              <Heart className="w-12 h-12 text-red-500 mx-auto mb-4" />
+              <p className="text-gray-500 text-lg">Your Wishlist is empty</p>
+              <p className="text-gray-400 text-sm">Click to browse products</p>
+            </div>
+          </Link>
+        </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {loading ? (
@@ -138,15 +138,25 @@ export default function Wishlist() {
             items.map((item) => {
               // item: { id, variant: {...}, product_title, product_brand, product_image }
               const variant = item.variant || {};
-              const productTitle = item.product_title || (variant.product && variant.product.title) || "Product";
-              const productBrand = item.product_brand || (variant.product && variant.product.brand) || "";
+              const productTitle =
+                item.product_title ||
+                (variant.product && variant.product.title) ||
+                "Product";
+              const productBrand =
+                item.product_brand ||
+                (variant.product && variant.product.brand) ||
+                "";
               const productImage =
-                item.product_image || (variant.product && variant.product.image1) || "/static/no-image.png";
+                item.product_image ||
+                (variant.product && variant.product.image1) ||
+                "/static/no-image.png";
 
               // price info from variant (if present)
               const price = variant.price || variant.mrp || 0;
               const mrp = variant.mrp || price;
-              const discount = mrp ? Math.round(((mrp - price) / mrp) * 100) : 0;
+              const discount = mrp
+                ? Math.round(((mrp - price) / mrp) * 100)
+                : 0;
 
               const variantId = variant.id;
 
@@ -170,18 +180,33 @@ export default function Wishlist() {
                       src={productImage}
                       alt={productTitle}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      data-aos="fade-in"
                     />
                   </div>
 
                   {/* Details */}
                   <div className="p-4">
-                    <p className="text-xs uppercase tracking-wider text-gray-500 mb-1">{productBrand}</p>
-                    <h3 className="text-base font-semibold text-black mb-2 leading-tight">{productTitle}</h3>
+                    <p className="text-xs uppercase tracking-wider text-gray-500 mb-1">
+                      {productBrand}
+                    </p>
+                    <h3 className="text-base font-semibold text-black mb-2 leading-tight">
+                      {productTitle}
+                    </h3>
 
                     <div className="flex items-center gap-2 mb-3">
-                      <span className="text-lg font-bold text-black">₹{price}</span>
-                      {mrp && mrp !== price ? <span className="text-sm text-gray-400 line-through">₹{mrp}</span> : null}
-                      {discount ? <span className="text-xs font-medium text-green-600">{discount}% off</span> : null}
+                      <span className="text-lg font-bold text-black">
+                        ₹{price}
+                      </span>
+                      {mrp && mrp !== price ? (
+                        <span className="text-sm text-gray-400 line-through">
+                          ₹{mrp}
+                        </span>
+                      ) : null}
+                      {discount ? (
+                        <span className="text-xs font-medium text-green-600">
+                          {discount}% off
+                        </span>
+                      ) : null}
                     </div>
 
                     <div className="flex gap-3">
@@ -191,7 +216,9 @@ export default function Wishlist() {
                         disabled={movingToCart === variantId}
                       >
                         <ShoppingCart className="w-4 h-4" />
-                        {movingToCart === variantId ? "Moving..." : "Move to Cart"}
+                        {movingToCart === variantId
+                          ? "Moving..."
+                          : "Move to Cart"}
                       </button>
 
                       <Link
