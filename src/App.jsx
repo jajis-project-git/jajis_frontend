@@ -40,7 +40,7 @@ import UserProfile from "./pages/E-user_profile";
 export default function App() {
   useEffect(() => {
     AOS.init({
-      duration: 800,
+      duration: 500,
       once: true,
       easing: "ease-in-out",
     });
