@@ -2,7 +2,14 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { API } from "../config/api";
-import { X, Share2, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  X,
+  Share2,
+  ChevronLeft,
+  ChevronRight,
+  Truck,
+  Shield,
+} from "lucide-react";
 import { Dialog } from "@headlessui/react";
 import { SkeletonProductDetails } from "../components/SkeletonLoader";
 
@@ -141,6 +148,17 @@ export default function ProductDetails() {
                   className="absolute inset-0 w-full h-full object-cover"
                   data-aos="fade-in"
                 />
+
+                {/* SHARE BUTTON */}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleShare();
+                  }}
+                  className="absolute top-4 right-4 bg-white/80 p-2 rounded-full hover:bg-white"
+                >
+                  <Share2 size={20} />
+                </button>
               </div>
 
               <div className="flex gap-3 mt-4">
@@ -187,6 +205,23 @@ export default function ProductDetails() {
 
           <p className="text-gray-700 text-justify">{product.description}</p>
 
+          {/* PRODUCT BENEFITS */}
+          <div className="grid grid-cols-2 gap-4">
+            <div className="bg-orange-200 p-4 rounded-lg flex flex-col items-center text-center">
+              <Truck size={24} className="text-green-600 mb-2" />
+              <span className="text-sm text-gray-700 font-medium">
+                Free Shipping
+              </span>
+            </div>
+
+            <div className="bg-orange-200 p-4 rounded-lg flex flex-col items-center text-center">
+              <Shield size={24} className="text-green-600 mb-2" />
+              <span className="text-sm text-gray-700 font-medium">
+                Secure Payment
+              </span>
+            </div>
+          </div>
+
           {/* VARIANT SELECTOR */}
           <div>
             <p className="font-semibold mb-2">Available Quantities:</p>
@@ -229,7 +264,7 @@ export default function ProductDetails() {
             </p>
           )}
 
-          {/* ADD TO CART + SHARE BUTTON */}
+          {/* ADD TO CART BUTTON */}
           <div className="flex gap-4">
             {selectedVariant && selectedVariant.stock < 1 ? (
               <button
@@ -247,15 +282,6 @@ export default function ProductDetails() {
                 {addingItem ? "Adding…" : "Add to Cart"}
               </button>
             )}
-
-            {/* SHARE BUTTON */}
-            <button
-              onClick={handleShare}
-              className="px-6 py-3 bg-black text-white rounded-lg hover:bg-blue-700 flex items-center gap-2"
-            >
-              <Share2 size={18} />
-              Share
-            </button>
           </div>
         </div>
       </div>
