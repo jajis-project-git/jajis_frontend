@@ -208,23 +208,23 @@ export default function ProductDetails() {
 
           {/* PRODUCT BENEFITS */}
           <div className="grid grid-cols-3 gap-4">
-            <div className="bg-orange-200 p-4 rounded-lg flex flex-col items-center text-center">
+            <div className="bg-orange-200 p-4 rounded-md flex flex-col items-center text-center">
               <Truck size={24} className="text-green-600 mb-2" />
-              <span className="text-sm text-gray-700 font-medium">
+              <span className="text-xs text-gray-700 font-medium">
                 Free Shipping
               </span>
             </div>
 
-            <div className="bg-orange-200 p-4 rounded-lg flex flex-col items-center text-center">
+            <div className="bg-orange-200 p-4 rounded-md flex flex-col items-center text-center">
               <Shield size={24} className="text-green-600 mb-2" />
-              <span className="text-sm text-gray-700 font-medium">
+              <span className="text-xs text-gray-700 font-medium">
                 Secure Payment
               </span>
             </div>
 
-            <div className="bg-orange-200 p-4 rounded-lg flex flex-col items-center text-center">
+            <div className="bg-orange-200 p-4 rounded-md flex flex-col items-center text-center">
               <Clock size={24} className="text-green-600 mb-2" />
-              <span className="text-sm text-gray-700 font-medium">
+              <span className="text-xs text-gray-700 font-medium">
                 Express Delivery
               </span>
             </div>
