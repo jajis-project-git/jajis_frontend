@@ -208,7 +208,7 @@ export default function ProductDetails() {
           <p className="text-gray-700 text-justify">{product.description}</p>
 
           {/* PRODUCT BENEFITS */}
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="bg-orange-200 p-4 rounded-md flex flex-col items-center text-center">
               <Truck size={24} className="text-green-600 mb-2" />
               <span className="text-xs text-gray-700 font-medium">
