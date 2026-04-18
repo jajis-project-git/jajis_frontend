@@ -216,7 +216,7 @@ Partner with Jaji’s. Lead Your Own Success Story.`,
       icon: <Award className="w-8 h-8" />,
       link: "/franchise",
       layout: "left",
-      bgImage: "https://nucleoniitjeekota.com/img/Franchisee.jpg",
+      bgImage: "https://imgs.franchising.com/art/articles/703_plate.jpg",
       cardImage:
         "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=2071&q=80",
     },
