@@ -103,7 +103,7 @@ export default function JajisHomepage() {
       link: "/salons",
       layout: "left",
       bgImage:
-        "https://png.pngtree.com/thumb_back/fh260/background/20230425/pngtree-salon-service-salon-design-hd-image_2512958.jpg",
+        "https://content.jdmagicbox.com/comp/thiruvananthapuram/w7/0471px471.x471.221127203010.n6w7/catalogue/jajis-innovation-eanchakkal-thiruvananthapuram-beauty-parlours-qjkg2qccss.jpg",
       cardImage:
         "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=2069&q=80",
     },
@@ -116,7 +116,7 @@ export default function JajisHomepage() {
       icon: <Palette className="w-8 h-8" />,
       link: "/cosmetics",
       layout: "right",
-      bgImage: cosmetics_bg,
+      bgImage: 'https://media.licdn.com/dms/image/v2/D5622AQENBhuUnJD9aQ/feedshare-shrink_800/feedshare-shrink_800/0/1694665826323?e=2147483647&v=beta&t=2llBc1m-xc-ZZlzJFB2_XA_2NYkMxheFsQlGBQi5ELI',
       cardImage: cosmeticsImg,
     },
 
