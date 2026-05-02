@@ -116,7 +116,8 @@ export default function JajisHomepage() {
       icon: <Palette className="w-8 h-8" />,
       link: "/cosmetics",
       layout: "right",
-      bgImage: 'https://media.licdn.com/dms/image/v2/D5622AQENBhuUnJD9aQ/feedshare-shrink_800/feedshare-shrink_800/0/1694665826323?e=2147483647&v=beta&t=2llBc1m-xc-ZZlzJFB2_XA_2NYkMxheFsQlGBQi5ELI',
+      bgImage:
+        "https://media.licdn.com/dms/image/v2/D5622AQENBhuUnJD9aQ/feedshare-shrink_800/feedshare-shrink_800/0/1694665826323?e=2147483647&v=beta&t=2llBc1m-xc-ZZlzJFB2_XA_2NYkMxheFsQlGBQi5ELI",
       cardImage: cosmeticsImg,
     },
 
@@ -130,7 +131,6 @@ More than a café, it is a cultural hub where food, music, and celebrations meet
 With warm ambiance, multi-cuisine offerings, and a versatile event setup, the venue continues to redefine tourism and entertainment in Kollam while creating moments that bring people together.
 
 Its premier auditorium seats 400+ guests and is ideal for weddings, seminars, award functions, product launches, and grand celebrations — a landmark space where community, creativity, and celebration unite. Celebrate. Connect. Create Memories.`,
-
 
       icon: <Building className="w-8 h-8" />,
       link: "/event-hall",
@@ -239,22 +239,6 @@ Partner with Jaji’s. Lead Your Own Success Story.`,
     fetchData();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-white px-4">
-        {/* Logo */}
-        <img
-          src={LOGO}
-          alt="Jajis Lifestyle"
-          className="h-24 w-auto mb-6 animate-pulse"
-        />
-
-        {/* Spinner */}
-        <div className="h-7 w-7 border-4 border-gray-200 border-t-gray-900 rounded-full animate-spin" />
-      </div>
-    );
-  }
-
   if (error) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-black text-white">
@@ -361,7 +345,6 @@ Partner with Jaji’s. Lead Your Own Success Story.`,
       <section
         id="home"
         className="relative h-[100vh] overflow-hidden bg-fixed bg-center bg-cover"
-        data-aos="fade-in"
         style={{ backgroundImage: `url(${heroImage})` }}
       >
         {/* Overlay */}
