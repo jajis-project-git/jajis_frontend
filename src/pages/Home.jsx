@@ -20,9 +20,19 @@ import {
   ShoppingBag,
 } from "lucide-react";
 
+import salon from "../assets/saloon/1.jpeg";
+import salonbg from "../assets/saloon/2.jpeg";
 import cosmeticsImg from "../assets/images/cosmatics.png";
-import cosmetics_bg from "../assets/images/cos-bg.jpg";
+import cosmetics_bg from "../assets/saloon/3.jpeg";
 import LOGO from "../assets/images/logo.png";
+import eventbg from "../assets/event hall/3.jpeg";
+import event from "../assets/event hall/2.jpeg";
+
+import qcafe from "../assets/foodcourt/2.jpeg";
+import qcafebg from "../assets/foodcourt/1.jpeg";
+
+import design from "../assets/design/1.jpeg";
+import designbg from "../assets/design/3.jpeg";
 
 function Counter({ value }) {
   const numericValue = parseInt(value);
@@ -89,10 +99,6 @@ export default function JajisHomepage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Business sections data
-  // ONLY the businesses array and description styling were improved.
-  // Everything else remains unchanged.
-
   const businesses = [
     {
       id: "salons",
@@ -102,10 +108,8 @@ export default function JajisHomepage() {
       icon: <Scissors className="w-8 h-8" />,
       link: "/salons",
       layout: "left",
-      bgImage:
-        "https://content.jdmagicbox.com/comp/thiruvananthapuram/w7/0471px471.x471.221127203010.n6w7/catalogue/jajis-innovation-eanchakkal-thiruvananthapuram-beauty-parlours-qjkg2qccss.jpg",
-      cardImage:
-        "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=2069&q=80",
+      bgImage: salonbg,
+      cardImage: salon,
     },
 
     {
@@ -116,8 +120,7 @@ export default function JajisHomepage() {
       icon: <Palette className="w-8 h-8" />,
       link: "/cosmetics",
       layout: "right",
-      bgImage:
-        "https://media.licdn.com/dms/image/v2/D5622AQENBhuUnJD9aQ/feedshare-shrink_800/feedshare-shrink_800/0/1694665826323?e=2147483647&v=beta&t=2llBc1m-xc-ZZlzJFB2_XA_2NYkMxheFsQlGBQi5ELI",
+      bgImage: cosmetics_bg,
       cardImage: cosmeticsImg,
     },
 
@@ -135,10 +138,8 @@ Its premier auditorium seats 400+ guests and is ideal for weddings, seminars, aw
       icon: <Building className="w-8 h-8" />,
       link: "/event-hall",
       layout: "left",
-      bgImage:
-        "https://assets.simplotel.com/simplotel/image/upload/x_0,y_100,w_1920,h_1080,r_0,c_crop,q_80,fl_progressive/w_900,f_auto,c_fit/jenneys-residency-coimbatore/diamond_banquet_hall_with_seating_arrangement_for_conference_and_weddings4_wq7t1z",
-      cardImage:
-        "https://www.princehotels.com/shinyokohama/wp-content/uploads/sites/8/2019/06/Z7T7769%E5%B0%8F.jpg",
+      bgImage: eventbg,
+      cardImage: event,
     },
 
     {
@@ -154,10 +155,8 @@ Open Air. Great Food. Unmatched Vibes.`,
       icon: <Utensils className="w-8 h-8" />,
       link: "/food-court",
       layout: "right",
-      bgImage:
-        "https://images.unsplash.com/photo-1567521464027-f127ff144326?auto=format&fit=crop&w=2074&q=80",
-      cardImage:
-        "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=2070&q=80",
+      bgImage: qcafebg,
+      cardImage: qcafe,
     },
 
     {
@@ -173,10 +172,8 @@ Where Every Woman Finds Her Perfect Fit.`,
       icon: <Heart className="w-8 h-8" />,
       link: "/designing-stitching",
       layout: "left",
-      bgImage:
-        "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=2074&q=80",
-      cardImage:
-        "https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=2071&q=80",
+      bgImage: designbg,
+      cardImage: design,
     },
 
     {
@@ -345,6 +342,7 @@ Partner with Jaji’s. Lead Your Own Success Story.`,
       <section
         id="home"
         className="relative h-[100vh] overflow-hidden bg-fixed bg-center bg-cover"
+        loading="lazy"
         style={{ backgroundImage: `url(${heroImage})` }}
       >
         {/* Overlay */}

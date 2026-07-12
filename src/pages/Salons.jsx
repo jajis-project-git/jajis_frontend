@@ -22,7 +22,12 @@ import {
   FaArrowRight,
 } from "react-icons/fa";
 
-import BgImage from "../assets/images/saloon_bg.jpg";
+import BgImage from "../assets/saloon/2.jpeg";
+import aboutbg from "../assets/saloon/3.jpeg";
+import about from "../assets/saloon/1.jpeg";
+import premiumbg from "../assets/saloon/7.jpeg";
+import premium from "../assets/saloon/4.jpeg";
+import last from "../assets/saloon/8.jpeg";
 
 export default function Salons() {
   const [data, setData] = useState({ page: "", banner_image: "", data: [] });
@@ -174,12 +179,9 @@ export default function Salons() {
     <div className="min-h-screen text-white">
       {/* Hero Banner Section */}
       <div
-        className="relative h-[60vh] w-full bg-fixed bg-cover bg-center"
+        className="relative h-[100vh] w-full bg-fixed bg-cover bg-top"
         style={{
-          backgroundImage: `url(${
-            data.banner_image ||
-            "https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=2069&q=80"
-          })`,
+          backgroundImage: `url(${BgImage})`,
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent">
@@ -230,7 +232,7 @@ export default function Salons() {
       <div
         className="relative bg-fixed bg-cover bg-center py-16 px-6"
         style={{
-          backgroundImage: `url("https://cdn.pixabay.com/photo/2019/03/08/20/17/beauty-salon-4043096_1280.jpg")`,
+          backgroundImage: `url(${aboutbg})`,
         }}
       >
         {/* Dark overlay */}
@@ -244,7 +246,7 @@ export default function Salons() {
           <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
             <div>
               <img
-                src="https://cdn1.treatwell.net/images/view/v2.i5059485.w720.h480.xEC74D084/"
+                src={about}
                 alt="Dr. K Jajimole - Founder"
                 className="w-full h-[400px] object-cover rounded-2xl shadow-2xl"
               />
@@ -316,7 +318,7 @@ export default function Salons() {
       <div
         className="relative bg-fixed bg-cover bg-center py-16"
         style={{
-          backgroundImage: `url("https://as2.ftcdn.net/v2/jpg/00/99/70/41/1000_F_99704113_ay6HtFyF1YYgnk4thqYayY0Ionn6wmxN.jpg")`,
+          backgroundImage: `url(${premiumbg})`,
         }}
       >
         {/* Dark Overlay for readability */}
@@ -380,7 +382,7 @@ export default function Salons() {
             {/* Right side - image */}
             <div className="relative">
               <img
-                src="https://as2.ftcdn.net/v2/jpg/00/99/70/41/1000_F_99704113_ay6HtFyF1YYgnk4thqYayY0Ionn6wmxN.jpg"
+                src={premium}
                 alt="Beauty Services"
                 className="w-full h-[500px] object-cover rounded-2xl shadow-2xl"
               />
@@ -393,7 +395,7 @@ export default function Salons() {
       {/* Available Salons Section - Enhanced */}
       <div
         className="relative py-16 px-4 sm:px-6 lg:px-8 bg-fixed bg-cover bg-top bg-center"
-        style={{ backgroundImage: `url(${BgImage})` }}
+        style={{ backgroundImage: `url(${last})` }}
       >
         <div className="absolute inset-0 bg-black/70"></div>
 

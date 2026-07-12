@@ -1,6 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
-import { API_BASE_URL } from "../config/api";
+import { API } from "../config/api";
 import { useNavigate, Link } from "react-router-dom";
 import { User, Mail, Lock } from "lucide-react";
 
@@ -24,7 +23,7 @@ export default function Register() {
     setError("");
 
     try {
-      const response = await axios.post(`${API_BASE_URL}signup/`, formData);
+      const response = await API.post("signup/", formData);
       localStorage.setItem("token", response.data.token);
       navigate("/products");
     } catch (err) {

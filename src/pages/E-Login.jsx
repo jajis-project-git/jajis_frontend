@@ -1,6 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
-import { API_BASE_URL } from "../config/api";
+import { API } from "../config/api";
 import { useNavigate, Link } from "react-router-dom";
 
 // Icons
@@ -27,7 +26,7 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const response = await axios.post(`${API_BASE_URL}login/`, formData);
+      const response = await API.post("login/", formData);
 
       localStorage.setItem("token", response.data.token);
 
