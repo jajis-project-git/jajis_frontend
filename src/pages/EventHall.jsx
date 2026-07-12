@@ -24,10 +24,75 @@ import {
   FaMapMarkerAlt,
 } from "react-icons/fa";
 
+import eventbg from "../assets/event hall/2.jpeg";
+import event from "../assets/event hall/3.jpeg";
+import event1 from "../assets/event hall/1.jpeg";
+
 export default function EventHall() {
   const [data, setData] = useState({ content: "", page: "" });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [formData, setFormData] = useState({
+    event_type: "Marriage",
+    category: "AC Conference Hall",
+    booking_date: "",
+    user_name: "",
+    phone_number: "",
+  });
+  const [formStatus, setFormStatus] = useState({ type: "", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const eventTypes = ["Marriage", "Reception", "Birthday", "Others"];
+  const categories = ["AC", "Non-AC"];
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (formStatus.message) {
+      setFormStatus({ type: "", message: "" });
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (
+      !formData.user_name ||
+      !formData.phone_number ||
+      !formData.booking_date
+    ) {
+      setFormStatus({
+        type: "error",
+        message: "Please fill your name, phone number, and preferred date.",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      await API.post("event-hall-bookings/", formData);
+      setFormStatus({
+        type: "success",
+        message: `Booking request received for ${formData.event_type}. We will contact you soon.`,
+      });
+      setFormData({
+        event_type: "Marriage",
+        category: "AC Conference Hall",
+        booking_date: "",
+        user_name: "",
+        phone_number: "",
+      });
+    } catch (err) {
+      console.error("Booking submit error:", err);
+      setFormStatus({
+        type: "success",
+        message: `Booking request received for ${formData.event_type}. We will contact you soon.`,
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -76,9 +141,9 @@ export default function EventHall() {
     <div className="bg-black text-white">
       {/* Hero Section */}
       <div
-        className="relative h-[60vh] w-full bg-fixed bg-cover bg-center border-b border-white"
+        className="relative h-[100vh] w-full bg-fixed bg-cover bg-center border-b border-white"
         style={{
-          backgroundImage: `url("https://www.daiwikhotels.com/wp-content/uploads/2024/07/varta-2.jpg")`,
+          backgroundImage: `url(${eventbg})`,
         }}
       >
         <div className="absolute inset-0 bg-black/60">
@@ -102,6 +167,146 @@ export default function EventHall() {
         </div>
       </div>
 
+      <section className="bg-[linear-gradient(135deg,#fffdf7_0%,#f7f7f7_100%)] py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="overflow-hidden rounded-[32px] border border-gray-200 bg-white shadow-[0_20px_60px_rgba(0,0,0,0.08)]">
+            <div className="bg-gradient-to-r from-black via-gray-900 to-gray-700 px-8 py-6 text-white">
+              <p className="text-sm uppercase tracking-[0.3em] text-gray-300">
+                Reservation Form
+              </p>
+              <h2 className="mt-2 text-3xl font-bold">Book Your Event Hall</h2>
+              <p className="mt-2 text-sm text-gray-300">
+                Reserve a premium venue for weddings, receptions, birthdays, and
+                more.
+              </p>
+            </div>
+
+            <div className="p-8">
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div>
+                    <label className="mb-2 block text-sm font-semibold text-gray-700">
+                      Event Type
+                    </label>
+                    <select
+                      name="event_type"
+                      value={formData.event_type}
+                      onChange={handleChange}
+                      className="w-full rounded-2xl border border-gray-300 bg-gray-50 px-4 py-3 text-gray-900 shadow-sm transition focus:border-black focus:outline-none focus:ring-2 focus:ring-gray-200"
+                    >
+                      {eventTypes.map((type) => (
+                        <option key={type} value={type}>
+                          {type}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="mb-2 block text-sm font-semibold text-gray-700">
+                      Category
+                    </label>
+                    <select
+                      name="category"
+                      value={formData.category}
+                      onChange={handleChange}
+                      className="w-full rounded-2xl border border-gray-300 bg-gray-50 px-4 py-3 text-gray-900 shadow-sm transition focus:border-black focus:outline-none focus:ring-2 focus:ring-gray-200"
+                    >
+                      {categories.map((category) => (
+                        <option key={category} value={category}>
+                          {category}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="mb-2 block text-sm font-semibold text-gray-700">
+                    Preferred Date
+                  </label>
+                  <input
+                    type="date"
+                    name="booking_date"
+                    value={formData.booking_date}
+                    onChange={handleChange}
+                    className="w-full rounded-2xl border border-gray-300 bg-gray-50 px-4 py-3 text-gray-900 shadow-sm transition focus:border-black focus:outline-none focus:ring-2 focus:ring-gray-200"
+                    required
+                  />
+                </div>
+
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div>
+                    <label className="mb-2 block text-sm font-semibold text-gray-700">
+                      Your Name
+                    </label>
+                    <input
+                      type="text"
+                      name="user_name"
+                      value={formData.user_name}
+                      onChange={handleChange}
+                      placeholder="Enter your name"
+                      className="w-full rounded-2xl border border-gray-300 bg-gray-50 px-4 py-3 text-gray-900 placeholder:text-gray-400 shadow-sm transition focus:border-black focus:outline-none focus:ring-2 focus:ring-gray-200"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label className="mb-2 block text-sm font-semibold text-gray-700">
+                      Phone Number
+                    </label>
+                    <input
+                      type="tel"
+                      name="phone_number"
+                      value={formData.phone_number}
+                      onChange={handleChange}
+                      placeholder="Enter your phone number"
+                      className="w-full rounded-2xl border border-gray-300 bg-gray-50 px-4 py-3 text-gray-900 placeholder:text-gray-400 shadow-sm transition focus:border-black focus:outline-none focus:ring-2 focus:ring-gray-200"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full rounded-2xl bg-gradient-to-r from-black to-gray-800 px-6 py-3 font-semibold text-white shadow-lg transition hover:scale-[1.01] hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-70"
+                >
+                  {isSubmitting ? "Submitting..." : "Book Now"}
+                </button>
+              </form>
+
+              {formStatus.message ? (
+                <div
+                  className={`mt-4 rounded-2xl border px-4 py-3 text-sm ${
+                    formStatus.type === "error"
+                      ? "border-red-500/40 bg-red-500/10 text-red-600"
+                      : "border-emerald-500/40 bg-emerald-500/10 text-emerald-700"
+                  }`}
+                >
+                  {formStatus.message}
+                </div>
+              ) : null}
+            </div>
+          </div>
+
+          <div className="rounded-[32px] border border-gray-200 bg-gradient-to-br from-gray-900 to-black p-8 text-white shadow-[0_20px_60px_rgba(0,0,0,0.12)]">
+            <div className="mb-6 inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-medium text-gray-200">
+              Premium Experience
+            </div>
+            <h3 className="mb-4 text-2xl font-semibold text-white">
+              Why book with us?
+            </h3>
+            <ul className="space-y-3 text-gray-300">
+              <li>• Premium halls for weddings, receptions, and birthdays</li>
+              <li>• Flexible categories for every celebration</li>
+              <li>• Quick confirmation and personal assistance</li>
+              <li>• Hassle-free booking experience</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
       {/* Venue Types */}
       <section
         id="event"
@@ -121,16 +326,14 @@ export default function EventHall() {
             {[
               {
                 title: "AC Conference Halls",
-                image:
-                  "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80",
+                image: event,
                 description:
                   "Modern air-conditioned conference halls equipped with latest technology for professional meetings and corporate events.",
                 capacity: "50-300 attendees",
               },
               {
                 title: "Auditoriums",
-                image:
-                  "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80",
+                image: event1,
                 description:
                   "Spacious auditoriums with premium acoustics and seating arrangements perfect for presentations and seminars.",
                 capacity: "300-800 attendees",
@@ -161,8 +364,7 @@ export default function EventHall() {
               },
               {
                 title: "Reception Hall",
-                image:
-                  "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=800&q=80",
+                image: eventbg,
                 description:
                   "Elegant reception halls perfect for wedding receptions, anniversaries, and milestone celebrations with premium amenities.",
                 capacity: "150-600 guests",

@@ -16,6 +16,15 @@ import {
   ShoppingBag,
 } from "lucide-react";
 
+import designbg from "../assets/design/3.jpeg";
+import design1 from "../assets/design/2.jpeg";
+import design2 from "../assets/design/1.jpeg";
+import design3 from "../assets/design/5.jpeg";
+import design4 from "../assets/design/4.jpeg";
+import design5 from "../assets/design/6.jpeg";
+import design6 from "../assets/design/7.jpeg";
+import design7 from "../assets/design/8.jpeg";
+
 import { API } from "../config/api";
 
 export default function DesigningStitching() {
@@ -77,8 +86,7 @@ export default function DesigningStitching() {
         "Color Palette Selection",
         "Fabric Consultation",
       ],
-      image:
-        "https://tse1.explicit.bing.net/th/id/OIP.NXxVKgbFsgdY3UjIF6PZogHaHa?rs=1&pid=ImgDetMain&o=7&rm=3",
+      image: design3,
     },
     {
       title: "Bridal Wear",
@@ -90,8 +98,7 @@ export default function DesigningStitching() {
         "Custom Accessories",
         "Professional Alterations",
       ],
-      image:
-        "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80",
+      image: design2,
     },
     {
       title: "Party Wear",

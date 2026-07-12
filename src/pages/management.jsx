@@ -1,16 +1,18 @@
 import CEO from "../assets/management/ceo.jpeg";
 import DIRECTOR from "../assets/management/jaji main image.PNG";
 import JAJI from "../assets/management/jaji.jpeg";
+import jaji1 from "../assets/management/jajis.jpeg";
+import jaji2 from "../assets/management/jajis1.jpeg";
+import jaji3 from "../assets/management/jajis2.jpeg";
 
 export default function Management() {
   return (
     <div className="w-full text-gray-800 ">
       {/* ================= HERO / PARALLAX BANNER ================= */}
       <div
-        className="relative h-[40vh] mt-12 w-full bg-fixed bg-cover bg-center"
+        className="relative h-[100vh] mt-12 w-full bg-fixed bg-cover bg-center"
         style={{
-          backgroundImage:
-            "url(https://t4.ftcdn.net/jpg/02/44/16/37/360_F_244163733_ErNyvrHfOJcRlHd7t3doQcs4bEgclAfq.jpg)",
+          backgroundImage: `url(${jaji2})`,
         }}
       >
         <div className="absolute inset-0 bg-black/65">
@@ -27,11 +29,12 @@ export default function Management() {
 
       {/* ================= FOUNDER SECTION ================= */}
       <section className="max-w-7xl mx-auto px-6 py-20">
-        <div className="grid md:grid-cols-2 gap-12 items-center" >
+        <div className="grid md:grid-cols-2 gap-12 items-center">
           <img
             src={JAJI}
             alt="Dr. Jajimole K Founder of Jajis Innovation"
-            className="rounded-2xl shadow-xl object-cover w-full h-[480px]" data-aos="slide-right"
+            className="rounded-2xl shadow-xl object-cover w-full h-[480px]"
+            data-aos="slide-right"
           />
 
           <div className="text-justify" data-aos="slide-left">
@@ -66,13 +69,12 @@ export default function Management() {
 
       {/* ================= PARALLAX BREAK SECTION ================= */}
       <div
-        className="relative h-[30vh] w-full bg-fixed bg-cover bg-center"
+        className="relative h-[50vh] w-full bg-fixed bg-cover bg-center"
         style={{
-          backgroundImage:
-            "url(https://t4.ftcdn.net/jpg/02/44/16/37/360_F_244163733_ErNyvrHfOJcRlHd7t3doQcs4bEgclAfq.jpg)",
+          backgroundImage: `url(${jaji1})`,
         }}
       >
-        <div className="absolute inset-0 bg-black/70 flex items-center justify-center text-center px-6">
+        <div className="absolute inset-0 bg-black/30 flex items-center justify-center text-center px-6">
           <p className="text-white text-2xl md:text-3xl font-semibold max-w-4xl">
             “Beauty is not just appearance, but confidence, wellness, and
             empowerment.”
@@ -88,7 +90,10 @@ export default function Management() {
 
         <div className="grid md:grid-cols-2 gap-12">
           {/* ===== KEERTHI SUNIL ===== */}
-          <div className="bg-white rounded-2xl shadow-lg overflow-hidden" data-aos="flip-left">
+          <div
+            className="bg-white rounded-2xl shadow-lg overflow-hidden"
+            data-aos="flip-left"
+          >
             <div className="relative h-[420px] w-full">
               <img
                 src={DIRECTOR}
@@ -114,7 +119,10 @@ export default function Management() {
           </div>
 
           {/* ===== KARTHIK SUNIL ===== */}
-          <div className="bg-white rounded-2xl shadow-lg overflow-hidden" data-aos="flip-right">
+          <div
+            className="bg-white rounded-2xl shadow-lg overflow-hidden"
+            data-aos="flip-right"
+          >
             <div className="relative h-[420px] w-full">
               <img
                 src={CEO}

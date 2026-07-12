@@ -17,6 +17,10 @@ import { FaMapMarkerAlt, FaClock, FaPhoneAlt } from "react-icons/fa";
 
 import { API } from "../config/api";
 
+import food1 from "../assets/foodcourt/1.jpeg";
+import food2 from "../assets/foodcourt/2.jpeg";
+import food3 from "../assets/foodcourt/3.jpeg";
+
 export default function FoodCourt() {
   const [menuData, setMenuData] = useState({ page: "", data: [] });
   const [loading, setLoading] = useState(true);
@@ -133,8 +137,7 @@ export default function FoodCourt() {
       <section
         className="relative h-screen flex items-center justify-center border-b border-white"
         style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&h=1080&fit=crop')",
+          backgroundImage: `url(${food1})`,
           backgroundAttachment: "fixed",
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -173,8 +176,7 @@ export default function FoodCourt() {
       <section
         className="relative min-h-screen flex items-center"
         style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1920&h=1080&fit=crop')",
+          backgroundImage: `url(${food2})`,
           backgroundAttachment: "fixed",
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -189,7 +191,7 @@ export default function FoodCourt() {
             {/* Left: Image */}
             <div className="relative">
               <img
-                src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=800&h=1000&fit=crop"
+                src={food3}
                 alt="Jaji’s Food Court Interior"
                 className="w-full h-[400px] md:h-[550px] object-cover shadow-2xl rounded-2xl transition-transform duration-500 hover:scale-105"
               />
@@ -331,8 +333,7 @@ export default function FoodCourt() {
       <section
         className="relative min-h-screen py-24"
         style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&h=1080&fit=crop')",
+          backgroundImage: `url(${food2})`,
           backgroundAttachment: "fixed",
           backgroundSize: "cover",
           backgroundPosition: "center",

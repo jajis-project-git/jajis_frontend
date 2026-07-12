@@ -17,15 +17,32 @@ import {
 import CEO from "../assets/management/ceo.jpeg";
 import DIRECTOR from "../assets/management/jaji main image.PNG";
 import JAJI from "../assets/management/jaji.jpeg";
+import jaji1 from "../assets/management/jajis.jpeg";
+import jaji2 from "../assets/management/jajis1.jpeg";
+import jaji3 from "../assets/management/jajis2.jpeg";
+
+import salon from "../assets/saloon/1.jpeg";
+import salonbg from "../assets/saloon/2.jpeg";
+import cosmeticsImg from "../assets/images/cosmatics.png";
+import cosmetics_bg from "../assets/saloon/3.jpeg";
+import LOGO from "../assets/images/logo.png";
+import eventbg from "../assets/event hall/3.jpeg";
+import event from "../assets/event hall/2.jpeg";
+
+import qcafe from "../assets/foodcourt/2.jpeg";
+import qcafebg from "../assets/foodcourt/1.jpeg";
+
+import design from "../assets/design/1.jpeg";
+import designbg from "../assets/design/3.jpeg";
 
 export default function AboutUs() {
   return (
     <div className="min-h-screen bg-black">
       {/* Hero Section */}
       <div
-        className="relative h-[30vh] mt-12 w-full bg-fixed bg-cover bg-center"
+        className="relative h-[100vh] mt-12 w-full bg-fixed bg-cover bg-center"
         style={{
-          backgroundImage: `url(https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=2069&q=80)`,
+          backgroundImage: `url(${JAJI})`,
         }}
       >
         <div className="absolute inset-0 bg-black/60">
@@ -89,8 +106,11 @@ export default function AboutUs() {
             </div>
 
             {/* Right Content - Cards */}
-            <div className="space-y-10" >
-              <div className="bg-white p-10 rounded-2xl shadow-lg border border-gray-300 hover:shadow-xl transition-all group" data-aos="zoom-in">
+            <div className="space-y-10">
+              <div
+                className="bg-white p-10 rounded-2xl shadow-lg border border-gray-300 hover:shadow-xl transition-all group"
+                data-aos="zoom-in"
+              >
                 <div className="w-16 h-16 flex items-center justify-center rounded-full bg-gray-100 text-black text-4xl mb-6 group-hover:scale-110 transition-transform">
                   <FaBuilding />
                 </div>
@@ -104,7 +124,10 @@ export default function AboutUs() {
                 </p>
               </div>
 
-              <div className="bg-white p-10 rounded-2xl shadow-lg border border-gray-300 hover:shadow-xl transition-all group" data-aos="zoom-out">
+              <div
+                className="bg-white p-10 rounded-2xl shadow-lg border border-gray-300 hover:shadow-xl transition-all group"
+                data-aos="zoom-out"
+              >
                 <div className="w-16 h-16 flex items-center justify-center rounded-full bg-gray-100 text-black text-4xl mb-6 group-hover:scale-110 transition-transform">
                   <FaStar />
                 </div>
@@ -122,14 +145,11 @@ export default function AboutUs() {
         </div>
       </section>
 
-
-      
       {/* Team Section */}
       <section
-        className="relative bg-fixed bg-center bg-cover"
+        className="relative bg-fixed bg-center bg-top"
         style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600')",
+          backgroundImage: `url(${cosmetics_bg})`,
         }}
       >
         <div className="absolute inset-0 bg-black/60"></div>
@@ -167,7 +187,8 @@ export default function AboutUs() {
               <div
                 key={i}
                 className="group text-center p-8 
-              transition-all duration-300 rounded-2xl" data-aos="flip-right"
+              transition-all duration-300 rounded-2xl"
+                data-aos="flip-right"
               >
                 {/* Profile Image */}
                 <div className="relative w-62 h-62 mx-auto mb-6">
@@ -199,8 +220,7 @@ export default function AboutUs() {
       <section
         className="relative bg-fixed bg-center bg-cover"
         style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1600')",
+          backgroundImage: `url(${jaji1})`,
         }}
       >
         <div className="absolute inset-0 bg-black/70"></div>
@@ -261,8 +281,7 @@ export default function AboutUs() {
       <section
         className="relative bg-fixed bg-center bg-cover"
         style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1600')",
+          backgroundImage: `url(${jaji3})`,
         }}
       >
         <div className="absolute inset-0 bg-black/70"></div>
@@ -329,16 +348,14 @@ export default function AboutUs() {
         </div>
       </section>
 
-
       {/* Final CTA Section */}
       <section
         className="relative bg-fixed bg-center bg-cover"
         style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1556761175-b413da4baf72?w=1600')",
+          backgroundImage: `url(${salonbg})`,
         }}
       >
-        <div className="absolute inset-0 bg-black/90"></div>
+        <div className="absolute inset-0 bg-black/80"></div>
         <div className="relative max-w-4xl mx-auto px-6 py-32 text-center">
           <h2 className="text-5xl font-bold text-white mb-8">
             Ready to Experience Excellence?
