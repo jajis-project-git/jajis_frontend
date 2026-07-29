@@ -32,18 +32,32 @@ export default function EventHall() {
   const [data, setData] = useState({ content: "", page: "" });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [formData, setFormData] = useState({
-    event_type: "Marriage",
-    category: "AC Conference Hall",
-    booking_date: "",
-    user_name: "",
-    phone_number: "",
-  });
+  const initialFormState = {
+    name: "",
+    phone: "",
+    email: "",
+    event_type: "wedding",
+    category: "ac",
+    event_date: "",
+  };
+  const [formData, setFormData] = useState(initialFormState);
   const [formStatus, setFormStatus] = useState({ type: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [bookedDates, setBookedDates] = useState([]);
+  const [isLoadingBookedDates, setIsLoadingBookedDates] = useState(false);
 
-  const eventTypes = ["Marriage", "Reception", "Birthday", "Others"];
-  const categories = ["AC", "Non-AC"];
+  const eventTypes = [
+    { value: "wedding", label: "Wedding" },
+    { value: "reception", label: "Reception" },
+    { value: "birthday", label: "Birthday" },
+    { value: "corporate", label: "Corporate" },
+    { value: "other", label: "Other" },
+  ];
+  const categories = [
+    { value: "ac", label: "AC" },
+    { value: "non-ac", label: "Non-AC" },
+  ];
+  const todayString = new Date().toISOString().split("T")[0];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -56,14 +70,33 @@ export default function EventHall() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const payload = { ...formData };
+
     if (
-      !formData.user_name ||
-      !formData.phone_number ||
-      !formData.booking_date
+      !payload.name ||
+      !payload.phone ||
+      !payload.email ||
+      !payload.event_date
     ) {
       setFormStatus({
         type: "error",
-        message: "Please fill your name, phone number, and preferred date.",
+        message: "Please fill in your name, phone, email, and preferred date.",
+      });
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) {
+      setFormStatus({
+        type: "error",
+        message: "Please enter a valid email address.",
+      });
+      return;
+    }
+
+    if (bookedDates.includes(payload.event_date)) {
+      setFormStatus({
+        type: "error",
+        message: "This date is already booked. Please choose another date.",
       });
       return;
     }
@@ -71,23 +104,37 @@ export default function EventHall() {
     setIsSubmitting(true);
 
     try {
-      await API.post("event-hall-bookings/", formData);
-      setFormStatus({
-        type: "success",
-        message: `Booking request received for ${formData.event_type}. We will contact you soon.`,
-      });
-      setFormData({
-        event_type: "Marriage",
-        category: "AC Conference Hall",
-        booking_date: "",
-        user_name: "",
-        phone_number: "",
-      });
+      const endpoints = [
+        "event-hall-bookings/",
+        "event-hall/bookings/",
+        "event-hall/",
+      ];
+      let lastError = null;
+
+      for (const endpoint of endpoints) {
+        try {
+          await API.post(endpoint, payload);
+          setFormStatus({
+            type: "success",
+            message: `Booking request received for ${eventTypes.find((item) => item.value === payload.event_type)?.label || payload.event_type}. We will contact you soon.`,
+          });
+          setFormData(initialFormState);
+          return;
+        } catch (err) {
+          lastError = err;
+          if (err?.response?.status !== 404) {
+            throw err;
+          }
+        }
+      }
+
+      throw lastError;
     } catch (err) {
       console.error("Booking submit error:", err);
       setFormStatus({
-        type: "success",
-        message: `Booking request received for ${formData.event_type}. We will contact you soon.`,
+        type: "error",
+        message:
+          "We could not submit your booking right now. Please try again later.",
       });
     } finally {
       setIsSubmitting(false);
@@ -108,7 +155,20 @@ export default function EventHall() {
       }
     };
 
+    const fetchBookedDates = async () => {
+      try {
+        setIsLoadingBookedDates(true);
+        const response = await API.get("event-hall/booked-dates/");
+        setBookedDates(response?.data?.booked_dates || []);
+      } catch (err) {
+        console.error("Error fetching booked dates:", err);
+      } finally {
+        setIsLoadingBookedDates(false);
+      }
+    };
+
     fetchData();
+    fetchBookedDates();
   }, []);
 
   // if (loading) {
@@ -195,8 +255,8 @@ export default function EventHall() {
                       className="w-full rounded-2xl border border-gray-300 bg-gray-50 px-4 py-3 text-gray-900 shadow-sm transition focus:border-black focus:outline-none focus:ring-2 focus:ring-gray-200"
                     >
                       {eventTypes.map((type) => (
-                        <option key={type} value={type}>
-                          {type}
+                        <option key={type.value} value={type.value}>
+                          {type.label}
                         </option>
                       ))}
                     </select>
@@ -213,8 +273,8 @@ export default function EventHall() {
                       className="w-full rounded-2xl border border-gray-300 bg-gray-50 px-4 py-3 text-gray-900 shadow-sm transition focus:border-black focus:outline-none focus:ring-2 focus:ring-gray-200"
                     >
                       {categories.map((category) => (
-                        <option key={category} value={category}>
-                          {category}
+                        <option key={category.value} value={category.value}>
+                          {category.label}
                         </option>
                       ))}
                     </select>
@@ -227,12 +287,20 @@ export default function EventHall() {
                   </label>
                   <input
                     type="date"
-                    name="booking_date"
-                    value={formData.booking_date}
+                    name="event_date"
+                    value={formData.event_date}
+                    min={todayString}
                     onChange={handleChange}
                     className="w-full rounded-2xl border border-gray-300 bg-gray-50 px-4 py-3 text-gray-900 shadow-sm transition focus:border-black focus:outline-none focus:ring-2 focus:ring-gray-200"
                     required
                   />
+                  <p className="mt-2 text-xs text-gray-500">
+                    {isLoadingBookedDates
+                      ? "Checking available dates..."
+                      : bookedDates.length > 0
+                        ? `Booked dates currently unavailable: ${bookedDates.join(", ")}`
+                        : "All dates are currently available."}
+                  </p>
                 </div>
 
                 <div className="grid gap-4 md:grid-cols-2">
@@ -242,8 +310,8 @@ export default function EventHall() {
                     </label>
                     <input
                       type="text"
-                      name="user_name"
-                      value={formData.user_name}
+                      name="name"
+                      value={formData.name}
                       onChange={handleChange}
                       placeholder="Enter your name"
                       className="w-full rounded-2xl border border-gray-300 bg-gray-50 px-4 py-3 text-gray-900 placeholder:text-gray-400 shadow-sm transition focus:border-black focus:outline-none focus:ring-2 focus:ring-gray-200"
@@ -257,14 +325,29 @@ export default function EventHall() {
                     </label>
                     <input
                       type="tel"
-                      name="phone_number"
-                      value={formData.phone_number}
+                      name="phone"
+                      value={formData.phone}
                       onChange={handleChange}
                       placeholder="Enter your phone number"
                       className="w-full rounded-2xl border border-gray-300 bg-gray-50 px-4 py-3 text-gray-900 placeholder:text-gray-400 shadow-sm transition focus:border-black focus:outline-none focus:ring-2 focus:ring-gray-200"
                       required
                     />
                   </div>
+                </div>
+
+                <div>
+                  <label className="mb-2 block text-sm font-semibold text-gray-700">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="Enter your email"
+                    className="w-full rounded-2xl border border-gray-300 bg-gray-50 px-4 py-3 text-gray-900 placeholder:text-gray-400 shadow-sm transition focus:border-black focus:outline-none focus:ring-2 focus:ring-gray-200"
+                    required
+                  />
                 </div>
 
                 <button
