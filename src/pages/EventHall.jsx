@@ -29,8 +29,8 @@ import event from "../assets/event hall/3.jpeg";
 import event1 from "../assets/event hall/1.jpeg";
 
 export default function EventHall() {
-  const [data, setData] = useState({ content: "", page: "" });
-  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState({ content: "", page: "Jaji’s Q Cafe & Event Hall" });
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const initialFormState = {
     name: "",
@@ -64,6 +64,18 @@ export default function EventHall() {
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (formStatus.message) {
       setFormStatus({ type: "", message: "" });
+    }
+  };
+
+  const fetchBookedDates = async () => {
+    try {
+      setIsLoadingBookedDates(true);
+      const response = await API.get("event-hall/booked-dates/");
+      setBookedDates(response?.data?.booked_dates || []);
+    } catch (err) {
+      console.error("Error fetching booked dates:", err);
+    } finally {
+      setIsLoadingBookedDates(false);
     }
   };
 
@@ -104,37 +116,50 @@ export default function EventHall() {
     setIsSubmitting(true);
 
     try {
-      const endpoints = [
-        "event-hall-bookings/",
-        "event-hall/bookings/",
-        "event-hall/",
-      ];
-      let lastError = null;
-
-      for (const endpoint of endpoints) {
-        try {
-          await API.post(endpoint, payload);
-          setFormStatus({
-            type: "success",
-            message: `Booking request received for ${eventTypes.find((item) => item.value === payload.event_type)?.label || payload.event_type}. We will contact you soon.`,
+      let response;
+      try {
+        response = await API.post("event-hall/", payload);
+      } catch (postErr) {
+        if (postErr?.response?.status === 401) {
+          // Retry without invalid token header if 401 occurs
+          response = await API.post("event-hall/", payload, {
+            headers: { Authorization: "" },
           });
-          setFormData(initialFormState);
-          return;
-        } catch (err) {
-          lastError = err;
-          if (err?.response?.status !== 404) {
-            throw err;
-          }
+        } else if (!postErr?.response) {
+          // If primary server has network issue, try local backend
+          response = await axios.post("http://localhost:8000/api/event-hall/", payload);
+        } else {
+          throw postErr;
         }
       }
 
-      throw lastError;
+      setFormStatus({
+        type: "success",
+        message:
+          response?.data?.message ||
+          `Booking request received for ${
+            eventTypes.find((item) => item.value === payload.event_type)?.label ||
+            payload.event_type
+          }. We will contact you soon.`,
+      });
+      setFormData(initialFormState);
+      fetchBookedDates();
     } catch (err) {
       console.error("Booking submit error:", err);
+      let errMsg = "We could not submit your booking right now. Please check server status and try again.";
+      if (err?.response?.data) {
+        if (typeof err.response.data === "string") {
+          errMsg = err.response.data;
+        } else if (typeof err.response.data === "object") {
+          const messages = Object.entries(err.response.data)
+            .map(([key, val]) => `${key !== "detail" ? `${key}: ` : ""}${Array.isArray(val) ? val.join(" ") : String(val)}`)
+            .join(" ");
+          if (messages) errMsg = messages;
+        }
+      }
       setFormStatus({
         type: "error",
-        message:
-          "We could not submit your booking right now. Please try again later.",
+        message: errMsg,
       });
     } finally {
       setIsSubmitting(false);
@@ -142,60 +167,8 @@ export default function EventHall() {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const response = await API.get("event-hall/"); // /api/event-hall/
-        setData(response.data);
-      } catch (err) {
-        console.error("Error fetching event hall data:", err);
-        setError("Failed to load event hall page data");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    const fetchBookedDates = async () => {
-      try {
-        setIsLoadingBookedDates(true);
-        const response = await API.get("event-hall/booked-dates/");
-        setBookedDates(response?.data?.booked_dates || []);
-      } catch (err) {
-        console.error("Error fetching booked dates:", err);
-      } finally {
-        setIsLoadingBookedDates(false);
-      }
-    };
-
-    fetchData();
     fetchBookedDates();
   }, []);
-
-  // if (loading) {
-  //   return (
-  //     <div className="min-h-screen flex items-center justify-center bg-black">
-  //       <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-white"></div>
-  //     </div>
-  //   );
-  // }
-
-  if (error) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-black text-white">
-        <div className="text-center">
-          <div className="text-red-500 text-6xl mb-4">⚠️</div>
-          <h2 className="text-2xl font-bold mb-2">Oops!</h2>
-          <p>{error}</p>
-          <button
-            onClick={() => window.location.reload()}
-            className="mt-4 px-6 py-2 bg-white text-black rounded-lg hover:bg-gray-200 transition-colors"
-          >
-            Try Again
-          </button>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="bg-black text-white">
@@ -209,7 +182,7 @@ export default function EventHall() {
         <div className="absolute inset-0 bg-black/60">
           <div className="h-full flex flex-col items-center justify-center text-center px-4">
             <h1 className="text-5xl md:text-7xl font-bold mb-2 text-white">
-              {data.page}
+              {data.page || "Jaji’s Q Cafe & Event Hall"}
             </h1>
             <p className="text-xl md:text-2xl max-w-3xl mb-6 text-gray-300">
               Celebrate life’s most important moments in style.
