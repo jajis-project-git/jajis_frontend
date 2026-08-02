@@ -143,7 +143,7 @@ export default function Franchise() {
     <div className="min-h-screen w-full overflow-x-hidden font-sans bg-black text-white">
       {/* HERO */}
       <section
-        className="relative bg-center bg-cover min-h-screen text-white flex items-center justify-center md:bg-fixed"
+        className="relative bg-center bg-cover h-[70vh] text-white flex items-center justify-center md:bg-fixed"
         style={{
           backgroundImage:
             "url('https://www.causeway.com/hs-fs/hubfs/iStock-1225020118-1-scaled.webp')",
