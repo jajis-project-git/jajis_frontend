@@ -140,7 +140,7 @@ export default function Franchise() {
   }
 
   return (
-    <div className="min-h-screen font-sans bg-black text-white">
+    <div className="h-[50vh] font-sans bg-black text-white">
       {/* HERO */}
       <section
         className="relative bg-fixed bg-center bg-cover h-screen text-white flex items-center justify-center"
@@ -152,9 +152,7 @@ export default function Franchise() {
         <div className="absolute inset-0 bg-black/70" />
 
         <div className="relative z-10 text-center px-6 max-w-3xl">
-          <span className="inline-block px-4 py-1.5 mb-4 text-xs font-bold tracking-widest uppercase bg-white/10 border border-white/20 text-white rounded-full">
-            Franchise Opportunity
-          </span>
+        
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">
             {data.page || "Jaji’s Beauty Saloon Franchise"}
           </h1>
