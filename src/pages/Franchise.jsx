@@ -164,75 +164,11 @@ export default function Franchise() {
 
           <div className="mt-8 flex flex-wrap gap-4 justify-center">
             <a
-              href="#view"
-              className="px-8 py-3.5 bg-white text-black rounded-full font-semibold hover:bg-gray-200 transition shadow-lg"
-            >
-              View Opportunity
-            </a>
-            <a
               href="#enquiry-form-section"
               className="px-8 py-3.5 bg-black border border-white text-white rounded-full font-bold hover:bg-white hover:text-black transition shadow-lg flex items-center gap-2"
             >
               <FaPaperPlane className="text-sm" /> Apply Now
             </a>
-          </div>
-        </div>
-      </section>
-
-      {/* FRANCHISE OPPORTUNITY */}
-      <section
-        id="view"
-        className="relative bg-fixed bg-center bg-cover"
-        style={{
-          backgroundImage:
-            "url('https://static.vecteezy.com/system/resources/previews/026/793/730/large_2x/double-exposure-of-a-business-man-using-laptop-on-his-desk-front-view-office-background-realistic-image-ultra-hd-high-design-very-detailed-photo.jpg')",
-        }}
-      >
-        <div className="absolute inset-0 bg-black/75" />
-
-        <div
-          className="relative max-w-5xl mx-auto px-6 py-20"
-          data-aos="zoom-in"
-        >
-          <h2 className="text-4xl font-extrabold text-center text-white mb-12">
-            Beauty Saloon Franchise
-          </h2>
-
-          <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 md:p-12 text-white text-center shadow-2xl">
-            <div className="w-20 h-20 mx-auto mb-6 flex items-center justify-center rounded-2xl bg-white text-black text-4xl shadow-lg">
-              <FaSpa />
-            </div>
-
-            <h3 className="text-3xl font-bold mb-4 tracking-wide">
-              Jaji’s Premium Beauty Salon
-            </h3>
-
-            <p className="text-gray-200 leading-relaxed mb-8 text-base md:text-lg max-w-3xl mx-auto">
-              Partner with Jaji’s and bring a trusted beauty and wellness brand
-              to your region. Our salon franchise combines professional
-              expertise, premium services, and a proven operational model to
-              deliver consistent customer satisfaction and strong business
-              growth.
-            </p>
-
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl mx-auto text-left">
-              {[
-                "Professional training & skill development",
-                "Complete salon setup & interior guidance",
-                "Brand & marketing support",
-                "Product supply & service protocols",
-                "Ongoing business mentoring",
-                "Streamlined operational systems",
-              ].map((item, idx) => (
-                <div
-                  key={idx}
-                  className="flex items-center gap-3 bg-white/5 border border-white/10 p-3.5 rounded-xl"
-                >
-                  <FaCheckCircle className="text-white shrink-0 text-lg" />
-                  <span className="text-sm text-gray-200">{item}</span>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
