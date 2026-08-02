@@ -140,10 +140,10 @@ export default function Franchise() {
   }
 
   return (
-    <div className="h-[50vh] font-sans bg-black text-white">
+    <div className="min-h-screen w-full overflow-x-hidden font-sans bg-black text-white">
       {/* HERO */}
       <section
-        className="relative bg-fixed bg-center bg-cover h-screen text-white flex items-center justify-center"
+        className="relative bg-center bg-cover min-h-screen text-white flex items-center justify-center md:bg-fixed"
         style={{
           backgroundImage:
             "url('https://www.causeway.com/hs-fs/hubfs/iStock-1225020118-1-scaled.webp')",
@@ -152,7 +152,6 @@ export default function Franchise() {
         <div className="absolute inset-0 bg-black/70" />
 
         <div className="relative z-10 text-center px-6 max-w-3xl">
-        
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">
             {data.page || "Jaji’s Beauty Saloon Franchise"}
           </h1>
@@ -251,7 +250,7 @@ export default function Franchise() {
 
       {/* WHY FRANCHISE */}
       <section
-        className="relative bg-fixed bg-center bg-cover text-white py-24 border-t border-white/10"
+        className="relative bg-center bg-cover text-white py-24 border-t border-white/10 md:bg-fixed"
         style={{
           backgroundImage: `url(${saloonBg})`,
         }}
