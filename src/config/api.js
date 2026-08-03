@@ -29,12 +29,10 @@ API.interceptors.response.use(
       const fallbackBaseURL = "http://localhost:8000/api/";
       const currentBaseURL = originalRequest.baseURL || API_BASE_URL;
       
-      // If the current request is targeting a production domain (not localhost), try falling back to localhost
       if (currentBaseURL && !currentBaseURL.includes("localhost") && !currentBaseURL.includes("127.0.0.1")) {
         console.warn(`Primary API domain failed (${error.message}). Retrying with localhost fallback: ${fallbackBaseURL}`);
         originalRequest.baseURL = fallbackBaseURL;
         
-        // Re-execute the request with the new baseURL
         return API(originalRequest);
       }
     }
