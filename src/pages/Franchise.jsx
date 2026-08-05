@@ -61,6 +61,7 @@ export default function Franchise() {
   const [formData, setFormData] = useState(initialFormState);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formError, setFormError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     API.get("franchise/")
@@ -85,7 +86,7 @@ export default function Franchise() {
     if (formError) setFormError("");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Mandatory checks verification
@@ -121,14 +122,57 @@ export default function Franchise() {
       return;
     }
 
-    // Success simulation
     setFormError("");
-    setFormSubmitted(true);
+    setIsSubmitting(true);
+
+    const payload = {
+      full_name: formData.fullName,
+      mobile_number: formData.mobileNumber,
+      whatsapp_number: formData.whatsappNumber || null,
+      email: formData.email,
+      age_group: formData.ageGroup,
+      current_city_district: formData.currentCityDistrict,
+      state: formData.state,
+      occupation: formData.occupation,
+      has_business_exp: formData.hasBusinessExp,
+      business_exp_details: formData.businessExpDetails || null,
+      has_salon_exp: formData.hasSalonExp,
+      applicant_type: formData.applicantType,
+      preferred_city: formData.preferredCity,
+      preferred_area: formData.preferredArea,
+      has_commercial_property: formData.hasCommercialProperty,
+      property_size: formData.propertySize || null,
+      property_location_link: formData.propertyLocationLink || null,
+      investment_budget: formData.investmentBudget,
+      investment_source: formData.investmentSource,
+      plan_to_start: formData.planToStart,
+      daily_operations_involvement: formData.dailyOperationsInvolvement,
+      confirm_accurate: formData.confirmAccurate,
+      agree_contact: formData.agreeContact,
+    };
+
+    try {
+      await API.post("franchise/", payload);
+      setFormSubmitted(true);
+      const el = document.getElementById("enquiry-form-section");
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    } catch (err) {
+      console.error("Franchise submission error:", err);
+      const serverMsg =
+        err.response?.data?.message ||
+        (typeof err.response?.data === "string" ? err.response.data : null) ||
+        "Failed to submit franchise enquiry. Please check your inputs or try again.";
+      setFormError(serverMsg);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleResetForm = () => {
     setFormData(initialFormState);
     setFormSubmitted(false);
+    const el = document.getElementById("enquiry-form-section");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
   if (error) {
@@ -606,11 +650,10 @@ export default function Franchise() {
                           onClick={() =>
                             handleRadioSelect("hasBusinessExp", opt)
                           }
-                          className={`flex-1 py-3 px-4 rounded-xl border text-sm font-semibold transition-all flex items-center justify-center gap-2 cursor-pointer ${
-                            formData.hasBusinessExp === opt
+                          className={`flex-1 py-3 px-4 rounded-xl border text-sm font-semibold transition-all flex items-center justify-center gap-2 cursor-pointer ${formData.hasBusinessExp === opt
                               ? "bg-black text-white border-black shadow-md font-bold"
                               : "bg-white border-gray-300 text-gray-800 hover:bg-gray-100"
-                          }`}
+                            }`}
                         >
                           <span
                             className={`w-4 h-4 rounded-full border flex items-center justify-center text-xs ${formData.hasBusinessExp === opt ? "border-white bg-white text-black" : "border-gray-400"}`}
@@ -653,11 +696,10 @@ export default function Franchise() {
                           key={opt}
                           type="button"
                           onClick={() => handleRadioSelect("hasSalonExp", opt)}
-                          className={`flex-1 py-3 px-4 rounded-xl border text-sm font-semibold transition-all flex items-center justify-center gap-2 cursor-pointer ${
-                            formData.hasSalonExp === opt
+                          className={`flex-1 py-3 px-4 rounded-xl border text-sm font-semibold transition-all flex items-center justify-center gap-2 cursor-pointer ${formData.hasSalonExp === opt
                               ? "bg-black text-white border-black shadow-md font-bold"
                               : "bg-white border-gray-300 text-gray-800 hover:bg-gray-100"
-                          }`}
+                            }`}
                         >
                           <span
                             className={`w-4 h-4 rounded-full border flex items-center justify-center text-xs ${formData.hasSalonExp === opt ? "border-white bg-white text-black" : "border-gray-400"}`}
@@ -689,11 +731,10 @@ export default function Franchise() {
                           onClick={() =>
                             handleRadioSelect("applicantType", opt)
                           }
-                          className={`py-3 px-4 rounded-xl border text-xs md:text-sm font-semibold transition-all text-center cursor-pointer ${
-                            formData.applicantType === opt
+                          className={`py-3 px-4 rounded-xl border text-xs md:text-sm font-semibold transition-all text-center cursor-pointer ${formData.applicantType === opt
                               ? "bg-black text-white border-black font-bold"
                               : "bg-white border-gray-300 text-gray-800 hover:bg-gray-100"
-                          }`}
+                            }`}
                         >
                           {opt}
                         </button>
@@ -766,11 +807,10 @@ export default function Franchise() {
                           onClick={() =>
                             handleRadioSelect("hasCommercialProperty", opt)
                           }
-                          className={`p-3.5 rounded-xl border text-xs md:text-sm font-medium text-left transition-all flex items-center justify-between cursor-pointer ${
-                            formData.hasCommercialProperty === opt
+                          className={`p-3.5 rounded-xl border text-xs md:text-sm font-medium text-left transition-all flex items-center justify-between cursor-pointer ${formData.hasCommercialProperty === opt
                               ? "bg-black text-white border-black font-bold"
                               : "bg-white border-gray-300 text-gray-800 hover:bg-gray-100"
-                          }`}
+                            }`}
                         >
                           <span>{opt}</span>
                           <span
@@ -996,10 +1036,11 @@ export default function Franchise() {
               <div className="pt-6 border-t border-gray-200 text-center">
                 <button
                   type="submit"
-                  className="w-full md:w-auto px-12 py-4 bg-black text-white font-extrabold text-base md:text-lg rounded-xl hover:bg-gray-800 transition-all duration-300 uppercase tracking-wider flex items-center justify-center gap-3 mx-auto cursor-pointer shadow-lg"
+                  disabled={isSubmitting}
+                  className="w-full md:w-auto px-12 py-4 bg-black text-white font-extrabold text-base md:text-lg rounded-xl hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 uppercase tracking-wider flex items-center justify-center gap-3 mx-auto cursor-pointer shadow-lg"
                 >
-                  <FaPaperPlane className="text-base" /> SUBMIT FRANCHISE
-                  ENQUIRY
+                  <FaPaperPlane className="text-base" />{" "}
+                  {isSubmitting ? "SUBMITTING..." : "SUBMIT FRANCHISE ENQUIRY"}
                 </button>
               </div>
             </form>
